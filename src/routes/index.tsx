@@ -159,48 +159,56 @@ function Landing() {
           </div>
 
           <div className="lg:col-span-5">
-            <div className="relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur p-6 shadow-2xl">
-              <div className="flex items-center justify-between text-white/80 text-xs">
-                <span className="flex items-center gap-2"><Radio className="h-4 w-4 text-emerald-400" /> Central ao vivo</span>
-                <span>MG · SP · RJ</span>
-              </div>
-              <div className="mt-4 grid grid-cols-2 gap-3">
-                {[
-                  { label: "CAM 01 · Rua principal", src: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&q=70" },
-                  { label: "CAM 02 · Portaria", src: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=70" },
-                  { label: "CAM 03 · Residencial", src: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600&q=70" },
-                  { label: "CAM 04 · Garagem", src: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=600&q=70" },
-                ].map(({ label, src }, i) => (
-                  <div key={i} className="aspect-video rounded-lg bg-slate-950 border border-white/10 relative overflow-hidden">
-                    <img
-                      src={src}
-                      alt={label}
-                      loading="lazy"
-                      className="absolute inset-0 h-full w-full object-cover"
-                    />
-                    <div
-                      className="absolute inset-0 pointer-events-none mix-blend-overlay opacity-25"
-                      style={{
-                        backgroundImage:
-                          "repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0px, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 3px)",
-                      }}
-                    />
-                    <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-black/70 to-transparent" />
-                    <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-black/70 to-transparent" />
-                    <div className="absolute top-2 left-2 text-[10px] font-medium text-white drop-shadow">{label}</div>
-                    <div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500 animate-pulse" />
-                    <div className="absolute bottom-2 left-2 text-[10px] text-white/90 font-mono tracking-wider">● LIVE</div>
-                    <div className="absolute bottom-2 right-2 text-[10px] text-emerald-400 font-mono">REC</div>
-                  </div>
-                ))}
-              </div>
-              <div className="mt-5 flex items-center justify-between rounded-xl bg-primary-deep/60 border border-white/10 p-4">
-                <div>
-                  <div className="text-white text-sm font-semibold">Tempo médio de resposta</div>
-                  <div className="text-white/60 text-xs">Últimos 30 dias</div>
+            <div className="relative">
+              {/* Foto do operador — humaniza a marca */}
+              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 aspect-[4/5]">
+                <img
+                  src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=900&q=80"
+                  alt="Operador da central de monitoramento Rota Sul Tech acompanhando câmeras 24 horas"
+                  loading="eager"
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-primary-deep via-primary-deep/20 to-transparent" />
+
+                {/* Selo de confiança sobre a foto */}
+                <div className="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-black/50 backdrop-blur px-3 py-1.5 text-[11px] font-medium text-white border border-white/15">
+                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
+                  Vigilância humana ativa
                 </div>
-                <div className="text-3xl font-bold text-accent" style={{ fontFamily: "var(--font-display)" }}>
-                  8s
+
+                {/* Legenda humanizada */}
+                <div className="absolute inset-x-0 bottom-0 p-5 text-white">
+                  <div className="text-xs uppercase tracking-widest text-accent font-semibold">Do outro lado da câmera</div>
+                  <div className="mt-1 text-lg font-semibold leading-snug" style={{ fontFamily: "var(--font-display)" }}>
+                    Tem uma pessoa treinada olhando por você — agora.
+                  </div>
+                </div>
+              </div>
+
+              {/* Card flutuante: tempo de resposta */}
+              <div className="absolute -bottom-6 -left-6 hidden sm:flex items-center gap-3 rounded-xl bg-white shadow-xl border border-border px-4 py-3">
+                <div className="grid place-items-center h-11 w-11 rounded-lg bg-accent text-accent-foreground">
+                  <Radio className="h-5 w-5" />
+                </div>
+                <div>
+                  <div className="text-[11px] text-muted-foreground uppercase tracking-wide">Resposta média</div>
+                  <div className="text-2xl font-bold text-primary leading-none" style={{ fontFamily: "var(--font-display)" }}>8s</div>
+                </div>
+              </div>
+
+              {/* Card flutuante: câmera ao vivo */}
+              <div className="absolute -top-4 -right-4 hidden sm:block w-40 rounded-xl overflow-hidden border border-white/15 shadow-2xl">
+                <div className="relative aspect-video bg-slate-950">
+                  <img
+                    src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&q=70"
+                    alt="Câmera ao vivo — via pública"
+                    loading="lazy"
+                    className="absolute inset-0 h-full w-full object-cover"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
+                  <div className="absolute top-1.5 left-1.5 text-[9px] text-white/90 font-mono">CAM 01</div>
+                  <div className="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
+                  <div className="absolute bottom-1.5 left-1.5 text-[9px] text-emerald-400 font-mono">● LIVE</div>
                 </div>
               </div>
             </div>
@@ -263,6 +271,73 @@ function Landing() {
               <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> Central própria com energia e link redundantes</li>
               <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> Equipe humana 24/7 — nunca só uma máquina do outro lado</li>
             </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* BAND — Conheça nossas soluções (referência Behance) */}
+      <section aria-label="Conheça nossas soluções" className="relative overflow-hidden">
+        <div
+          className="relative"
+          style={{
+            background:
+              "linear-gradient(100deg, var(--primary-deep) 0%, var(--primary) 55%, oklch(0.35 0.14 260) 100%)",
+          }}
+        >
+          <div
+            className="absolute inset-0 opacity-[0.07] pointer-events-none"
+            style={{
+              backgroundImage:
+                "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+              backgroundSize: "56px 56px",
+            }}
+          />
+          <div className="absolute -right-32 top-1/2 -translate-y-1/2 h-[420px] w-[420px] rounded-full bg-accent/25 blur-3xl" />
+          <div className="relative max-w-7xl mx-auto px-5 lg:px-8 py-14 md:py-20 grid md:grid-cols-12 gap-8 items-center">
+            <div className="md:col-span-8 text-white">
+              <span className="text-xs font-semibold tracking-[0.25em] text-accent uppercase">// Rota Sul Tech</span>
+              <h2
+                className="mt-3 text-4xl md:text-6xl font-bold tracking-tight leading-[1.02]"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Conheça nossas <span className="text-accent">soluções</span>.
+              </h2>
+              <p className="mt-4 text-white/75 max-w-xl text-base md:text-lg">
+                Portaria remota, CFTV inteligente e monitoramento 24h — desenhados para condomínios,
+                indústrias e empresas que não podem parar.
+              </p>
+            </div>
+            <div className="md:col-span-4 flex md:justify-end">
+              <a
+                href="#servicos"
+                className="group inline-flex items-center gap-3 rounded-full bg-accent px-7 py-4 text-base font-semibold text-accent-foreground shadow-xl shadow-black/30 hover:brightness-110 hover:-translate-y-0.5 transition"
+              >
+                Explorar soluções
+                <span className="grid place-items-center h-7 w-7 rounded-full bg-accent-foreground/10 group-hover:translate-x-0.5 transition">
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </a>
+            </div>
+          </div>
+          {/* faixa inferior com atalhos */}
+          <div className="relative border-t border-white/10 bg-black/20">
+            <div className="max-w-7xl mx-auto px-5 lg:px-8 py-4 grid grid-cols-2 md:grid-cols-4 gap-3 text-white/85 text-sm">
+              {[
+                { icon: Users, label: "Portaria Remota" },
+                { icon: Radio, label: "Alarmes 24h" },
+                { icon: Camera, label: "CFTV & IA" },
+                { icon: ShieldCheck, label: "Controle de Acesso" },
+              ].map(({ icon: Icon, label }) => (
+                <a
+                  key={label}
+                  href="#servicos"
+                  className="flex items-center gap-2 hover:text-accent transition"
+                >
+                  <Icon className="h-4 w-4 text-accent" />
+                  <span className="font-medium">{label}</span>
+                </a>
+              ))}
+            </div>
           </div>
         </div>
       </section>
