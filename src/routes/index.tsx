@@ -389,38 +389,55 @@ function Landing() {
       {/* PROVA SOCIAL */}
       <section id="clientes" className="py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <div className="text-center max-w-2xl mx-auto">
+          <div className="text-center max-w-3xl mx-auto">
             <span className="text-xs font-semibold tracking-widest text-accent uppercase">Prova social</span>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
               Quem confia na Rota Sul Tech dorme tranquilo.
             </h2>
+            <p className="mt-5 text-lg text-muted-foreground">
+              Veja como nossos parceiros de diversos setores escalaram seus negócios, eliminaram custos operacionais e garantiram a melhor tecnologia de monitoramento do mercado.
+            </p>
+          </div>
+
+          {/* Barra de métricas / gatilhos de autoridade */}
+          <div className="mt-12 grid md:grid-cols-3 gap-4">
+            {[
+              { title: "Zero Custo Trabalhista", desc: "Elimine gastos com folha de pagamento, férias e encargos de uma portaria física." },
+              { title: "Atendimento 24/7 Ininterrupto", desc: "Monitores de base com tempo de resposta ágil, todos os dias do ano." },
+              { title: "Tecnologia de Ponta", desc: "Soluções híbridas com Inteligência Artificial e integração em nuvem." },
+            ].map((m) => (
+              <div key={m.title} className="rounded-2xl border border-border bg-card p-6 shadow-sm">
+                <div className="text-sm font-bold tracking-wide text-accent uppercase">{m.title}</div>
+                <p className="mt-2 text-sm text-muted-foreground leading-relaxed">{m.desc}</p>
+              </div>
+            ))}
           </div>
 
           <div className="mt-14 grid md:grid-cols-3 gap-6">
             {[
               {
-                name: "Ricardo M.",
-                role: "Síndico · Cond. Villa Toscana",
-                text: "Reduzimos 38% do custo de portaria em 4 meses. O tempo de resposta impressiona — atenderam uma tentativa de invasão em segundos.",
+                name: "Diretoria de Operações",
+                role: "Enterplak Produtos Eletrônicos · Indústria",
+                text: "Como uma indústria de componentes e placas eletrônicas, a segurança de nossa infraestrutura e do nosso estoque é vital. Terceirizar nossa portaria e o monitoramento reduziu drasticamente nossos custos operacionais e nos livrou de passivos trabalhistas. A tecnologia implantada é de primeira linha. Recomendo muito!",
               },
               {
-                name: "Aline P.",
-                role: "Administradora · GP Imóveis",
-                text: "Passamos 12 condomínios para a Rota Sul Tech. Zero passivo trabalhista novo e relatórios claros todo mês.",
+                name: "Gerência",
+                role: "Maria Maria Gastrobar · Gastronomia",
+                text: "Nosso movimento no gastrobar é muito forte, principalmente à noite. Ter a certeza de que contamos com uma central 24h monitorando o ambiente nos dá a paz de espírito necessária para focarmos apenas na experiência dos nossos clientes. Atendimento e suporte sempre muito rápidos e eficientes!",
               },
               {
-                name: "Eduardo L.",
-                role: "Diretor · Logística Sul",
-                text: "A IA deles cortou 90% dos falsos positivos que nos tiravam o sono. Investimento que se pagou no 2º mês.",
+                name: "Gestão de Facilities",
+                role: "Ampla Construção · Obras & Empreiteiras",
+                text: "A gestão de acesso de prestadores de serviço e o controle de entrada e saída em nossos projetos eram uma dor de cabeça constante. Com as soluções de portaria remota e CFTV, otimizamos todo o fluxo e eliminamos os furos de segurança. Uma parceria que traz tranquilidade e muita economia.",
               },
             ].map((t) => (
-              <figure key={t.name} className="rounded-2xl border border-border bg-card p-7 shadow-sm">
+              <figure key={t.name} className="rounded-2xl border border-border bg-card p-7 shadow-sm flex flex-col">
                 <div className="flex gap-0.5 text-accent">
                   {Array.from({ length: 5 }).map((_, i) => (
                     <Star key={i} className="h-4 w-4 fill-current" />
                   ))}
                 </div>
-                <blockquote className="mt-4 text-[15px] leading-relaxed text-foreground">
+                <blockquote className="mt-4 text-[15px] leading-relaxed text-foreground flex-1">
                   “{t.text}”
                 </blockquote>
                 <figcaption className="mt-5 pt-5 border-t border-border">
