@@ -255,6 +255,23 @@ function Landing() {
 
       {/* SERVIÇOS — inspirado na referência: fundo escuro, pill + "Nossos serviços" */}
       <section id="servicos" className="relative py-20 md:py-28 bg-primary-deep text-white overflow-hidden">
+        {/* Fundo humanizado — operador em videowall */}
+        <img
+          src={servicosBg}
+          alt=""
+          aria-hidden
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover opacity-25 pointer-events-none"
+        />
+        {/* Gradiente para garantir legibilidade */}
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(180deg, color-mix(in oklab, var(--primary-deep) 92%, transparent) 0%, color-mix(in oklab, var(--primary-deep) 78%, transparent) 50%, color-mix(in oklab, var(--primary-deep) 92%, transparent) 100%)",
+          }}
+        />
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none"
           style={{
             backgroundImage:
