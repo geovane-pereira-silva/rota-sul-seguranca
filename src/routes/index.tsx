@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import heroTecnico from "@/assets/hero-tecnico.jpg";
-import central24h from "@/assets/central-24h.jpg";
-import appMobile from "@/assets/app-mobile.jpg";
-import agenteRonda from "@/assets/agente-ronda.jpg";
+import ligacoesCentral from "@/assets/ligacoes-central.jpg.asset.json";
+import relatoriosImg from "@/assets/relatorios.jpg.asset.json";
+import appAgente from "@/assets/app-agente.jpg.asset.json";
+import appPersonalizado from "@/assets/app-personalizado.png.asset.json";
 import {
   ShieldCheck,
   Camera,
@@ -454,28 +455,35 @@ function Landing() {
             </p>
           </div>
 
-          <div className="mt-14 grid md:grid-cols-3 gap-6">
+          <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               {
-                img: central24h,
-                titulo: "Central de Monitoramento 24h",
+                img: ligacoesCentral.url,
+                titulo: "Ligações e notificações personalizadas",
                 desc:
-                  "Operadores treinados acompanham câmeras, alarmes e chamadas em tempo real. Falsos alertas são filtrados por IA antes de acionar uma resposta.",
-                tag: "Ligações & Alertas",
+                  "WhatsApp e ligações saem com o número e a marca da sua empresa. Seu cliente recebe alertas com fotos, vídeos e status do atendimento em tempo real.",
+                tag: "WhatsApp & Voz",
               },
               {
-                img: appMobile,
-                titulo: "App do Cliente 100% personalizado",
+                img: appPersonalizado.url,
+                titulo: "App do cliente 100% personalizado",
                 desc:
-                  "Acompanhe câmeras, pause alarme, abra chamados e receba notificações — tudo no seu celular, com sua marca.",
+                  "Arme/desarme, anulação de setores, recepção de eventos, linha do tempo, B.O.s eletrônicos e acesso às câmeras. Com sua logo e suas cores.",
                 tag: "iOS & Android",
               },
               {
-                img: agenteRonda,
-                titulo: "Agentes em campo com app tático",
+                img: appAgente.url,
+                titulo: "App tático do agente de campo",
                 desc:
-                  "Ronda motorizada com registro por QR code, evidências fotográficas e relatórios de ocorrência enviados em tempo real.",
+                  "Tarefas, SLA cronometrado, deslocamento, checklists e evidências. Todo o trabalho do agente com registro auditável ponta a ponta.",
                 tag: "Ronda & Ocorrências",
+              },
+              {
+                img: relatoriosImg.url,
+                titulo: "Relatórios e e-mails personalizados",
+                desc:
+                  "Relatórios gerenciais, gráficos e envios programados por e-mail — com a identidade visual da sua empresa e dados do atendimento.",
+                tag: "Gestão & BI",
               },
             ].map(({ img, titulo, desc, tag }) => (
               <article
@@ -487,8 +495,6 @@ function Landing() {
                     src={img}
                     alt={titulo}
                     loading="lazy"
-                    width={1280}
-                    height={832}
                     className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
                   />
                   <div className="absolute top-3 left-3 rounded-full bg-black/55 backdrop-blur px-3 py-1 text-[11px] font-medium text-white border border-white/15">
