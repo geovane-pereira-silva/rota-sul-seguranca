@@ -46,18 +46,17 @@ function Landing() {
               Rota Sul Tech
             </span>
           </a>
-          <nav className="hidden md:flex items-center gap-8 text-sm text-white/80">
+          <nav className="hidden md:flex items-center gap-8 text-sm text-white/80" aria-label="Navegação principal">
             <a href="#servicos" className="hover:text-white transition">Serviços</a>
             <a href="#beneficios" className="hover:text-white transition">Benefícios</a>
-            <a href="#clientes" className="hover:text-white transition">Clientes</a>
-            <a href="#orcamento" className="hover:text-white transition">Contato</a>
+            <a href="#clientes" className="hover:text-white transition">Depoimentos</a>
           </nav>
           <a
             href="#orcamento"
             onClick={scrollToForm}
-            className="hidden md:inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground hover:brightness-110 transition"
+            className="hidden md:inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-sm font-semibold text-white hover:bg-white hover:text-primary transition"
           >
-            Falar com especialista <ArrowRight className="h-4 w-4" />
+            Solicitar Orçamento <ArrowRight className="h-4 w-4" />
           </a>
           <button
             className="md:hidden text-white p-2"
