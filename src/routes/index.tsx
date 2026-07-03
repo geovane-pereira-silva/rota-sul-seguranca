@@ -670,16 +670,17 @@ function Landing() {
             ].map(({ img, alt }) => (
               <div
                 key={alt}
-                className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-border bg-muted"
+                className="rounded-2xl overflow-hidden border border-border bg-gradient-to-br from-secondary to-muted p-4 flex items-center justify-center"
               >
                 <img
                   src={img}
                   alt={alt}
                   loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover hover:scale-[1.04] transition-transform duration-500"
+                  className="w-full h-auto max-h-64 object-contain hover:scale-[1.04] transition-transform duration-500"
                 />
               </div>
             ))}
+
           </div>
 
 
