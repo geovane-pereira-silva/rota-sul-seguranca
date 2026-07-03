@@ -288,7 +288,7 @@ function Landing() {
       </section>
 
       {/* BENEFÍCIOS */}
-      <section id="beneficios" className="py-20 md:py-28 bg-primary text-white relative overflow-hidden">
+      <section id="diferenciais" className="py-20 md:py-28 bg-primary text-white relative overflow-hidden">
         <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-accent/20 blur-3xl" />
         <div className="relative max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-14 items-start">
           <div>
