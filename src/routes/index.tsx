@@ -507,7 +507,7 @@ function Landing() {
         </div>
         <div className="border-t border-white/10">
           <div className="max-w-7xl mx-auto px-5 lg:px-8 py-5 text-xs flex flex-col md:flex-row justify-between gap-2">
-            <span>© {new Date().getFullYear()} Rota Sul Tech. Todos os direitos reservados.</span>
+            <span>© 2026 Rota Sul Tech. Todos os direitos reservados.</span>
             <span>CNPJ 00.000.000/0001-00</span>
           </div>
         </div>
