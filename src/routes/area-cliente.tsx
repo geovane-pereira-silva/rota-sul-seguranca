@@ -2,48 +2,142 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   ShieldCheck,
-  FileText,
   Wallet,
-  Wrench,
-  MessageSquare,
+  Headphones,
   Download,
   ArrowLeft,
   CheckCircle2,
   Clock,
   Send,
+  Video,
 } from "lucide-react";
 
 export const Route = createFileRoute("/area-cliente")({
   head: () => ({
     meta: [
       { title: "Área do Cliente | Rota Sul Tech" },
-      { name: "description", content: "Acesse suas notas fiscais, histórico de pagamentos, ordens de serviço e tickets financeiros." },
+      {
+        name: "description",
+        content:
+          "Acesse suas faturas e notas fiscais em um só lugar e abra chamados técnicos ou financeiros pela central de atendimento.",
+      },
       { name: "robots", content: "noindex" },
     ],
   }),
   component: ClientArea,
 });
 
-type Tab = "notas" | "pagamentos" | "os" | "tickets";
+type Tab = "financeiro" | "atendimento";
 
-const notas = [
-  { id: "NF 001284", data: "05/03/2026", valor: "R$ 2.480,00", status: "Emitida" },
-  { id: "NF 001271", data: "05/02/2026", valor: "R$ 2.480,00", status: "Emitida" },
-  { id: "NF 001258", data: "05/01/2026", valor: "R$ 2.480,00", status: "Emitida" },
-  { id: "NF 001244", data: "05/12/2025", valor: "R$ 2.320,00", status: "Emitida" },
+// Faturas unificadas: cada linha traz o pagamento + a nota fiscal correspondente
+const faturas = [
+  {
+    data: "05/03/2026",
+    desc: "Mensalidade Monitoramento 24h",
+    valor: "R$ 2.480,00",
+    statusPagto: "Pago",
+    nf: "NF 001284",
+  },
+  {
+    data: "05/02/2026",
+    desc: "Mensalidade Monitoramento 24h",
+    valor: "R$ 2.480,00",
+    statusPagto: "Pago",
+    nf: "NF 001271",
+  },
+  {
+    data: "05/01/2026",
+    desc: "Mensalidade Monitoramento 24h",
+    valor: "R$ 2.480,00",
+    statusPagto: "Pago",
+    nf: "NF 001258",
+  },
+  {
+    data: "05/12/2025",
+    desc: "Mensalidade + Instalação CFTV",
+    valor: "R$ 2.320,00",
+    statusPagto: "Pago",
+    nf: "NF 001244",
+  },
+  {
+    data: "05/04/2026",
+    desc: "Mensalidade Monitoramento 24h",
+    valor: "R$ 2.480,00",
+    statusPagto: "Em aberto",
+    nf: "—",
+  },
 ];
 
-const pagamentos = [
-  { data: "05/03/2026", desc: "Mensalidade Monitoramento 24h", valor: "R$ 2.480,00", status: "Pago" },
-  { data: "05/02/2026", desc: "Mensalidade Monitoramento 24h", valor: "R$ 2.480,00", status: "Pago" },
-  { data: "05/01/2026", desc: "Mensalidade Monitoramento 24h", valor: "R$ 2.480,00", status: "Pago" },
-  { data: "05/12/2025", desc: "Mensalidade + Instalação CFTV", valor: "R$ 2.320,00", status: "Pago" },
+// Chamados unificados: técnico + financeiro na mesma lista
+const chamadosRecentes = [
+  {
+    id: "OS #4821",
+    tipo: "Encontrar gravação — CAM 03",
+    categoria: "Técnico",
+    data: "01/03/2026",
+    status: "Em análise",
+    cor: "amber",
+  },
+  {
+    id: "T-908",
+    tipo: "2ª via boleto — Fev/26",
+    categoria: "Financeiro",
+    data: "03/02/2026",
+    status: "Resolvido",
+    cor: "emerald",
+  },
+  {
+    id: "OS #4802",
+    tipo: "Ajuste sensor do portão",
+    categoria: "Técnico",
+    data: "28/02/2026",
+    status: "Concluído",
+    cor: "emerald",
+  },
+  {
+    id: "T-889",
+    tipo: "Ajuste dados de faturamento",
+    categoria: "Financeiro",
+    data: "12/01/2026",
+    status: "Resolvido",
+    cor: "emerald",
+  },
+  {
+    id: "OS #4781",
+    tipo: "Visita técnica preventiva",
+    categoria: "Técnico",
+    data: "10/02/2026",
+    status: "Concluído",
+    cor: "emerald",
+  },
+];
+
+// Tipos unificados de chamado — inclui "Encontrar gravação"
+const tiposChamado = [
+  { group: "Técnico", options: [
+    "Encontrar gravação de câmera (data e horário)",
+    "Manutenção corretiva CFTV",
+    "Ajuste de sensor / alarme",
+    "Configuração de acesso / biometria",
+    "Reset de câmera",
+    "Visita técnica preventiva",
+  ]},
+  { group: "Financeiro", options: [
+    "2ª via de boleto",
+    "Dúvida sobre nota fiscal",
+    "Reajuste / contrato",
+    "Comprovante de retenção",
+    "Outros — financeiro",
+  ]},
 ];
 
 function ClientArea() {
-  const [tab, setTab] = useState<Tab>("notas");
-  const [osSent, setOsSent] = useState(false);
-  const [ticketSent, setTicketSent] = useState(false);
+  const [tab, setTab] = useState<Tab>("financeiro");
+  const [chamadoSent, setChamadoSent] = useState(false);
+  const [categoria, setCategoria] = useState<"Técnico" | "Financeiro">("Técnico");
+  const [tipo, setTipo] = useState("Encontrar gravação de câmera (data e horário)");
+
+  const isGravacao = tipo.startsWith("Encontrar gravação");
 
   return (
     <div className="min-h-screen bg-secondary/40 font-sans" style={{ fontFamily: "var(--font-sans)" }}>
@@ -92,13 +186,11 @@ function ClientArea() {
           </div>
         </div>
 
-        {/* Tabs */}
+        {/* Tabs — apenas 2 agora: Financeiro (notas + pagamentos) e Atendimento (OS + tickets) */}
         <div className="mt-8 flex flex-wrap gap-2 border-b border-border">
           {[
-            { id: "notas" as Tab, label: "Notas Fiscais", icon: FileText },
-            { id: "pagamentos" as Tab, label: "Histórico de Pagamentos", icon: Wallet },
-            { id: "os" as Tab, label: "Ordem de Serviço", icon: Wrench },
-            { id: "tickets" as Tab, label: "Financeiro (Tickets)", icon: MessageSquare },
+            { id: "financeiro" as Tab, label: "Financeiro & Notas Fiscais", icon: Wallet },
+            { id: "atendimento" as Tab, label: "Atendimento & Chamados", icon: Headphones },
           ].map(({ id, label, icon: Icon }) => (
             <button
               key={id}
@@ -115,117 +207,224 @@ function ClientArea() {
         </div>
 
         <div className="mt-6">
-          {tab === "notas" && (
+          {/* ================= FINANCEIRO UNIFICADO ================= */}
+          {tab === "financeiro" && (
             <div className="rounded-2xl border border-border bg-white overflow-hidden">
-              <table className="w-full text-sm">
-                <thead className="bg-secondary/60 text-left text-xs uppercase text-muted-foreground">
-                  <tr>
-                    <th className="px-5 py-3">Nota</th>
-                    <th className="px-5 py-3">Data</th>
-                    <th className="px-5 py-3">Valor</th>
-                    <th className="px-5 py-3">Status</th>
-                    <th className="px-5 py-3 text-right">Ação</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {notas.map((n) => (
-                    <tr key={n.id} className="border-t border-border">
-                      <td className="px-5 py-4 font-medium text-primary">{n.id}</td>
-                      <td className="px-5 py-4">{n.data}</td>
-                      <td className="px-5 py-4">{n.valor}</td>
-                      <td className="px-5 py-4">
-                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 text-emerald-700 text-xs px-2 py-1">
-                          <CheckCircle2 className="h-3 w-3" /> {n.status}
-                        </span>
-                      </td>
-                      <td className="px-5 py-4 text-right">
-                        <button className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-accent transition">
-                          <Download className="h-4 w-4" /> Baixar XML/PDF
-                        </button>
-                      </td>
+              <div className="px-5 py-4 border-b border-border flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <h3 className="text-base font-bold text-primary" style={{ fontFamily: "var(--font-display)" }}>
+                    Faturas, pagamentos e notas fiscais
+                  </h3>
+                  <p className="text-xs text-muted-foreground">
+                    Tudo em um só lugar — baixe boleto, comprovante ou nota fiscal de cada mês.
+                  </p>
+                </div>
+                <button className="inline-flex items-center gap-2 rounded-full border border-border px-4 py-2 text-xs font-semibold text-primary hover:bg-secondary transition">
+                  <Download className="h-3.5 w-3.5" /> Exportar histórico (CSV)
+                </button>
+              </div>
+              <div className="overflow-x-auto">
+                <table className="w-full text-sm">
+                  <thead className="bg-secondary/60 text-left text-xs uppercase text-muted-foreground">
+                    <tr>
+                      <th className="px-5 py-3">Competência</th>
+                      <th className="px-5 py-3">Descrição</th>
+                      <th className="px-5 py-3">Valor</th>
+                      <th className="px-5 py-3">Pagamento</th>
+                      <th className="px-5 py-3">Nota Fiscal</th>
+                      <th className="px-5 py-3 text-right">Ações</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {faturas.map((f, i) => {
+                      const pago = f.statusPagto === "Pago";
+                      return (
+                        <tr key={i} className="border-t border-border hover:bg-secondary/30 transition">
+                          <td className="px-5 py-4 whitespace-nowrap">{f.data}</td>
+                          <td className="px-5 py-4">{f.desc}</td>
+                          <td className="px-5 py-4 font-medium">{f.valor}</td>
+                          <td className="px-5 py-4">
+                            <span
+                              className={`inline-flex items-center gap-1 rounded-full text-xs px-2 py-1 ${
+                                pago
+                                  ? "bg-emerald-50 text-emerald-700"
+                                  : "bg-amber-50 text-amber-700"
+                              }`}
+                            >
+                              {pago ? <CheckCircle2 className="h-3 w-3" /> : <Clock className="h-3 w-3" />}
+                              {f.statusPagto}
+                            </span>
+                          </td>
+                          <td className="px-5 py-4 font-medium text-primary">{f.nf}</td>
+                          <td className="px-5 py-4 text-right">
+                            <div className="inline-flex gap-3 justify-end">
+                              {!pago && (
+                                <button className="text-sm font-semibold text-accent hover:brightness-110">
+                                  Boleto
+                                </button>
+                              )}
+                              {pago && (
+                                <button className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-accent transition">
+                                  <Download className="h-4 w-4" /> Comprovante
+                                </button>
+                              )}
+                              {f.nf !== "—" && (
+                                <button className="inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-accent transition">
+                                  <Download className="h-4 w-4" /> NF-e
+                                </button>
+                              )}
+                            </div>
+                          </td>
+                        </tr>
+                      );
+                    })}
+                  </tbody>
+                </table>
+              </div>
             </div>
           )}
 
-          {tab === "pagamentos" && (
-            <div className="rounded-2xl border border-border bg-white overflow-hidden">
-              <table className="w-full text-sm">
-                <thead className="bg-secondary/60 text-left text-xs uppercase text-muted-foreground">
-                  <tr>
-                    <th className="px-5 py-3">Data</th>
-                    <th className="px-5 py-3">Descrição</th>
-                    <th className="px-5 py-3">Valor</th>
-                    <th className="px-5 py-3">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {pagamentos.map((p, i) => (
-                    <tr key={i} className="border-t border-border">
-                      <td className="px-5 py-4">{p.data}</td>
-                      <td className="px-5 py-4">{p.desc}</td>
-                      <td className="px-5 py-4 font-medium">{p.valor}</td>
-                      <td className="px-5 py-4">
-                        <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 text-emerald-700 text-xs px-2 py-1">
-                          <CheckCircle2 className="h-3 w-3" /> {p.status}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          )}
-
-          {tab === "os" && (
-            <div className="grid md:grid-cols-2 gap-6">
+          {/* ================= ATENDIMENTO UNIFICADO ================= */}
+          {tab === "atendimento" && (
+            <div className="grid lg:grid-cols-2 gap-6">
+              {/* Form unificado */}
               <form
                 onSubmit={(e) => {
                   e.preventDefault();
-                  setOsSent(true);
+                  setChamadoSent(true);
                 }}
                 className="rounded-2xl border border-border bg-white p-6"
               >
                 <h3 className="text-lg font-bold text-primary" style={{ fontFamily: "var(--font-display)" }}>
-                  Gerar Ordem de Serviço
+                  Abrir chamado
                 </h3>
-                <p className="mt-1 text-sm text-muted-foreground">Nossa equipe técnica retorna em até 4h úteis.</p>
+                <p className="mt-1 text-sm text-muted-foreground">
+                  Um único canal para pedir suporte técnico, encontrar gravações ou falar com o financeiro.
+                </p>
 
-                {osSent ? (
+                {chamadoSent ? (
                   <div className="mt-6 rounded-xl bg-emerald-50 text-emerald-700 p-5 text-sm flex gap-3">
                     <CheckCircle2 className="h-5 w-5 shrink-0" />
                     <div>
-                      <div className="font-semibold">OS #4821 criada!</div>
-                      <div>Nossa equipe técnica entrará em contato em breve.</div>
+                      <div className="font-semibold">
+                        Chamado {categoria === "Técnico" ? "OS #4822" : "T-921"} criado!
+                      </div>
+                      <div>
+                        {categoria === "Técnico"
+                          ? "Nossa equipe técnica retorna em até 4h úteis."
+                          : "O time financeiro responde em até 1 dia útil."}
+                      </div>
                     </div>
                   </div>
                 ) : (
                   <div className="mt-5 space-y-4">
+                    {/* Categoria: técnico ou financeiro */}
                     <div>
-                      <label className="text-sm font-medium">Tipo de chamado</label>
-                      <select className="mt-1 w-full rounded-lg border border-border px-4 py-3 text-sm bg-white">
-                        <option>Manutenção corretiva CFTV</option>
-                        <option>Ajuste de sensor / alarme</option>
-                        <option>Configuração de acesso</option>
-                        <option>Visita técnica preventiva</option>
+                      <label className="text-sm font-medium">Categoria</label>
+                      <div className="mt-2 grid grid-cols-2 gap-2">
+                        {(["Técnico", "Financeiro"] as const).map((c) => (
+                          <button
+                            type="button"
+                            key={c}
+                            onClick={() => {
+                              setCategoria(c);
+                              const first = tiposChamado.find((g) => g.group === c)?.options[0];
+                              if (first) setTipo(first);
+                            }}
+                            className={`rounded-lg border px-4 py-3 text-sm font-medium transition ${
+                              categoria === c
+                                ? "border-accent bg-accent/10 text-primary"
+                                : "border-border text-muted-foreground hover:border-primary/40"
+                            }`}
+                          >
+                            {c}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="text-sm font-medium">Tipo</label>
+                      <select
+                        value={tipo}
+                        onChange={(e) => setTipo(e.target.value)}
+                        className="mt-1 w-full rounded-lg border border-border px-4 py-3 text-sm bg-white"
+                      >
+                        {tiposChamado
+                          .find((g) => g.group === categoria)
+                          ?.options.map((op) => (
+                            <option key={op}>{op}</option>
+                          ))}
                       </select>
                     </div>
-                    <div>
-                      <label className="text-sm font-medium">Prioridade</label>
-                      <select className="mt-1 w-full rounded-lg border border-border px-4 py-3 text-sm bg-white">
-                        <option>Normal</option>
-                        <option>Urgente</option>
-                        <option>Emergência</option>
-                      </select>
-                    </div>
+
+                    {/* Campos extras para "Encontrar gravação" */}
+                    {isGravacao && (
+                      <div className="rounded-xl bg-primary/5 border border-primary/10 p-4">
+                        <div className="flex items-center gap-2 text-sm font-semibold text-primary">
+                          <Video className="h-4 w-4 text-accent" /> Dados da gravação
+                        </div>
+                        <div className="mt-3 grid grid-cols-2 gap-3">
+                          <div>
+                            <label className="text-xs text-muted-foreground">Câmera</label>
+                            <select className="mt-1 w-full rounded-lg border border-border px-3 py-2 text-sm bg-white">
+                              <option>CAM 01 · Portaria</option>
+                              <option>CAM 02 · Garagem</option>
+                              <option>CAM 03 · Hall</option>
+                              <option>CAM 04 · Perímetro</option>
+                            </select>
+                          </div>
+                          <div>
+                            <label className="text-xs text-muted-foreground">Data</label>
+                            <input
+                              type="date"
+                              required
+                              className="mt-1 w-full rounded-lg border border-border px-3 py-2 text-sm bg-white"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-xs text-muted-foreground">Horário início</label>
+                            <input
+                              type="time"
+                              required
+                              className="mt-1 w-full rounded-lg border border-border px-3 py-2 text-sm bg-white"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-xs text-muted-foreground">Horário fim</label>
+                            <input
+                              type="time"
+                              required
+                              className="mt-1 w-full rounded-lg border border-border px-3 py-2 text-sm bg-white"
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
+
+                    {categoria === "Técnico" && (
+                      <div>
+                        <label className="text-sm font-medium">Prioridade</label>
+                        <select className="mt-1 w-full rounded-lg border border-border px-4 py-3 text-sm bg-white">
+                          <option>Normal</option>
+                          <option>Urgente</option>
+                          <option>Emergência</option>
+                        </select>
+                      </div>
+                    )}
+
                     <div>
                       <label className="text-sm font-medium">Descrição</label>
                       <textarea
                         rows={4}
                         required
-                        placeholder="Descreva o problema com o máximo de detalhes possível"
+                        placeholder={
+                          isGravacao
+                            ? "Ex.: preciso identificar a entrada de um veículo prata"
+                            : categoria === "Técnico"
+                              ? "Descreva o problema com o máximo de detalhes"
+                              : "Como podemos ajudar?"
+                        }
                         className="mt-1 w-full rounded-lg border border-border px-4 py-3 text-sm bg-white"
                       />
                     </div>
@@ -239,102 +438,40 @@ function ClientArea() {
                 )}
               </form>
 
+              {/* Lista unificada de chamados */}
               <div className="rounded-2xl border border-border bg-white p-6">
                 <h3 className="text-lg font-bold text-primary" style={{ fontFamily: "var(--font-display)" }}>
-                  Chamados recentes
-                </h3>
-                <ul className="mt-4 divide-y divide-border">
-                  {[
-                    { id: "OS #4802", tipo: "Ajuste sensor portão", data: "28/02/2026", status: "Concluído", cor: "emerald" },
-                    { id: "OS #4781", tipo: "Visita preventiva", data: "10/02/2026", status: "Concluído", cor: "emerald" },
-                    { id: "OS #4765", tipo: "Reset câmera CAM-03", data: "22/01/2026", status: "Concluído", cor: "emerald" },
-                  ].map((o) => (
-                    <li key={o.id} className="py-3 flex items-center justify-between text-sm">
-                      <div>
-                        <div className="font-medium text-primary">{o.id} — {o.tipo}</div>
-                        <div className="text-xs text-muted-foreground flex items-center gap-1"><Clock className="h-3 w-3" /> {o.data}</div>
-                      </div>
-                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 text-emerald-700 text-xs px-2 py-1">
-                        {o.status}
-                      </span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-          )}
-
-          {tab === "tickets" && (
-            <div className="grid md:grid-cols-2 gap-6">
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  setTicketSent(true);
-                }}
-                className="rounded-2xl border border-border bg-white p-6"
-              >
-                <h3 className="text-lg font-bold text-primary" style={{ fontFamily: "var(--font-display)" }}>
-                  Falar com o Financeiro
+                  Meus chamados
                 </h3>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  Dúvidas sobre boletos, notas ou contrato. Retorno em até 1 dia útil.
+                  Técnicos e financeiros na mesma linha do tempo.
                 </p>
-
-                {ticketSent ? (
-                  <div className="mt-6 rounded-xl bg-emerald-50 text-emerald-700 p-5 text-sm flex gap-3">
-                    <CheckCircle2 className="h-5 w-5 shrink-0" />
-                    <div>
-                      <div className="font-semibold">Ticket #T-921 aberto!</div>
-                      <div>Você receberá as respostas por e-mail e nesta tela.</div>
-                    </div>
-                  </div>
-                ) : (
-                  <div className="mt-5 space-y-4">
-                    <div>
-                      <label className="text-sm font-medium">Assunto</label>
-                      <select className="mt-1 w-full rounded-lg border border-border px-4 py-3 text-sm bg-white">
-                        <option>2ª via de boleto</option>
-                        <option>Dúvida sobre nota fiscal</option>
-                        <option>Reajuste / contrato</option>
-                        <option>Outros</option>
-                      </select>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium">Mensagem</label>
-                      <textarea
-                        rows={5}
-                        required
-                        placeholder="Como podemos ajudar?"
-                        className="mt-1 w-full rounded-lg border border-border px-4 py-3 text-sm bg-white"
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      className="w-full inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-3 text-sm font-bold text-accent-foreground hover:brightness-110 transition"
-                    >
-                      Enviar ticket <Send className="h-4 w-4" />
-                    </button>
-                  </div>
-                )}
-              </form>
-
-              <div className="rounded-2xl border border-border bg-white p-6">
-                <h3 className="text-lg font-bold text-primary" style={{ fontFamily: "var(--font-display)" }}>
-                  Tickets recentes
-                </h3>
                 <ul className="mt-4 divide-y divide-border">
-                  {[
-                    { id: "T-908", assunto: "2ª via boleto Fev/26", data: "03/02/2026", status: "Resolvido" },
-                    { id: "T-889", assunto: "Ajuste dados de faturamento", data: "12/01/2026", status: "Resolvido" },
-                    { id: "T-871", assunto: "Comprovante de retenção", data: "18/12/2025", status: "Resolvido" },
-                  ].map((t) => (
-                    <li key={t.id} className="py-3 flex items-center justify-between text-sm">
-                      <div>
-                        <div className="font-medium text-primary">#{t.id} — {t.assunto}</div>
-                        <div className="text-xs text-muted-foreground flex items-center gap-1"><Clock className="h-3 w-3" /> {t.data}</div>
+                  {chamadosRecentes.map((c) => (
+                    <li key={c.id} className="py-3 flex items-center justify-between text-sm gap-3">
+                      <div className="min-w-0">
+                        <div className="font-medium text-primary truncate">{c.id} — {c.tipo}</div>
+                        <div className="text-xs text-muted-foreground flex items-center gap-2">
+                          <span
+                            className={`inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-semibold ${
+                              c.categoria === "Técnico"
+                                ? "bg-primary/10 text-primary"
+                                : "bg-accent/15 text-accent"
+                            }`}
+                          >
+                            {c.categoria}
+                          </span>
+                          <span className="flex items-center gap-1"><Clock className="h-3 w-3" /> {c.data}</span>
+                        </div>
                       </div>
-                      <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 text-emerald-700 text-xs px-2 py-1">
-                        {t.status}
+                      <span
+                        className={`shrink-0 inline-flex items-center gap-1 rounded-full text-xs px-2 py-1 ${
+                          c.cor === "amber"
+                            ? "bg-amber-50 text-amber-700"
+                            : "bg-emerald-50 text-emerald-700"
+                        }`}
+                      >
+                        {c.status}
                       </span>
                     </li>
                   ))}
