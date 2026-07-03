@@ -166,30 +166,30 @@ function Landing() {
               </div>
               <div className="mt-4 grid grid-cols-2 gap-3">
                 {[
-                  { label: "CAM 01 · Portaria", gif: "https://media.giphy.com/media/SIYtnOkrQxJNFQQ7Op/giphy.gif" },
-                  { label: "CAM 02 · Garagem", gif: "https://media.giphy.com/media/pG9kMKdbJfQttjTkpb/giphy.gif" },
-                  { label: "CAM 03 · Playground", gif: "https://media.giphy.com/media/6AlK10KuTyToP2wmn8/giphy.gif" },
-                  { label: "CAM 04 · Perímetro", gif: "https://media.giphy.com/media/DZbvu0MGf5G5wLsLF4/giphy.gif" },
-                ].map(({ label, gif }, i) => (
+                  { label: "CAM 01 · Rua principal", src: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&q=70" },
+                  { label: "CAM 02 · Portaria", src: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=70" },
+                  { label: "CAM 03 · Residencial", src: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600&q=70" },
+                  { label: "CAM 04 · Garagem", src: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=600&q=70" },
+                ].map(({ label, src }, i) => (
                   <div key={i} className="aspect-video rounded-lg bg-slate-950 border border-white/10 relative overflow-hidden">
                     <img
-                      src={gif}
+                      src={src}
                       alt={label}
                       loading="lazy"
-                      className="absolute inset-0 h-full w-full object-cover grayscale contrast-110 brightness-90"
+                      className="absolute inset-0 h-full w-full object-cover"
                     />
-                    {/* scanline overlay para reforçar sensação de CFTV */}
                     <div
-                      className="absolute inset-0 pointer-events-none mix-blend-overlay opacity-40"
+                      className="absolute inset-0 pointer-events-none mix-blend-overlay opacity-25"
                       style={{
                         backgroundImage:
-                          "repeating-linear-gradient(0deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px, transparent 1px, transparent 3px)",
+                          "repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0px, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 3px)",
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none" />
+                    <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-black/70 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-black/70 to-transparent" />
                     <div className="absolute top-2 left-2 text-[10px] font-medium text-white drop-shadow">{label}</div>
                     <div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500 animate-pulse" />
-                    <div className="absolute bottom-2 left-2 text-[10px] text-white/80 font-mono tracking-wider">● LIVE</div>
+                    <div className="absolute bottom-2 left-2 text-[10px] text-white/90 font-mono tracking-wider">● LIVE</div>
                     <div className="absolute bottom-2 right-2 text-[10px] text-emerald-400 font-mono">REC</div>
                   </div>
                 ))}
@@ -207,6 +207,7 @@ function Landing() {
           </div>
         </div>
       </section>
+
 
       {/* METRICS BAR */}
       <section className="border-y border-border bg-secondary">
