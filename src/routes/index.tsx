@@ -421,55 +421,98 @@ function Landing() {
             </p>
           </div>
 
-          <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Bento: destaque para o App 100% personalizado + 3 cards secundários */}
+          <div className="mt-14 grid lg:grid-cols-5 gap-6">
+            {/* DESTAQUE — App personalizado */}
+            <article className="lg:col-span-3 lg:row-span-2 group relative rounded-3xl overflow-hidden border border-border bg-gradient-to-br from-primary-deep via-primary to-primary-deep text-white shadow-xl">
+              <div className="absolute top-5 left-5 z-10 inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-3 py-1 text-[11px] font-bold uppercase tracking-widest">
+                <Star className="h-3 w-3" /> Diferencial exclusivo
+              </div>
+              <div className="grid md:grid-cols-2 gap-4 p-6 md:p-10 items-center min-h-[520px]">
+                <div className="order-2 md:order-1">
+                  <div className="text-[11px] font-semibold uppercase tracking-widest text-accent">
+                    iOS & Android
+                  </div>
+                  <h3
+                    className="mt-3 text-2xl md:text-3xl font-bold leading-tight"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    App do cliente <span className="text-accent">100% personalizado</span> com sua marca
+                  </h3>
+                  <p className="mt-4 text-white/80 text-sm md:text-base leading-relaxed">
+                    A única terceirizadora que entrega um aplicativo com a sua logo e suas cores.
+                    Seu cliente controla tudo pelo celular — com a identidade da sua empresa.
+                  </p>
+                  <ul className="mt-5 space-y-2 text-sm text-white/85">
+                    {[
+                      "Arme / Desarme remoto",
+                      "Anulação de setores",
+                      "Recepção de eventos e linha do tempo",
+                      "B.O.s eletrônicos com evidências do agente",
+                      "Acesso ao vivo às câmeras",
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-accent mt-0.5 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="order-1 md:order-2 relative flex items-center justify-center py-4">
+                  {/* Halo */}
+                  <div className="absolute inset-0 bg-accent/15 blur-3xl rounded-full" />
+                  <img
+                    src={appPersonalizado.url}
+                    alt="App do cliente 100% personalizado — Rota Sul Tech"
+                    loading="lazy"
+                    className="relative w-full max-w-sm h-auto object-contain drop-shadow-2xl group-hover:scale-[1.03] transition-transform duration-500"
+                  />
+                </div>
+              </div>
+            </article>
+
+            {/* Cards secundários — nada é cortado (object-contain) */}
             {[
               {
                 img: ligacoesCentral.url,
                 titulo: "Ligações e notificações personalizadas",
                 desc:
-                  "WhatsApp e ligações saem com o número e a marca da sua empresa. Seu cliente recebe alertas com fotos, vídeos e status do atendimento em tempo real.",
+                  "WhatsApp e ligações com o número e a marca da sua empresa. Alertas com fotos e status em tempo real.",
                 tag: "WhatsApp & Voz",
-              },
-              {
-                img: appPersonalizado.url,
-                titulo: "App do cliente 100% personalizado",
-                desc:
-                  "Arme/desarme, anulação de setores, recepção de eventos, linha do tempo, B.O.s eletrônicos e acesso às câmeras. Com sua logo e suas cores.",
-                tag: "iOS & Android",
               },
               {
                 img: appAgente.url,
                 titulo: "App tático do agente de campo",
                 desc:
-                  "Tarefas, SLA cronometrado, deslocamento, checklists e evidências. Todo o trabalho do agente com registro auditável ponta a ponta.",
+                  "Tarefas, SLA cronometrado, deslocamento, checklists e evidências — auditáveis ponta a ponta.",
                 tag: "Ronda & Ocorrências",
               },
               {
                 img: relatoriosImg.url,
                 titulo: "Relatórios e e-mails personalizados",
                 desc:
-                  "Relatórios gerenciais, gráficos e envios programados por e-mail — com a identidade visual da sua empresa e dados do atendimento.",
+                  "Relatórios gerenciais, gráficos e envios programados com a identidade visual da sua empresa.",
                 tag: "Gestão & BI",
               },
-            ].map(({ img, titulo, desc, tag }) => (
+            ].map(({ img, titulo, desc, tag }, i) => (
               <article
                 key={titulo}
-                className="group rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all"
+                className={`group rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all lg:col-span-2 ${i === 0 ? "lg:col-start-4" : ""}`}
               >
-                <div className="relative aspect-[4/3] overflow-hidden bg-primary-deep">
+                <div className="relative h-48 md:h-52 bg-gradient-to-br from-secondary to-muted flex items-center justify-center overflow-hidden">
                   <img
                     src={img}
                     alt={titulo}
                     loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="max-h-full max-w-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-3 left-3 rounded-full bg-black/55 backdrop-blur px-3 py-1 text-[11px] font-medium text-white border border-white/15">
+                  <div className="absolute top-3 left-3 rounded-full bg-primary/90 backdrop-blur px-3 py-1 text-[11px] font-medium text-white">
                     {tag}
                   </div>
                 </div>
-                <div className="p-6">
+                <div className="p-5">
                   <h3
-                    className="text-lg font-semibold text-primary"
+                    className="text-base font-semibold text-primary leading-snug"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {titulo}
