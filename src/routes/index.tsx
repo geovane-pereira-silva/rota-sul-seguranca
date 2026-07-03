@@ -31,6 +31,7 @@ function scrollToForm(e: React.MouseEvent) {
 function Landing() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground" style={{ fontFamily: "var(--font-sans)" }}>
@@ -45,18 +46,17 @@ function Landing() {
               Rota Sul Tech
             </span>
           </a>
-          <nav className="hidden md:flex items-center gap-8 text-sm text-white/80">
+          <nav className="hidden md:flex items-center gap-8 text-sm text-white/80" aria-label="Navegação principal">
             <a href="#servicos" className="hover:text-white transition">Serviços</a>
             <a href="#beneficios" className="hover:text-white transition">Benefícios</a>
-            <a href="#clientes" className="hover:text-white transition">Clientes</a>
-            <a href="#orcamento" className="hover:text-white transition">Contato</a>
+            <a href="#clientes" className="hover:text-white transition">Depoimentos</a>
           </nav>
           <a
             href="#orcamento"
             onClick={scrollToForm}
-            className="hidden md:inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground hover:brightness-110 transition"
+            className="hidden md:inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-sm font-semibold text-white hover:bg-white hover:text-primary transition"
           >
-            Falar com especialista <ArrowRight className="h-4 w-4" />
+            Solicitar Orçamento <ArrowRight className="h-4 w-4" />
           </a>
           <button
             className="md:hidden text-white p-2"
@@ -70,13 +70,13 @@ function Landing() {
           <div className="md:hidden bg-primary border-t border-white/10 px-5 py-4 space-y-3 text-white/90">
             <a href="#servicos" onClick={() => setMenuOpen(false)} className="block">Serviços</a>
             <a href="#beneficios" onClick={() => setMenuOpen(false)} className="block">Benefícios</a>
-            <a href="#clientes" onClick={() => setMenuOpen(false)} className="block">Clientes</a>
+            <a href="#clientes" onClick={() => setMenuOpen(false)} className="block">Depoimentos</a>
             <a
               href="#orcamento"
               onClick={(e) => { setMenuOpen(false); scrollToForm(e); }}
               className="block rounded-lg bg-accent text-accent-foreground text-center py-2 font-semibold"
             >
-              Falar com especialista
+              Solicitar Orçamento
             </a>
           </div>
         )}
@@ -108,12 +108,12 @@ function Landing() {
               className="mt-6 text-4xl md:text-6xl font-bold leading-[1.05] tracking-tight"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Tranquilidade 24h e Tecnologia de Ponta:{" "}
-              <span className="text-accent">Terceirize sua Central de Monitoramento.</span>
+              Tranquilidade 24h e Tecnologia de Ponta.{" "}
+              <span className="text-accent">Terceirize sua Central de Segurança.</span>
             </h1>
             <p className="mt-6 text-lg text-white/75 max-w-2xl">
-              Reduza custos operacionais e passivos trabalhistas com soluções híbridas de
-              segurança, IA e monitoramento em tempo real.
+              Elimine passivos trabalhistas e reduza os custos do seu condomínio ou empresa
+              com nossas soluções híbridas de monitoramento e Inteligência Artificial.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <a
@@ -121,7 +121,7 @@ function Landing() {
                 onClick={scrollToForm}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-4 text-base font-semibold text-accent-foreground shadow-lg shadow-black/30 hover:brightness-110 hover:-translate-y-0.5 transition"
               >
-                Receber 5 Propostas <ArrowRight className="h-5 w-5" />
+                Receber Proposta Personalizada <ArrowRight className="h-5 w-5" />
               </a>
               <a
                 href="#servicos"
@@ -170,9 +170,9 @@ function Landing() {
       <section className="border-y border-border bg-secondary">
         <div className="max-w-7xl mx-auto px-5 lg:px-8 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {[
-            { n: "+320", l: "Condomínios atendidos" },
+            { n: "+500", l: "Clientes Protegidos" },
             { n: "8s", l: "Tempo médio de resposta" },
-            { n: "24/7", l: "Monitoramento ininterrupto" },
+            { n: "24/7", l: "Atendimento ininterrupto" },
             { n: "99,98%", l: "Uptime da central" },
           ].map((m) => (
             <div key={m.l}>
@@ -387,7 +387,11 @@ function Landing() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              setSubmitted(true);
+              setLoading(true);
+              setTimeout(() => {
+                setLoading(false);
+                setSubmitted(true);
+              }, 1200);
             }}
             className="rounded-2xl bg-white p-7 md:p-8 shadow-2xl text-foreground"
           >
@@ -406,14 +410,15 @@ function Landing() {
             ) : (
               <>
                 <h3 className="text-xl font-bold text-primary" style={{ fontFamily: "var(--font-display)" }}>
-                  Solicite seu orçamento
+                  Pronto para otimizar sua segurança?
                 </h3>
                 <p className="mt-1 text-sm text-muted-foreground">Leva menos de 30 segundos.</p>
 
                 <div className="mt-6 space-y-4">
                   <div>
-                    <label className="text-sm font-medium text-foreground">Nome</label>
+                    <label htmlFor="f-nome" className="text-sm font-medium text-foreground">Nome</label>
                     <input
+                      id="f-nome"
                       required
                       type="text"
                       className="mt-1 w-full rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
@@ -421,34 +426,43 @@ function Landing() {
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-foreground">E-mail corporativo</label>
+                    <label htmlFor="f-contato" className="text-sm font-medium text-foreground">E-mail corporativo ou Telefone</label>
                     <input
+                      id="f-contato"
                       required
-                      type="email"
+                      type="text"
                       className="mt-1 w-full rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-                      placeholder="voce@empresa.com.br"
+                      placeholder="voce@empresa.com.br ou (51) 90000-0000"
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-foreground">Perfil</label>
+                    <label htmlFor="f-perfil" className="text-sm font-medium text-foreground">Perfil</label>
                     <select
+                      id="f-perfil"
                       required
                       className="mt-1 w-full rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
                       defaultValue=""
                     >
                       <option value="" disabled>Selecione uma opção</option>
-                      <option>Condomínio</option>
-                      <option>Empresa</option>
-                      <option>Residência</option>
+                      <option>Sou Síndico / Administradora</option>
+                      <option>Sou Empresário</option>
                     </select>
                   </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-4 text-sm font-bold text-accent-foreground hover:brightness-110 transition"
+                  disabled={loading}
+                  className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-4 text-sm font-bold text-accent-foreground hover:brightness-110 transition disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  Solicitar Orçamento Gratuito <ArrowRight className="h-4 w-4" />
+                  {loading ? (
+                    <>
+                      <span className="h-4 w-4 rounded-full border-2 border-accent-foreground/40 border-t-accent-foreground animate-spin" />
+                      Enviando...
+                    </>
+                  ) : (
+                    <>Solicitar Orçamento Gratuito <ArrowRight className="h-4 w-4" /></>
+                  )}
                 </button>
                 <p className="mt-3 text-[11px] text-center text-muted-foreground">
                   Seus dados estão protegidos conforme a LGPD.
@@ -493,7 +507,7 @@ function Landing() {
         </div>
         <div className="border-t border-white/10">
           <div className="max-w-7xl mx-auto px-5 lg:px-8 py-5 text-xs flex flex-col md:flex-row justify-between gap-2">
-            <span>© {new Date().getFullYear()} Rota Sul Tech. Todos os direitos reservados.</span>
+            <span>© 2026 Rota Sul Tech. Todos os direitos reservados.</span>
             <span>CNPJ 00.000.000/0001-00</span>
           </div>
         </div>
