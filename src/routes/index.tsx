@@ -7,6 +7,9 @@ import appAgente from "@/assets/app-agente.jpg.asset.json";
 import appPersonalizado from "@/assets/app-cliente-mockup.png";
 import centralOperadores from "@/assets/central-operadores.jpg";
 import servicosBg from "@/assets/servicos-bg.jpg";
+import estruturaCentral from "@/assets/estrutura-central-24h.jpg";
+import estruturaFrota from "@/assets/estrutura-frota-tatica.jpg";
+import estruturaTime from "@/assets/estrutura-time-tecnico.jpg";
 import {
   ShieldCheck,
   Camera,
