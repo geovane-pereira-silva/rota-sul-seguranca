@@ -658,12 +658,8 @@ function Landing() {
                           <span className="text-[9px] text-accent">Ver todos</span>
                         </div>
                         <div className="space-y-1">
-                          {[
-                            { dot: "bg-red-500", label: "Alarme intrusão", meta: "Setor externo", time: "22:15" },
-                            { dot: "bg-emerald-400", label: "Armado", meta: "Por João", time: "20:30" },
-                            { dot: "bg-white/40", label: "Desarmado", meta: "Por Maria", time: "07:45" },
-                          ].map((ev) => (
-                            <div key={ev.label + ev.time} className="flex items-center gap-2 rounded-md bg-white/5 border border-white/5 px-2 py-1.5">
+                          {eventos.map((ev, i) => (
+                            <div key={`${ev.label}-${ev.time}-${i}`} className="flex items-center gap-2 rounded-md bg-white/5 border border-white/5 px-2 py-1.5 animate-in fade-in slide-in-from-top-1 duration-300">
                               <span className={`h-1.5 w-1.5 rounded-full ${ev.dot} shrink-0`} />
                               <div className="flex-1 min-w-0">
                                 <div className="text-[10px] text-white/90 leading-tight truncate">{ev.label}</div>
