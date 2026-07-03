@@ -4,7 +4,9 @@ import heroFrota from "@/assets/hero-frota.jpg";
 import ligacoesCentral from "@/assets/ligacoes-central.jpg.asset.json";
 import relatoriosImg from "@/assets/relatorios.jpg.asset.json";
 import appAgente from "@/assets/app-agente.jpg.asset.json";
-import appPersonalizado from "@/assets/app-personalizado.png.asset.json";
+import appPersonalizado from "@/assets/app-cliente-mockup.png";
+import centralOperadores from "@/assets/central-operadores.jpg";
+import servicosBg from "@/assets/servicos-bg.jpg";
 import {
   ShieldCheck,
   Camera,
@@ -215,9 +217,11 @@ function Landing() {
         <div className="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative">
             <img
-              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=900&q=75"
-              alt="Equipe Rota Sul Tech no centro de operações"
+              src={centralOperadores}
+              alt="Central de monitoramento 24h da Rota Sul Tech com operadores acompanhando câmeras em tempo real"
               loading="lazy"
+              width={1600}
+              height={1088}
               className="rounded-2xl shadow-xl w-full h-[420px] object-cover"
             />
             <div className="absolute -bottom-6 -right-6 hidden md:flex items-center gap-3 rounded-xl bg-white border border-border shadow-lg px-5 py-4">
@@ -251,6 +255,23 @@ function Landing() {
 
       {/* SERVIÇOS — inspirado na referência: fundo escuro, pill + "Nossos serviços" */}
       <section id="servicos" className="relative py-20 md:py-28 bg-primary-deep text-white overflow-hidden">
+        {/* Fundo humanizado — operador em videowall */}
+        <img
+          src={servicosBg}
+          alt=""
+          aria-hidden
+          loading="lazy"
+          className="absolute inset-0 h-full w-full object-cover opacity-25 pointer-events-none"
+        />
+        {/* Gradiente para garantir legibilidade */}
+        <div
+          aria-hidden
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "linear-gradient(180deg, color-mix(in oklab, var(--primary-deep) 92%, transparent) 0%, color-mix(in oklab, var(--primary-deep) 78%, transparent) 50%, color-mix(in oklab, var(--primary-deep) 92%, transparent) 100%)",
+          }}
+        />
         <div className="absolute inset-0 opacity-[0.05] pointer-events-none"
           style={{
             backgroundImage:
@@ -426,7 +447,7 @@ function Landing() {
             {/* DESTAQUE — App personalizado */}
             <article className="lg:col-span-3 lg:row-span-2 group relative rounded-3xl overflow-hidden border border-border bg-gradient-to-br from-primary-deep via-primary to-primary-deep text-white shadow-xl">
               <div className="absolute top-5 left-5 z-10 inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-3 py-1 text-[11px] font-bold uppercase tracking-widest">
-                <Star className="h-3 w-3" /> Diferencial exclusivo
+                <Star className="h-3 w-3" /> Aplicativo do cliente
               </div>
               <div className="grid md:grid-cols-2 gap-4 p-6 md:p-10 items-center min-h-[520px]">
                 <div className="order-2 md:order-1">
@@ -437,19 +458,19 @@ function Landing() {
                     className="mt-3 text-2xl md:text-3xl font-bold leading-tight"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
-                    App do cliente <span className="text-accent">100% personalizado</span> com sua marca
+                    Controle a sua segurança <span className="text-accent">na palma da mão</span>
                   </h3>
                   <p className="mt-4 text-white/80 text-sm md:text-base leading-relaxed">
-                    A única terceirizadora que entrega um aplicativo com a sua logo e suas cores.
-                    Seu cliente controla tudo pelo celular — com a identidade da sua empresa.
+                    Um aplicativo completo para você acompanhar tudo em tempo real — do celular,
+                    onde estiver. Prático, rápido e direto.
                   </p>
                   <ul className="mt-5 space-y-2 text-sm text-white/85">
                     {[
-                      "Arme / Desarme remoto",
-                      "Anulação de setores",
+                      "Arme e desarme remoto do sistema",
+                      "Anulação de setores em segundos",
                       "Recepção de eventos e linha do tempo",
-                      "B.O.s eletrônicos com evidências do agente",
-                      "Acesso ao vivo às câmeras",
+                      "Registros de ocorrência com evidências do agente",
+                      "Acesso ao vivo às suas câmeras",
                     ].map((item) => (
                       <li key={item} className="flex items-start gap-2">
                         <CheckCircle2 className="h-4 w-4 text-accent mt-0.5 shrink-0" />
@@ -462,14 +483,17 @@ function Landing() {
                   {/* Halo */}
                   <div className="absolute inset-0 bg-accent/15 blur-3xl rounded-full" />
                   <img
-                    src={appPersonalizado.url}
-                    alt="App do cliente 100% personalizado — Rota Sul Tech"
+                    src={appPersonalizado}
+                    alt="Aplicativo do cliente Rota Sul Tech — controle o sistema pelo celular"
                     loading="lazy"
-                    className="relative w-full max-w-sm h-auto object-contain drop-shadow-2xl group-hover:scale-[1.03] transition-transform duration-500"
+                    width={1024}
+                    height={1280}
+                    className="relative w-full max-w-[280px] h-auto object-contain drop-shadow-2xl group-hover:scale-[1.03] transition-transform duration-500"
                   />
                 </div>
               </div>
             </article>
+
 
             {/* Cards secundários — nada é cortado (object-contain) */}
             {[
