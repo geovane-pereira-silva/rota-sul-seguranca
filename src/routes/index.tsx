@@ -515,106 +515,168 @@ function Landing() {
                   </div>
 
                   {/* Frame do celular */}
-                  <div className="relative w-full max-w-[340px] aspect-[9/19] rounded-[2.5rem] bg-neutral-900 p-2.5 shadow-2xl ring-1 ring-white/10">
-                    <div className="relative h-full w-full rounded-[2rem] overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-black">
+                  <div className="relative w-full max-w-[340px] aspect-[9/19.5] rounded-[2.5rem] bg-neutral-900 p-2.5 shadow-2xl ring-1 ring-white/10">
+                    <div className="relative h-full w-full rounded-[2rem] overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-black flex flex-col">
                       {/* Notch */}
                       <div className="absolute top-2 left-1/2 -translate-x-1/2 h-5 w-24 rounded-full bg-black z-10" />
 
                       {/* Status bar */}
                       <div className="relative z-0 pt-3 px-5 flex items-center justify-between text-[10px] text-white/70 font-medium">
-                        <span>09:42</span>
-                        <span>•••</span>
-                      </div>
-
-                      {/* Header */}
-                      <div className="px-5 pt-8">
-                        <div className="text-[10px] uppercase tracking-widest text-white/50">
-                          Rota Sul Tech
-                        </div>
-                        <div className="mt-1 text-white text-lg font-bold" style={{ fontFamily: "var(--font-display)" }}>
-                          Residência Central
+                        <span>9:41</span>
+                        <div className="flex items-center gap-1">
+                          <Signal className="h-2.5 w-2.5" />
+                          <Wifi className="h-2.5 w-2.5" />
+                          <BatteryFull className="h-3 w-3" />
                         </div>
                       </div>
 
-                      {/* Status circle */}
-                      <div className="mt-5 flex flex-col items-center">
-                        <div
-                          className={`relative h-32 w-32 rounded-full flex items-center justify-center transition-colors duration-500 ${
-                            armado
-                              ? "bg-gradient-to-br from-red-500/20 to-red-500/5 ring-4 ring-red-500/40"
-                              : "bg-gradient-to-br from-emerald-400/20 to-emerald-400/5 ring-4 ring-emerald-400/40"
-                          }`}
-                        >
-                          <div
-                            className={`absolute inset-0 rounded-full animate-ping opacity-40 ${
-                              armado ? "bg-red-500/20" : "bg-emerald-400/20"
-                            }`}
-                          />
-                          {armado ? (
-                            <Lock className="h-12 w-12 text-red-400 relative z-10" strokeWidth={2.2} />
-                          ) : (
-                            <Unlock className="h-12 w-12 text-emerald-300 relative z-10" strokeWidth={2.2} />
-                          )}
+                      {/* Header: logo + ações */}
+                      <div className="mt-4 px-4 flex items-center justify-between">
+                        <div className="flex items-center gap-2">
+                          <div className="h-8 w-8 rounded-lg bg-accent/20 border border-accent/40 flex items-center justify-center">
+                            <ShieldCheck className="h-4 w-4 text-accent" />
+                          </div>
+                          <div>
+                            <div className="text-[10px] text-white/50 leading-none">Bem-vindo</div>
+                            <div className="text-[11px] font-bold text-white leading-tight" style={{ fontFamily: "var(--font-display)" }}>
+                              Rota Sul Tech
+                            </div>
+                          </div>
                         </div>
-                        <div className="mt-3 text-[10px] uppercase tracking-widest text-white/50">
-                          Sistema
-                        </div>
-                        <div
-                          className={`text-base font-bold tracking-wide transition-colors ${
-                            armado ? "text-red-300" : "text-emerald-300"
-                          }`}
-                        >
-                          {armado ? "ARMADO" : "DESARMADO"}
+                        <div className="flex items-center gap-1.5">
+                          <div className="h-7 w-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                            <Menu className="h-3.5 w-3.5 text-white/70" />
+                          </div>
+                          <div className="relative h-7 w-7 rounded-lg bg-white/5 border border-white/10 flex items-center justify-center">
+                            <Bell className="h-3.5 w-3.5 text-white/70" />
+                            <span className="absolute -top-0.5 -right-0.5 h-2 w-2 rounded-full bg-red-500" />
+                          </div>
                         </div>
                       </div>
 
-                      {/* Botão interativo */}
-                      <div className="mt-4 px-5">
+                      {/* System status */}
+                      <div className={`mt-3 mx-4 rounded-2xl p-3 border transition-colors duration-500 ${
+                        armado
+                          ? "bg-gradient-to-br from-emerald-500/15 to-emerald-500/5 border-emerald-400/30"
+                          : "bg-gradient-to-br from-amber-500/15 to-amber-500/5 border-amber-400/30"
+                      }`}>
+                        <div className="flex items-center gap-2.5">
+                          <div className={`h-9 w-9 rounded-full flex items-center justify-center ${
+                            armado ? "bg-emerald-500/20" : "bg-amber-500/20"
+                          }`}>
+                            <Activity className={`h-4 w-4 ${armado ? "text-emerald-300" : "text-amber-300"} animate-pulse`} />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className={`text-[13px] font-bold tracking-wide ${
+                              armado ? "text-emerald-300" : "text-amber-300"
+                            }`}>
+                              {armado ? "ARMADO" : "DESARMADO"}
+                            </div>
+                            <div className="text-[10px] text-white/60">
+                              {armado ? "Tudo seguro" : "Sistema em stand-by"}
+                            </div>
+                          </div>
+                          <span className={`h-2 w-2 rounded-full animate-pulse ${
+                            armado ? "bg-emerald-400" : "bg-amber-400"
+                          }`} />
+                        </div>
+                      </div>
+
+                      {/* Quick actions — Armar/Desarmar clicáveis */}
+                      <div className="mt-3 px-4 grid grid-cols-4 gap-1.5">
                         <button
                           type="button"
-                          onClick={() => setArmado((v) => !v)}
+                          onClick={() => setArmado(true)}
                           aria-pressed={armado}
-                          aria-label={armado ? "Desarmar sistema" : "Armar sistema"}
-                          className={`w-full rounded-2xl py-3 text-sm font-bold uppercase tracking-widest transition-all active:scale-95 shadow-lg ${
+                          className={`flex flex-col items-center gap-1 rounded-xl border py-2 transition-all active:scale-95 ${
                             armado
-                              ? "bg-emerald-400 text-slate-900 hover:bg-emerald-300 shadow-emerald-400/30"
-                              : "bg-red-500 text-white hover:bg-red-400 shadow-red-500/30"
+                              ? "bg-emerald-500/20 border-emerald-400/50 shadow-lg shadow-emerald-500/20"
+                              : "bg-white/5 border-white/10 hover:bg-white/10"
                           }`}
                         >
-                          {armado ? "Desarmar" : "Armar"}
+                          <Lock className={`h-3.5 w-3.5 ${armado ? "text-emerald-300" : "text-white/70"}`} />
+                          <span className={`text-[9px] font-semibold ${armado ? "text-emerald-200" : "text-white/70"}`}>Armar</span>
                         </button>
+                        <button
+                          type="button"
+                          onClick={() => setArmado(false)}
+                          aria-pressed={!armado}
+                          className={`flex flex-col items-center gap-1 rounded-xl border py-2 transition-all active:scale-95 ${
+                            !armado
+                              ? "bg-amber-500/20 border-amber-400/50 shadow-lg shadow-amber-500/20"
+                              : "bg-white/5 border-white/10 hover:bg-white/10"
+                          }`}
+                        >
+                          <Unlock className={`h-3.5 w-3.5 ${!armado ? "text-amber-300" : "text-white/70"}`} />
+                          <span className={`text-[9px] font-semibold ${!armado ? "text-amber-200" : "text-white/70"}`}>Desarmar</span>
+                        </button>
+                        <div className="flex flex-col items-center gap-1 rounded-xl border py-2 bg-white/5 border-white/10">
+                          <Video className="h-3.5 w-3.5 text-white/70" />
+                          <span className="text-[9px] font-semibold text-white/70">Câmeras</span>
+                        </div>
+                        <div className="flex flex-col items-center gap-1 rounded-xl border py-2 bg-red-500/20 border-red-400/50 shadow-lg shadow-red-500/20">
+                          <AlertTriangle className="h-3.5 w-3.5 text-red-300" />
+                          <span className="text-[9px] font-semibold text-red-200">Pânico</span>
+                        </div>
                       </div>
 
-                      {/* Ações rápidas */}
-                      <div className="mt-4 px-5 grid grid-cols-3 gap-2">
+                      {/* Live camera */}
+                      <div className="mt-3 mx-4">
+                        <div className="flex items-center justify-between mb-1.5">
+                          <span className="text-[10px] font-semibold text-white/80">Câmera ao vivo</span>
+                          <span className="inline-flex items-center gap-1 text-[9px] font-bold text-red-300">
+                            <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
+                            AO VIVO
+                          </span>
+                        </div>
+                        <div className="relative h-16 rounded-lg overflow-hidden bg-gradient-to-br from-slate-800 via-slate-900 to-black border border-white/10">
+                          <div className="absolute inset-0 opacity-70 bg-[radial-gradient(ellipse_at_bottom,_rgba(251,191,36,0.35),_transparent_60%)]" />
+                          <div className="absolute inset-0 opacity-40 bg-[linear-gradient(180deg,transparent_60%,rgba(0,0,0,0.6))]" />
+                          <div className="absolute bottom-1 left-1.5 text-[8px] text-white/70 font-mono">CAM 01 · GARAGEM</div>
+                        </div>
+                      </div>
+
+                      {/* Eventos recentes */}
+                      <div className="mt-3 mx-4 flex-1">
+                        <div className="flex items-center justify-between mb-1">
+                          <span className="text-[10px] font-semibold text-white/80">Eventos recentes</span>
+                          <span className="text-[9px] text-accent">Ver todos</span>
+                        </div>
+                        <div className="space-y-1">
+                          {[
+                            { dot: "bg-red-500", label: "Alarme intrusão", meta: "Setor externo", time: "22:15" },
+                            { dot: "bg-emerald-400", label: "Armado", meta: "Por João", time: "20:30" },
+                            { dot: "bg-white/40", label: "Desarmado", meta: "Por Maria", time: "07:45" },
+                          ].map((ev) => (
+                            <div key={ev.label + ev.time} className="flex items-center gap-2 rounded-md bg-white/5 border border-white/5 px-2 py-1.5">
+                              <span className={`h-1.5 w-1.5 rounded-full ${ev.dot} shrink-0`} />
+                              <div className="flex-1 min-w-0">
+                                <div className="text-[10px] text-white/90 leading-tight truncate">{ev.label}</div>
+                                <div className="text-[8px] text-white/50 leading-tight truncate">{ev.meta}</div>
+                              </div>
+                              <span className="text-[8px] text-white/50 font-mono">{ev.time}</span>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+
+                      {/* Bottom navigation */}
+                      <div className="mt-2 mx-2 mb-2 grid grid-cols-4 rounded-xl bg-white/5 border border-white/10 py-1.5">
                         {[
-                          { Icon: Video, label: "Câmeras" },
-                          { Icon: Bell, label: "Eventos" },
-                          { Icon: ShieldCheck, label: "Setores" },
-                        ].map(({ Icon, label }) => (
-                          <div
-                            key={label}
-                            className="flex flex-col items-center gap-1 rounded-xl bg-white/5 border border-white/10 py-2.5"
-                          >
-                            <Icon className="h-4 w-4 text-accent" />
-                            <span className="text-[9px] text-white/70 font-medium">{label}</span>
+                          { Icon: Home, label: "Início", active: true },
+                          { Icon: Clock, label: "Histórico", active: false },
+                          { Icon: LayoutGrid, label: "Dispositivos", active: false },
+                          { Icon: Settings, label: "Config.", active: false },
+                        ].map(({ Icon, label, active }) => (
+                          <div key={label} className="flex flex-col items-center gap-0.5">
+                            <Icon className={`h-3.5 w-3.5 ${active ? "text-accent" : "text-white/50"}`} />
+                            <span className={`text-[8px] ${active ? "text-accent font-bold" : "text-white/50"}`}>{label}</span>
                           </div>
                         ))}
                       </div>
-
-                      {/* Última atividade */}
-                      <div className="mt-4 mx-5 rounded-xl bg-white/5 border border-white/10 p-3">
-                        <div className="text-[9px] uppercase tracking-widest text-white/40">
-                          Última atividade
-                        </div>
-                        <div className="mt-1 text-[11px] text-white/85">
-                          {armado
-                            ? "Sistema armado às 09:41"
-                            : "Sistema desarmado agora"}
-                        </div>
-                      </div>
                     </div>
                   </div>
+
                 </div>
               </div>
 
