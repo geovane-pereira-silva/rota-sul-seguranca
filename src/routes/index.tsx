@@ -441,7 +441,127 @@ function Landing() {
         </div>
       </section>
 
+      {/* ESTRUTURA */}
+      <section id="estrutura" className="py-20 md:py-28 bg-secondary/50">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="max-w-2xl">
+            <span className="text-xs font-semibold tracking-widest text-accent uppercase">Nossa estrutura</span>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
+              Uma central pronta para não falhar.
+            </h2>
+          </div>
+          <div className="mt-12 grid md:grid-cols-3 gap-6">
+            {[
+              { img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&q=75", title: "Central 24h", desc: "Operadores presenciais, videowall e protocolo de resposta em segundos." },
+              { img: "https://images.unsplash.com/photo-1580983218765-f663bec07b37?w=800&q=75", title: "Frota Tática", desc: "Viaturas próprias com rastreamento em tempo real para atendimento local." },
+              { img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=75", title: "Time Técnico", desc: "Engenheiros e técnicos certificados para instalação e manutenção." },
+            ].map((c) => (
+              <div key={c.title} className="rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-lg transition">
+                <img src={c.img} alt={c.title} loading="lazy" className="h-48 w-full object-cover" />
+                <div className="p-6">
+                  <div className="flex items-center gap-2 text-primary">
+                    <Building2 className="h-5 w-5" />
+                    <h3 className="font-bold" style={{ fontFamily: "var(--font-display)" }}>{c.title}</h3>
+                  </div>
+                  <p className="mt-2 text-sm text-muted-foreground">{c.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PARCEIROS */}
+      <section id="parceiros" className="py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="text-xs font-semibold tracking-widest text-accent uppercase">Parceiros tecnológicos</span>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
+              Trabalhamos com os melhores do mercado.
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              Integramos equipamentos e plataformas homologadas para garantir performance, escalabilidade e suporte oficial.
+            </p>
+          </div>
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+            {["Intelbras", "Hikvision", "Motorola", "Bosch", "Positivo", "Axis", "Dahua", "Unifi"].map((p) => (
+              <div key={p} className="flex items-center justify-center rounded-xl border border-border bg-card py-8 hover:border-accent/50 hover:shadow-md transition">
+                <div className="flex items-center gap-2 text-primary">
+                  <Handshake className="h-5 w-5 text-accent" />
+                  <span className="font-semibold" style={{ fontFamily: "var(--font-display)" }}>{p}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* NA MÍDIA */}
+      <section id="midia" className="py-20 md:py-28 bg-secondary/50">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="max-w-2xl">
+            <span className="text-xs font-semibold tracking-widest text-accent uppercase">Na mídia</span>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
+              Nosso trabalho é notícia.
+            </h2>
+          </div>
+          <div className="mt-12 grid md:grid-cols-3 gap-6">
+            {[
+              { veiculo: "GZH · Zero Hora", titulo: "Rota Sul Tech reduz em 38% o custo de portaria em condomínios de Porto Alegre." },
+              { veiculo: "Correio do Povo", titulo: "IA aplicada à segurança: startup gaúcha entra no radar de administradoras." },
+              { veiculo: "Portal Sindiconet", titulo: "Terceirização de monitoramento: por que síndicos estão migrando." },
+            ].map((n) => (
+              <article key={n.veiculo} className="rounded-2xl border border-border bg-card p-6 hover:shadow-lg transition">
+                <div className="flex items-center gap-2 text-xs font-semibold text-accent uppercase tracking-widest">
+                  <Newspaper className="h-4 w-4" /> {n.veiculo}
+                </div>
+                <h3 className="mt-3 font-semibold text-primary" style={{ fontFamily: "var(--font-display)" }}>{n.titulo}</h3>
+                <a href="#" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-accent transition">
+                  Ler matéria <ArrowRight className="h-4 w-4" />
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* BLOG */}
+      <section id="blog" className="py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="max-w-2xl">
+              <span className="text-xs font-semibold tracking-widest text-accent uppercase">Blog</span>
+              <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
+                Conteúdo pra quem leva segurança a sério.
+              </h2>
+            </div>
+            <a href="#" className="text-sm font-semibold text-primary hover:text-accent transition inline-flex items-center gap-1">
+              Ver todos os artigos <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+          <div className="mt-10 grid md:grid-cols-3 gap-6">
+            {[
+              { img: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=75", cat: "Condomínios", titulo: "5 sinais de que seu condomínio precisa terceirizar a portaria" },
+              { img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=75", cat: "Tecnologia", titulo: "Como a IA reduz falsos positivos em alarmes residenciais" },
+              { img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=75", cat: "Gestão", titulo: "Terceirização x segurança própria: comparativo completo de custos" },
+            ].map((p) => (
+              <article key={p.titulo} className="rounded-2xl overflow-hidden border border-border bg-card hover:shadow-lg transition">
+                <img src={p.img} alt={p.titulo} loading="lazy" className="h-44 w-full object-cover" />
+                <div className="p-6">
+                  <div className="text-xs font-semibold text-accent uppercase tracking-widest">{p.cat}</div>
+                  <h3 className="mt-2 font-semibold text-primary" style={{ fontFamily: "var(--font-display)" }}>{p.titulo}</h3>
+                  <a href="#" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-accent transition">
+                    Ler artigo <ArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FORMULÁRIO */}
+
       <section
         id="orcamento"
         className="py-20 md:py-28 relative"
