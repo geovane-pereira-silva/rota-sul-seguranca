@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import heroTecnico from "@/assets/hero-tecnico.jpg";
+import heroFrota from "@/assets/hero-frota.jpg";
 import ligacoesCentral from "@/assets/ligacoes-central.jpg.asset.json";
 import relatoriosImg from "@/assets/relatorios.jpg.asset.json";
 import appAgente from "@/assets/app-agente.jpg.asset.json";
@@ -108,117 +108,83 @@ function Landing() {
 
       </header>
 
-      {/* HERO — inspirado na referência: fundo claro, listras diagonais, homem + texto */}
+      {/* HERO — full-bleed, imagem em destaque com frota de segurança ao fundo */}
       <section
         id="top"
-        className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-secondary"
+        className="relative min-h-[92vh] flex items-center overflow-hidden"
       >
-        {/* Listras diagonais decorativas — canto superior esquerdo */}
-        <div aria-hidden className="absolute -top-10 -left-16 hidden md:block pointer-events-none">
-          <div className="flex flex-col gap-2 -rotate-[18deg]">
-            <div className="h-3 w-40 bg-primary rounded-full" />
-            <div className="h-3 w-56 bg-primary rounded-full" />
-            <div className="h-3 w-32 bg-accent rounded-full" />
-          </div>
-        </div>
-        {/* Listras diagonais — canto inferior esquerdo */}
-        <div aria-hidden className="absolute -bottom-6 -left-10 hidden md:block pointer-events-none">
-          <div className="flex flex-col gap-2 -rotate-[18deg]">
-            <div className="h-3 w-56 bg-primary rounded-full" />
-            <div className="h-3 w-40 bg-primary rounded-full" />
-            <div className="h-3 w-24 bg-accent rounded-full" />
-          </div>
-        </div>
-        {/* Listras diagonais — canto superior direito */}
-        <div aria-hidden className="absolute -top-6 -right-16 hidden md:block pointer-events-none">
-          <div className="flex flex-col gap-2 rotate-[18deg]">
-            <div className="h-3 w-40 bg-primary rounded-full" />
-            <div className="h-3 w-56 bg-primary rounded-full" />
-          </div>
-        </div>
+        {/* Imagem de fundo com a frota */}
+        <img
+          src={heroFrota}
+          alt="Gestor da Rota Sul Tech em base operacional com frota de viaturas de segurança"
+          fetchPriority="high"
+          width={1920}
+          height={1088}
+          className="absolute inset-0 h-full w-full object-cover object-right"
+        />
+        {/* Overlays: escurece geral + gradiente forte à esquerda pro texto */}
+        <div
+          aria-hidden
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(90deg, var(--primary-deep) 0%, color-mix(in oklab, var(--primary-deep) 88%, transparent) 35%, color-mix(in oklab, var(--primary-deep) 45%, transparent) 60%, transparent 90%)",
+          }}
+        />
+        <div aria-hidden className="absolute inset-0 bg-primary-deep/25" />
 
-        <div className="relative max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
-          {/* Texto — esquerda */}
-          <div className="lg:col-span-6 text-primary">
+        {/* Grid decorativo sutil */}
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.06] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,.6) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.6) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+          }}
+        />
+
+        {/* Conteúdo — texto à esquerda */}
+        <div className="relative w-full max-w-7xl mx-auto px-5 lg:px-10 pt-28 pb-20 md:pt-32 md:pb-28">
+          <div className="max-w-2xl text-white">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 backdrop-blur px-3 py-1 text-[11px] font-semibold tracking-widest uppercase text-white/90">
+              <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+              Central ativa agora — 24/7
+            </div>
             <h1
-              className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] font-bold leading-[1.08] tracking-tight"
+              className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-[4.2rem] font-bold leading-[1.02] tracking-tight"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Na <span className="text-primary">Rota Sul Tech</span> cuidamos do que realmente importa:{" "}
-              <span className="text-accent">sua Família, sua Segurança e seu Patrimônio.</span>
+              Nós cuidamos da{" "}
+              <span className="text-accent">segurança do seu patrimônio</span>,
+              e você cuida do que realmente importa.
             </h1>
-            <p className="mt-6 text-base md:text-lg text-muted-foreground max-w-xl">
-              Há mais de 10 anos oferecendo soluções completas em monitoramento eletrônico, portaria remota
-              e CFTV inteligente. Unimos tecnologia, experiência e uma equipe humana 24h para proteger
-              pessoas e negócios com confiança e eficiência.
+            <p className="mt-6 text-base md:text-lg text-white/80 max-w-xl">
+              Há mais de 10 anos em Poços de Caldas, unindo tecnologia,
+              monitoramento eletrônico e uma equipe humana 24h para proteger
+              famílias, empresas e obras com resposta em segundos.
             </p>
 
-            <div className="mt-8 flex flex-col sm:flex-row gap-3">
+            <div className="mt-9 flex flex-col sm:flex-row gap-3">
               <a
                 href="#orcamento"
                 onClick={scrollToForm}
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-8 py-4 text-sm md:text-base font-bold uppercase tracking-wider text-primary-foreground shadow-lg shadow-primary/25 hover:brightness-125 hover:-translate-y-0.5 transition"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-accent px-9 py-4 text-sm md:text-base font-bold uppercase tracking-wider text-accent-foreground shadow-lg shadow-accent/30 hover:brightness-110 hover:-translate-y-0.5 transition"
               >
-                Solicite um orçamento
+                Quero saber mais
               </a>
               <a
                 href="#servicos"
-                className="inline-flex items-center justify-center gap-2 rounded-md border-2 border-primary/15 px-7 py-4 text-sm md:text-base font-semibold text-primary hover:border-primary hover:bg-primary/5 transition"
+                className="inline-flex items-center justify-center gap-2 rounded-md border border-white/30 bg-white/5 backdrop-blur px-8 py-4 text-sm md:text-base font-semibold text-white hover:bg-white/15 transition"
               >
                 Ver soluções <ArrowRight className="h-4 w-4" />
               </a>
             </div>
 
-            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-accent" /> Central 24/7</div>
+            <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-white/75">
               <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-accent" /> Certificação ABESE</div>
               <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-accent" /> +500 clientes protegidos</div>
-            </div>
-          </div>
-
-          {/* Foto — direita, painel arredondado escuro */}
-          <div className="lg:col-span-6">
-            <div className="relative">
-              <div
-                className="relative overflow-hidden rounded-[2rem] shadow-2xl"
-                style={{
-                  background:
-                    "linear-gradient(135deg, var(--primary-deep), var(--primary))",
-                }}
-              >
-                <img
-                  src={heroTecnico}
-                  alt="Técnico da Rota Sul Tech sorrindo — segurança feita por pessoas"
-                  loading="eager"
-                  width={1024}
-                  height={1024}
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-
-              {/* Selo flutuante */}
-              <div className="absolute -bottom-5 -left-4 md:-left-6 flex items-center gap-3 rounded-xl bg-white shadow-xl border border-border px-4 py-3">
-                <div className="grid place-items-center h-11 w-11 rounded-lg bg-accent text-accent-foreground">
-                  <ShieldCheck className="h-5 w-5" />
-                </div>
-                <div>
-                  <div className="text-[11px] text-muted-foreground uppercase tracking-wide">Vigilância humana</div>
-                  <div className="text-sm font-bold text-primary leading-tight" style={{ fontFamily: "var(--font-display)" }}>
-                    Ativa agora — 24h
-                  </div>
-                </div>
-              </div>
-
-              {/* Card flutuante — resposta */}
-              <div className="absolute -top-4 -right-4 hidden sm:flex items-center gap-3 rounded-xl bg-white shadow-xl border border-border px-4 py-3">
-                <div className="grid place-items-center h-11 w-11 rounded-lg bg-primary text-primary-foreground">
-                  <Radio className="h-5 w-5" />
-                </div>
-                <div>
-                  <div className="text-[11px] text-muted-foreground uppercase tracking-wide">Resposta média</div>
-                  <div className="text-xl font-bold text-primary leading-none" style={{ fontFamily: "var(--font-display)" }}>8s</div>
-                </div>
-              </div>
+              <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-accent" /> Resposta média em 8s</div>
             </div>
           </div>
         </div>
@@ -455,55 +421,98 @@ function Landing() {
             </p>
           </div>
 
-          <div className="mt-14 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+          {/* Bento: destaque para o App 100% personalizado + 3 cards secundários */}
+          <div className="mt-14 grid lg:grid-cols-5 gap-6">
+            {/* DESTAQUE — App personalizado */}
+            <article className="lg:col-span-3 lg:row-span-2 group relative rounded-3xl overflow-hidden border border-border bg-gradient-to-br from-primary-deep via-primary to-primary-deep text-white shadow-xl">
+              <div className="absolute top-5 left-5 z-10 inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-3 py-1 text-[11px] font-bold uppercase tracking-widest">
+                <Star className="h-3 w-3" /> Diferencial exclusivo
+              </div>
+              <div className="grid md:grid-cols-2 gap-4 p-6 md:p-10 items-center min-h-[520px]">
+                <div className="order-2 md:order-1">
+                  <div className="text-[11px] font-semibold uppercase tracking-widest text-accent">
+                    iOS & Android
+                  </div>
+                  <h3
+                    className="mt-3 text-2xl md:text-3xl font-bold leading-tight"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    App do cliente <span className="text-accent">100% personalizado</span> com sua marca
+                  </h3>
+                  <p className="mt-4 text-white/80 text-sm md:text-base leading-relaxed">
+                    A única terceirizadora que entrega um aplicativo com a sua logo e suas cores.
+                    Seu cliente controla tudo pelo celular — com a identidade da sua empresa.
+                  </p>
+                  <ul className="mt-5 space-y-2 text-sm text-white/85">
+                    {[
+                      "Arme / Desarme remoto",
+                      "Anulação de setores",
+                      "Recepção de eventos e linha do tempo",
+                      "B.O.s eletrônicos com evidências do agente",
+                      "Acesso ao vivo às câmeras",
+                    ].map((item) => (
+                      <li key={item} className="flex items-start gap-2">
+                        <CheckCircle2 className="h-4 w-4 text-accent mt-0.5 shrink-0" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                <div className="order-1 md:order-2 relative flex items-center justify-center py-4">
+                  {/* Halo */}
+                  <div className="absolute inset-0 bg-accent/15 blur-3xl rounded-full" />
+                  <img
+                    src={appPersonalizado.url}
+                    alt="App do cliente 100% personalizado — Rota Sul Tech"
+                    loading="lazy"
+                    className="relative w-full max-w-sm h-auto object-contain drop-shadow-2xl group-hover:scale-[1.03] transition-transform duration-500"
+                  />
+                </div>
+              </div>
+            </article>
+
+            {/* Cards secundários — nada é cortado (object-contain) */}
             {[
               {
                 img: ligacoesCentral.url,
                 titulo: "Ligações e notificações personalizadas",
                 desc:
-                  "WhatsApp e ligações saem com o número e a marca da sua empresa. Seu cliente recebe alertas com fotos, vídeos e status do atendimento em tempo real.",
+                  "WhatsApp e ligações com o número e a marca da sua empresa. Alertas com fotos e status em tempo real.",
                 tag: "WhatsApp & Voz",
-              },
-              {
-                img: appPersonalizado.url,
-                titulo: "App do cliente 100% personalizado",
-                desc:
-                  "Arme/desarme, anulação de setores, recepção de eventos, linha do tempo, B.O.s eletrônicos e acesso às câmeras. Com sua logo e suas cores.",
-                tag: "iOS & Android",
               },
               {
                 img: appAgente.url,
                 titulo: "App tático do agente de campo",
                 desc:
-                  "Tarefas, SLA cronometrado, deslocamento, checklists e evidências. Todo o trabalho do agente com registro auditável ponta a ponta.",
+                  "Tarefas, SLA cronometrado, deslocamento, checklists e evidências — auditáveis ponta a ponta.",
                 tag: "Ronda & Ocorrências",
               },
               {
                 img: relatoriosImg.url,
                 titulo: "Relatórios e e-mails personalizados",
                 desc:
-                  "Relatórios gerenciais, gráficos e envios programados por e-mail — com a identidade visual da sua empresa e dados do atendimento.",
+                  "Relatórios gerenciais, gráficos e envios programados com a identidade visual da sua empresa.",
                 tag: "Gestão & BI",
               },
-            ].map(({ img, titulo, desc, tag }) => (
+            ].map(({ img, titulo, desc, tag }, i) => (
               <article
                 key={titulo}
-                className="group rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all"
+                className={`group rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all lg:col-span-2 ${i === 0 ? "lg:col-start-4" : ""}`}
               >
-                <div className="relative aspect-[4/3] overflow-hidden bg-primary-deep">
+                <div className="relative h-48 md:h-52 bg-gradient-to-br from-secondary to-muted flex items-center justify-center overflow-hidden">
                   <img
                     src={img}
                     alt={titulo}
                     loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="max-h-full max-w-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
                   />
-                  <div className="absolute top-3 left-3 rounded-full bg-black/55 backdrop-blur px-3 py-1 text-[11px] font-medium text-white border border-white/15">
+                  <div className="absolute top-3 left-3 rounded-full bg-primary/90 backdrop-blur px-3 py-1 text-[11px] font-medium text-white">
                     {tag}
                   </div>
                 </div>
-                <div className="p-6">
+                <div className="p-5">
                   <h3
-                    className="text-lg font-semibold text-primary"
+                    className="text-base font-semibold text-primary leading-snug"
                     style={{ fontFamily: "var(--font-display)" }}
                   >
                     {titulo}
