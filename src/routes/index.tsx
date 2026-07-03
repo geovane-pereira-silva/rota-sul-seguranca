@@ -217,9 +217,11 @@ function Landing() {
         <div className="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative">
             <img
-              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=900&q=75"
-              alt="Equipe Rota Sul Tech no centro de operações"
+              src={centralOperadores}
+              alt="Central de monitoramento 24h da Rota Sul Tech com operadores acompanhando câmeras em tempo real"
               loading="lazy"
+              width={1600}
+              height={1088}
               className="rounded-2xl shadow-xl w-full h-[420px] object-cover"
             />
             <div className="absolute -bottom-6 -right-6 hidden md:flex items-center gap-3 rounded-xl bg-white border border-border shadow-lg px-5 py-4">
