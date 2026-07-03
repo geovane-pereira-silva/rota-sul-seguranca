@@ -162,7 +162,7 @@ function Landing() {
             <div className="relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur p-6 shadow-2xl">
               <div className="flex items-center justify-between text-white/80 text-xs">
                 <span className="flex items-center gap-2"><Radio className="h-4 w-4 text-emerald-400" /> Central ao vivo</span>
-                <span>SP · RS · PR</span>
+                <span>MG · SP · RJ</span>
               </div>
               <div className="mt-4 grid grid-cols-2 gap-3">
                 {[
@@ -524,7 +524,7 @@ function Landing() {
           </div>
           <div className="mt-12 grid md:grid-cols-3 gap-6">
             {[
-              { veiculo: "GZH · Zero Hora", titulo: "Rota Sul Tech reduz em 38% o custo de portaria em condomínios de Porto Alegre." },
+              { veiculo: "Jornal da Cidade", titulo: "Rota Sul Tech reduz em 38% o custo de portaria em condomínios de Poços de Caldas." },
               { veiculo: "Correio do Povo", titulo: "IA aplicada à segurança: startup gaúcha entra no radar de administradoras." },
               { veiculo: "Portal Sindiconet", titulo: "Terceirização de monitoramento: por que síndicos estão migrando." },
             ].map((n) => (
@@ -713,7 +713,7 @@ function Landing() {
             <ul className="mt-4 space-y-2 text-sm">
               <li className="flex items-center gap-2"><Phone className="h-4 w-4" /> 0800 000 0000</li>
               <li className="flex items-center gap-2"><Mail className="h-4 w-4" /> contato@rotasultech.com.br</li>
-              <li className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Porto Alegre · RS</li>
+              <li className="flex items-center gap-2"><MapPin className="h-4 w-4" /> Poços de Caldas · MG</li>
             </ul>
           </div>
           <div>
