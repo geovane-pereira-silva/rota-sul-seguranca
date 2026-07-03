@@ -431,6 +431,84 @@ function Landing() {
         </div>
       </section>
 
+      {/* COMO FUNCIONA — 3 imagens: central 24h, app mobile, agente em ronda */}
+      <section id="operacao" className="py-20 md:py-28 bg-background">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto">
+            <span className="text-xs font-semibold tracking-widest text-accent uppercase">
+              Como funciona
+            </span>
+            <h2
+              className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Uma operação inteira{" "}
+              <span className="text-accent">trabalhando por você</span>.
+            </h2>
+            <p className="mt-4 text-muted-foreground text-base md:text-lg">
+              Central humana 24h, aplicativo do cliente e agentes em campo — três
+              camadas conectadas que garantem tempo de resposta em segundos.
+            </p>
+          </div>
+
+          <div className="mt-14 grid md:grid-cols-3 gap-6">
+            {[
+              {
+                img: central24h,
+                titulo: "Central de Monitoramento 24h",
+                desc:
+                  "Operadores treinados acompanham câmeras, alarmes e chamadas em tempo real. Falsos alertas são filtrados por IA antes de acionar uma resposta.",
+                tag: "Ligações & Alertas",
+              },
+              {
+                img: appMobile,
+                titulo: "App do Cliente 100% personalizado",
+                desc:
+                  "Acompanhe câmeras, pause alarme, abra chamados e receba notificações — tudo no seu celular, com sua marca.",
+                tag: "iOS & Android",
+              },
+              {
+                img: agenteRonda,
+                titulo: "Agentes em campo com app tático",
+                desc:
+                  "Ronda motorizada com registro por QR code, evidências fotográficas e relatórios de ocorrência enviados em tempo real.",
+                tag: "Ronda & Ocorrências",
+              },
+            ].map(({ img, titulo, desc, tag }) => (
+              <article
+                key={titulo}
+                className="group rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all"
+              >
+                <div className="relative aspect-[4/3] overflow-hidden bg-primary-deep">
+                  <img
+                    src={img}
+                    alt={titulo}
+                    loading="lazy"
+                    width={1280}
+                    height={832}
+                    className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                  />
+                  <div className="absolute top-3 left-3 rounded-full bg-black/55 backdrop-blur px-3 py-1 text-[11px] font-medium text-white border border-white/15">
+                    {tag}
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h3
+                    className="text-lg font-semibold text-primary"
+                    style={{ fontFamily: "var(--font-display)" }}
+                  >
+                    {titulo}
+                  </h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                    {desc}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* BENEFÍCIOS */}
       <section id="diferenciais" className="py-20 md:py-28 bg-primary text-white relative overflow-hidden">
         <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-accent/20 blur-3xl" />
