@@ -614,7 +614,7 @@ function Landing() {
                         </button>
                         <button
                           type="button"
-                          onClick={() => setArmado(false)}
+                          onClick={() => registrarEvento(false)}
                           aria-pressed={!armado}
                           className={`flex flex-col items-center gap-1 rounded-xl border py-2 transition-all active:scale-95 ${
                             !armado
