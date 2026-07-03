@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   ShieldCheck,
@@ -17,7 +17,12 @@ import {
   MapPin,
   Menu,
   X,
+  Newspaper,
+  Building2,
+  Handshake,
+  Headphones,
 } from "lucide-react";
+
 
 export const Route = createFileRoute("/")({
   component: Landing,
@@ -46,20 +51,25 @@ function Landing() {
               Rota Sul Tech
             </span>
           </a>
-          <nav className="hidden md:flex items-center gap-8 text-sm text-white/80" aria-label="Navegação principal">
+          <nav className="hidden lg:flex items-center gap-6 text-sm text-white/80" aria-label="Navegação principal">
+            <a href="#top" className="hover:text-white transition">Home</a>
+            <a href="#sobre" className="hover:text-white transition">A Rota Sul Tech</a>
             <a href="#servicos" className="hover:text-white transition">Serviços</a>
-            <a href="#beneficios" className="hover:text-white transition">Benefícios</a>
-            <a href="#clientes" className="hover:text-white transition">Depoimentos</a>
+            <a href="#diferenciais" className="hover:text-white transition">Diferenciais</a>
+            <a href="#estrutura" className="hover:text-white transition">Estrutura</a>
+            <a href="#parceiros" className="hover:text-white transition">Parceiros</a>
+            <a href="#midia" className="hover:text-white transition">Na mídia</a>
+            <a href="#blog" className="hover:text-white transition">Blog</a>
+            <a href="#orcamento" onClick={scrollToForm} className="hover:text-white transition font-semibold">CONTATO</a>
           </nav>
-          <a
-            href="#orcamento"
-            onClick={scrollToForm}
-            className="hidden md:inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-sm font-semibold text-white hover:bg-white hover:text-primary transition"
+          <Link
+            to="/area-cliente"
+            className="hidden lg:inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground hover:brightness-110 transition"
           >
-            Solicitar Orçamento <ArrowRight className="h-4 w-4" />
-          </a>
+            Área do Cliente <ArrowRight className="h-4 w-4" />
+          </Link>
           <button
-            className="md:hidden text-white p-2"
+            className="lg:hidden text-white p-2"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Menu"
           >
@@ -67,19 +77,30 @@ function Landing() {
           </button>
         </div>
         {menuOpen && (
-          <div className="md:hidden bg-primary border-t border-white/10 px-5 py-4 space-y-3 text-white/90">
-            <a href="#servicos" onClick={() => setMenuOpen(false)} className="block">Serviços</a>
-            <a href="#beneficios" onClick={() => setMenuOpen(false)} className="block">Benefícios</a>
-            <a href="#clientes" onClick={() => setMenuOpen(false)} className="block">Depoimentos</a>
-            <a
-              href="#orcamento"
-              onClick={(e) => { setMenuOpen(false); scrollToForm(e); }}
+          <div className="lg:hidden bg-primary border-t border-white/10 px-5 py-4 space-y-3 text-white/90">
+            {[
+              ["#top", "Home"],
+              ["#sobre", "A Rota Sul Tech"],
+              ["#servicos", "Serviços"],
+              ["#diferenciais", "Diferenciais"],
+              ["#estrutura", "Estrutura"],
+              ["#parceiros", "Parceiros"],
+              ["#midia", "Na mídia"],
+              ["#blog", "Blog"],
+              ["#orcamento", "CONTATO"],
+            ].map(([href, label]) => (
+              <a key={href} href={href} onClick={() => setMenuOpen(false)} className="block">{label}</a>
+            ))}
+            <Link
+              to="/area-cliente"
+              onClick={() => setMenuOpen(false)}
               className="block rounded-lg bg-accent text-accent-foreground text-center py-2 font-semibold"
             >
-              Solicitar Orçamento
-            </a>
+              Área do Cliente
+            </Link>
           </div>
         )}
+
       </header>
 
       {/* HERO */}
@@ -145,30 +166,30 @@ function Landing() {
               </div>
               <div className="mt-4 grid grid-cols-2 gap-3">
                 {[
-                  { label: "CAM 01 · Portaria", gif: "https://media.giphy.com/media/SIYtnOkrQxJNFQQ7Op/giphy.gif" },
-                  { label: "CAM 02 · Garagem", gif: "https://media.giphy.com/media/pG9kMKdbJfQttjTkpb/giphy.gif" },
-                  { label: "CAM 03 · Playground", gif: "https://media.giphy.com/media/6AlK10KuTyToP2wmn8/giphy.gif" },
-                  { label: "CAM 04 · Perímetro", gif: "https://media.giphy.com/media/DZbvu0MGf5G5wLsLF4/giphy.gif" },
-                ].map(({ label, gif }, i) => (
+                  { label: "CAM 01 · Rua principal", src: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=600&q=70" },
+                  { label: "CAM 02 · Portaria", src: "https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=600&q=70" },
+                  { label: "CAM 03 · Residencial", src: "https://images.unsplash.com/photo-1518005020951-eccb494ad742?w=600&q=70" },
+                  { label: "CAM 04 · Garagem", src: "https://images.unsplash.com/photo-1502005229762-cf1b2da7c5d6?w=600&q=70" },
+                ].map(({ label, src }, i) => (
                   <div key={i} className="aspect-video rounded-lg bg-slate-950 border border-white/10 relative overflow-hidden">
                     <img
-                      src={gif}
+                      src={src}
                       alt={label}
                       loading="lazy"
-                      className="absolute inset-0 h-full w-full object-cover grayscale contrast-110 brightness-90"
+                      className="absolute inset-0 h-full w-full object-cover"
                     />
-                    {/* scanline overlay para reforçar sensação de CFTV */}
                     <div
-                      className="absolute inset-0 pointer-events-none mix-blend-overlay opacity-40"
+                      className="absolute inset-0 pointer-events-none mix-blend-overlay opacity-25"
                       style={{
                         backgroundImage:
-                          "repeating-linear-gradient(0deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px, transparent 1px, transparent 3px)",
+                          "repeating-linear-gradient(0deg, rgba(255,255,255,0.08) 0px, rgba(255,255,255,0.08) 1px, transparent 1px, transparent 3px)",
                       }}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none" />
+                    <div className="absolute inset-x-0 top-0 h-8 bg-gradient-to-b from-black/70 to-transparent" />
+                    <div className="absolute inset-x-0 bottom-0 h-8 bg-gradient-to-t from-black/70 to-transparent" />
                     <div className="absolute top-2 left-2 text-[10px] font-medium text-white drop-shadow">{label}</div>
                     <div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500 animate-pulse" />
-                    <div className="absolute bottom-2 left-2 text-[10px] text-white/80 font-mono tracking-wider">● LIVE</div>
+                    <div className="absolute bottom-2 left-2 text-[10px] text-white/90 font-mono tracking-wider">● LIVE</div>
                     <div className="absolute bottom-2 right-2 text-[10px] text-emerald-400 font-mono">REC</div>
                   </div>
                 ))}
@@ -186,6 +207,7 @@ function Landing() {
           </div>
         </div>
       </section>
+
 
       {/* METRICS BAR */}
       <section className="border-y border-border bg-secondary">
@@ -206,7 +228,47 @@ function Landing() {
         </div>
       </section>
 
+      {/* SOBRE — A Rota Sul Tech */}
+      <section id="sobre" className="py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+          <div className="relative">
+            <img
+              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=900&q=75"
+              alt="Equipe Rota Sul Tech no centro de operações"
+              loading="lazy"
+              className="rounded-2xl shadow-xl w-full h-[420px] object-cover"
+            />
+            <div className="absolute -bottom-6 -right-6 hidden md:flex items-center gap-3 rounded-xl bg-white border border-border shadow-lg px-5 py-4">
+              <div className="grid place-items-center h-11 w-11 rounded-lg bg-accent text-accent-foreground">
+                <Headphones className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="text-sm font-bold text-primary">Operadores certificados</div>
+                <div className="text-xs text-muted-foreground">Treinamento contínuo · ABESE</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <span className="text-xs font-semibold tracking-widest text-accent uppercase">A Rota Sul Tech</span>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
+              Segurança feita por gente. Escalada por tecnologia.
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              Somos uma empresa gaúcha especializada em terceirização de monitoramento eletrônico.
+              Nascemos da união entre operadores de segurança experientes e engenheiros de tecnologia
+              — com a missão de proteger pessoas, patrimônios e o sono de quem confia na gente.
+            </p>
+            <ul className="mt-6 space-y-3 text-sm text-foreground">
+              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> +10 anos protegendo condomínios e empresas do Sul do Brasil</li>
+              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> Central própria com energia e link redundantes</li>
+              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> Equipe humana 24/7 — nunca só uma máquina do outro lado</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* SERVIÇOS */}
+
       <section id="servicos" className="py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <div className="max-w-2xl">
@@ -266,7 +328,7 @@ function Landing() {
       </section>
 
       {/* BENEFÍCIOS */}
-      <section id="beneficios" className="py-20 md:py-28 bg-primary text-white relative overflow-hidden">
+      <section id="diferenciais" className="py-20 md:py-28 bg-primary text-white relative overflow-hidden">
         <div className="absolute -top-32 -right-32 h-96 w-96 rounded-full bg-accent/20 blur-3xl" />
         <div className="relative max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-14 items-start">
           <div>
@@ -379,7 +441,127 @@ function Landing() {
         </div>
       </section>
 
+      {/* ESTRUTURA */}
+      <section id="estrutura" className="py-20 md:py-28 bg-secondary/50">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="max-w-2xl">
+            <span className="text-xs font-semibold tracking-widest text-accent uppercase">Nossa estrutura</span>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
+              Uma central pronta para não falhar.
+            </h2>
+          </div>
+          <div className="mt-12 grid md:grid-cols-3 gap-6">
+            {[
+              { img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&q=75", title: "Central 24h", desc: "Operadores presenciais, videowall e protocolo de resposta em segundos." },
+              { img: "https://images.unsplash.com/photo-1580983218765-f663bec07b37?w=800&q=75", title: "Frota Tática", desc: "Viaturas próprias com rastreamento em tempo real para atendimento local." },
+              { img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=75", title: "Time Técnico", desc: "Engenheiros e técnicos certificados para instalação e manutenção." },
+            ].map((c) => (
+              <div key={c.title} className="rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-lg transition">
+                <img src={c.img} alt={c.title} loading="lazy" className="h-48 w-full object-cover" />
+                <div className="p-6">
+                  <div className="flex items-center gap-2 text-primary">
+                    <Building2 className="h-5 w-5" />
+                    <h3 className="font-bold" style={{ fontFamily: "var(--font-display)" }}>{c.title}</h3>
+                  </div>
+                  <p className="mt-2 text-sm text-muted-foreground">{c.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* PARCEIROS */}
+      <section id="parceiros" className="py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="text-xs font-semibold tracking-widest text-accent uppercase">Parceiros tecnológicos</span>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
+              Trabalhamos com os melhores do mercado.
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              Integramos equipamentos e plataformas homologadas para garantir performance, escalabilidade e suporte oficial.
+            </p>
+          </div>
+          <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
+            {["Intelbras", "Hikvision", "Motorola", "Bosch", "Positivo", "Axis", "Dahua", "Unifi"].map((p) => (
+              <div key={p} className="flex items-center justify-center rounded-xl border border-border bg-card py-8 hover:border-accent/50 hover:shadow-md transition">
+                <div className="flex items-center gap-2 text-primary">
+                  <Handshake className="h-5 w-5 text-accent" />
+                  <span className="font-semibold" style={{ fontFamily: "var(--font-display)" }}>{p}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* NA MÍDIA */}
+      <section id="midia" className="py-20 md:py-28 bg-secondary/50">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="max-w-2xl">
+            <span className="text-xs font-semibold tracking-widest text-accent uppercase">Na mídia</span>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
+              Nosso trabalho é notícia.
+            </h2>
+          </div>
+          <div className="mt-12 grid md:grid-cols-3 gap-6">
+            {[
+              { veiculo: "GZH · Zero Hora", titulo: "Rota Sul Tech reduz em 38% o custo de portaria em condomínios de Porto Alegre." },
+              { veiculo: "Correio do Povo", titulo: "IA aplicada à segurança: startup gaúcha entra no radar de administradoras." },
+              { veiculo: "Portal Sindiconet", titulo: "Terceirização de monitoramento: por que síndicos estão migrando." },
+            ].map((n) => (
+              <article key={n.veiculo} className="rounded-2xl border border-border bg-card p-6 hover:shadow-lg transition">
+                <div className="flex items-center gap-2 text-xs font-semibold text-accent uppercase tracking-widest">
+                  <Newspaper className="h-4 w-4" /> {n.veiculo}
+                </div>
+                <h3 className="mt-3 font-semibold text-primary" style={{ fontFamily: "var(--font-display)" }}>{n.titulo}</h3>
+                <a href="#" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-accent transition">
+                  Ler matéria <ArrowRight className="h-4 w-4" />
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* BLOG */}
+      <section id="blog" className="py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="flex flex-col md:flex-row md:items-end justify-between gap-4">
+            <div className="max-w-2xl">
+              <span className="text-xs font-semibold tracking-widest text-accent uppercase">Blog</span>
+              <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
+                Conteúdo pra quem leva segurança a sério.
+              </h2>
+            </div>
+            <a href="#" className="text-sm font-semibold text-primary hover:text-accent transition inline-flex items-center gap-1">
+              Ver todos os artigos <ArrowRight className="h-4 w-4" />
+            </a>
+          </div>
+          <div className="mt-10 grid md:grid-cols-3 gap-6">
+            {[
+              { img: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=75", cat: "Condomínios", titulo: "5 sinais de que seu condomínio precisa terceirizar a portaria" },
+              { img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=75", cat: "Tecnologia", titulo: "Como a IA reduz falsos positivos em alarmes residenciais" },
+              { img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=75", cat: "Gestão", titulo: "Terceirização x segurança própria: comparativo completo de custos" },
+            ].map((p) => (
+              <article key={p.titulo} className="rounded-2xl overflow-hidden border border-border bg-card hover:shadow-lg transition">
+                <img src={p.img} alt={p.titulo} loading="lazy" className="h-44 w-full object-cover" />
+                <div className="p-6">
+                  <div className="text-xs font-semibold text-accent uppercase tracking-widest">{p.cat}</div>
+                  <h3 className="mt-2 font-semibold text-primary" style={{ fontFamily: "var(--font-display)" }}>{p.titulo}</h3>
+                  <a href="#" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-accent transition">
+                    Ler artigo <ArrowRight className="h-4 w-4" />
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FORMULÁRIO */}
+
       <section
         id="orcamento"
         className="py-20 md:py-28 relative"
