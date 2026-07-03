@@ -524,7 +524,7 @@ function Landing() {
           </div>
           <div className="mt-12 grid md:grid-cols-3 gap-6">
             {[
-              { veiculo: "GZH · Zero Hora", titulo: "Rota Sul Tech reduz em 38% o custo de portaria em condomínios de Porto Alegre." },
+              { veiculo: "Jornal da Cidade", titulo: "Rota Sul Tech reduz em 38% o custo de portaria em condomínios de Poços de Caldas." },
               { veiculo: "Correio do Povo", titulo: "IA aplicada à segurança: startup gaúcha entra no radar de administradoras." },
               { veiculo: "Portal Sindiconet", titulo: "Terceirização de monitoramento: por que síndicos estão migrando." },
             ].map((n) => (
