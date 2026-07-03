@@ -162,7 +162,7 @@ function Landing() {
             <div className="relative rounded-2xl border border-white/10 bg-white/[0.04] backdrop-blur p-6 shadow-2xl">
               <div className="flex items-center justify-between text-white/80 text-xs">
                 <span className="flex items-center gap-2"><Radio className="h-4 w-4 text-emerald-400" /> Central ao vivo</span>
-                <span>SP · RS · PR</span>
+                <span>MG · SP · RJ</span>
               </div>
               <div className="mt-4 grid grid-cols-2 gap-3">
                 {[
