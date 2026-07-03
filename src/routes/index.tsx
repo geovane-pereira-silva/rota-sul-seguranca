@@ -35,6 +35,16 @@ import {
   Video,
   Bell,
   MoveLeft,
+  Signal,
+  Wifi,
+  BatteryFull,
+  Activity,
+  AlertTriangle,
+  Home,
+  Clock,
+  LayoutGrid,
+  Settings,
+
 } from "lucide-react";
 
 
