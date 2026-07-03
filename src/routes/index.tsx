@@ -350,6 +350,7 @@ function Landing() {
             <span className="text-xs font-semibold tracking-widest text-accent uppercase">O que oferecemos</span>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
               Três pilares para uma segurança sem falhas
+            </h2>
             <p className="mt-4 text-muted-foreground">
               Integração de pessoas, processos e tecnologia — sob monitoramento humano
               assistido por inteligência artificial.
