@@ -28,6 +28,8 @@ import {
   Building2,
   Handshake,
   Headphones,
+  PhoneCall,
+  BarChart3,
 } from "lucide-react";
 
 
