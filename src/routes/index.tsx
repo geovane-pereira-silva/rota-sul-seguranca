@@ -228,7 +228,47 @@ function Landing() {
         </div>
       </section>
 
+      {/* SOBRE — A Rota Sul Tech */}
+      <section id="sobre" className="py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
+          <div className="relative">
+            <img
+              src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=900&q=75"
+              alt="Equipe Rota Sul Tech no centro de operações"
+              loading="lazy"
+              className="rounded-2xl shadow-xl w-full h-[420px] object-cover"
+            />
+            <div className="absolute -bottom-6 -right-6 hidden md:flex items-center gap-3 rounded-xl bg-white border border-border shadow-lg px-5 py-4">
+              <div className="grid place-items-center h-11 w-11 rounded-lg bg-accent text-accent-foreground">
+                <Headphones className="h-5 w-5" />
+              </div>
+              <div>
+                <div className="text-sm font-bold text-primary">Operadores certificados</div>
+                <div className="text-xs text-muted-foreground">Treinamento contínuo · ABESE</div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <span className="text-xs font-semibold tracking-widest text-accent uppercase">A Rota Sul Tech</span>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
+              Segurança feita por gente. Escalada por tecnologia.
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              Somos uma empresa gaúcha especializada em terceirização de monitoramento eletrônico.
+              Nascemos da união entre operadores de segurança experientes e engenheiros de tecnologia
+              — com a missão de proteger pessoas, patrimônios e o sono de quem confia na gente.
+            </p>
+            <ul className="mt-6 space-y-3 text-sm text-foreground">
+              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> +10 anos protegendo condomínios e empresas do Sul do Brasil</li>
+              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> Central própria com energia e link redundantes</li>
+              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> Equipe humana 24/7 — nunca só uma máquina do outro lado</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
       {/* SERVIÇOS */}
+
       <section id="servicos" className="py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <div className="max-w-2xl">
