@@ -70,13 +70,13 @@ function Landing() {
           <div className="md:hidden bg-primary border-t border-white/10 px-5 py-4 space-y-3 text-white/90">
             <a href="#servicos" onClick={() => setMenuOpen(false)} className="block">Serviços</a>
             <a href="#beneficios" onClick={() => setMenuOpen(false)} className="block">Benefícios</a>
-            <a href="#clientes" onClick={() => setMenuOpen(false)} className="block">Clientes</a>
+            <a href="#clientes" onClick={() => setMenuOpen(false)} className="block">Depoimentos</a>
             <a
               href="#orcamento"
               onClick={(e) => { setMenuOpen(false); scrollToForm(e); }}
               className="block rounded-lg bg-accent text-accent-foreground text-center py-2 font-semibold"
             >
-              Falar com especialista
+              Solicitar Orçamento
             </a>
           </div>
         )}
