@@ -509,7 +509,7 @@ function Landing() {
                       <span className="text-[11px] font-bold uppercase tracking-widest text-accent">
                         Experimente
                       </span>
-                      <span className="text-xs text-white/85">toque no botão</span>
+                      <span className="text-xs text-white/85">toque em Armar/Desarmar</span>
                     </div>
                     <MoveLeft className="hidden sm:block h-8 w-8 text-accent animate-pulse" strokeWidth={2.5} />
                   </div>
