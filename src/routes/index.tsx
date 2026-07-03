@@ -30,6 +30,11 @@ import {
   Headphones,
   PhoneCall,
   BarChart3,
+  Lock,
+  Unlock,
+  Video,
+  Bell,
+  MoveLeft,
 } from "lucide-react";
 
 
