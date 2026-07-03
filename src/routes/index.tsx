@@ -108,12 +108,12 @@ function Landing() {
               className="mt-6 text-4xl md:text-6xl font-bold leading-[1.05] tracking-tight"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Tranquilidade 24h e Tecnologia de Ponta:{" "}
-              <span className="text-accent">Terceirize sua Central de Monitoramento.</span>
+              Tranquilidade 24h e Tecnologia de Ponta.{" "}
+              <span className="text-accent">Terceirize sua Central de Segurança.</span>
             </h1>
             <p className="mt-6 text-lg text-white/75 max-w-2xl">
-              Reduza custos operacionais e passivos trabalhistas com soluções híbridas de
-              segurança, IA e monitoramento em tempo real.
+              Elimine passivos trabalhistas e reduza os custos do seu condomínio ou empresa
+              com nossas soluções híbridas de monitoramento e Inteligência Artificial.
             </p>
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <a
@@ -121,7 +121,7 @@ function Landing() {
                 onClick={scrollToForm}
                 className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-4 text-base font-semibold text-accent-foreground shadow-lg shadow-black/30 hover:brightness-110 hover:-translate-y-0.5 transition"
               >
-                Receber 5 Propostas <ArrowRight className="h-5 w-5" />
+                Receber Proposta Personalizada <ArrowRight className="h-5 w-5" />
               </a>
               <a
                 href="#servicos"
