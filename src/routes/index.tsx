@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import heroTecnico from "@/assets/hero-tecnico.jpg";
 import {
   ShieldCheck,
   Camera,
@@ -103,112 +104,115 @@ function Landing() {
 
       </header>
 
-      {/* HERO */}
+      {/* HERO — inspirado na referência: fundo claro, listras diagonais, homem + texto */}
       <section
         id="top"
-        className="relative pt-28 pb-20 md:pt-40 md:pb-32 overflow-hidden"
-        style={{
-          background:
-            "radial-gradient(1200px 600px at 80% -10%, oklch(0.35 0.12 260 / 0.6), transparent 60%), linear-gradient(180deg, var(--primary-deep), var(--primary))",
-        }}
+        className="relative pt-24 pb-16 md:pt-32 md:pb-24 overflow-hidden bg-secondary"
       >
-        <div className="absolute inset-0 opacity-[0.06] pointer-events-none"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
-            backgroundSize: "48px 48px",
-          }}
-        />
-        <div className="relative max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-12 gap-12 items-center">
-          <div className="lg:col-span-7 text-white">
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-3 py-1 text-xs font-medium text-white/90">
-              <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-              Central operando agora — 24/7
-            </span>
+        {/* Listras diagonais decorativas — canto superior esquerdo */}
+        <div aria-hidden className="absolute -top-10 -left-16 hidden md:block pointer-events-none">
+          <div className="flex flex-col gap-2 -rotate-[18deg]">
+            <div className="h-3 w-40 bg-primary rounded-full" />
+            <div className="h-3 w-56 bg-primary rounded-full" />
+            <div className="h-3 w-32 bg-accent rounded-full" />
+          </div>
+        </div>
+        {/* Listras diagonais — canto inferior esquerdo */}
+        <div aria-hidden className="absolute -bottom-6 -left-10 hidden md:block pointer-events-none">
+          <div className="flex flex-col gap-2 -rotate-[18deg]">
+            <div className="h-3 w-56 bg-primary rounded-full" />
+            <div className="h-3 w-40 bg-primary rounded-full" />
+            <div className="h-3 w-24 bg-accent rounded-full" />
+          </div>
+        </div>
+        {/* Listras diagonais — canto superior direito */}
+        <div aria-hidden className="absolute -top-6 -right-16 hidden md:block pointer-events-none">
+          <div className="flex flex-col gap-2 rotate-[18deg]">
+            <div className="h-3 w-40 bg-primary rounded-full" />
+            <div className="h-3 w-56 bg-primary rounded-full" />
+          </div>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-12 gap-10 lg:gap-12 items-center">
+          {/* Texto — esquerda */}
+          <div className="lg:col-span-6 text-primary">
             <h1
-              className="mt-6 text-4xl md:text-6xl font-bold leading-[1.05] tracking-tight"
+              className="text-3xl sm:text-4xl md:text-5xl lg:text-[3.4rem] font-bold leading-[1.08] tracking-tight"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Tranquilidade 24h e Tecnologia de Ponta.{" "}
-              <span className="text-accent">Terceirize sua Central de Segurança.</span>
+              Na <span className="text-primary">Rota Sul Tech</span> cuidamos do que realmente importa:{" "}
+              <span className="text-accent">sua Família, sua Segurança e seu Patrimônio.</span>
             </h1>
-            <p className="mt-6 text-lg text-white/75 max-w-2xl">
-              Elimine passivos trabalhistas e reduza os custos do seu condomínio ou empresa
-              com nossas soluções híbridas de monitoramento e Inteligência Artificial.
+            <p className="mt-6 text-base md:text-lg text-muted-foreground max-w-xl">
+              Há mais de 10 anos oferecendo soluções completas em monitoramento eletrônico, portaria remota
+              e CFTV inteligente. Unimos tecnologia, experiência e uma equipe humana 24h para proteger
+              pessoas e negócios com confiança e eficiência.
             </p>
+
             <div className="mt-8 flex flex-col sm:flex-row gap-3">
               <a
                 href="#orcamento"
                 onClick={scrollToForm}
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-accent px-7 py-4 text-base font-semibold text-accent-foreground shadow-lg shadow-black/30 hover:brightness-110 hover:-translate-y-0.5 transition"
+                className="inline-flex items-center justify-center gap-2 rounded-md bg-primary px-8 py-4 text-sm md:text-base font-bold uppercase tracking-wider text-primary-foreground shadow-lg shadow-primary/25 hover:brightness-125 hover:-translate-y-0.5 transition"
               >
-                Receber Proposta Personalizada <ArrowRight className="h-5 w-5" />
+                Solicite um orçamento
               </a>
               <a
                 href="#servicos"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-white/25 px-7 py-4 text-base font-medium text-white hover:bg-white/10 transition"
+                className="inline-flex items-center justify-center gap-2 rounded-md border-2 border-primary/15 px-7 py-4 text-sm md:text-base font-semibold text-primary hover:border-primary hover:bg-primary/5 transition"
               >
-                Ver soluções
+                Ver soluções <ArrowRight className="h-4 w-4" />
               </a>
             </div>
-            <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm text-white/70">
+
+            <div className="mt-8 flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+              <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-accent" /> Central 24/7</div>
               <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-accent" /> Certificação ABESE</div>
-              <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-accent" /> ISO 9001</div>
-              <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-accent" /> Redundância total</div>
+              <div className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 text-accent" /> +500 clientes protegidos</div>
             </div>
           </div>
 
-          <div className="lg:col-span-5">
+          {/* Foto — direita, painel arredondado escuro */}
+          <div className="lg:col-span-6">
             <div className="relative">
-              {/* Foto do operador — humaniza a marca */}
-              <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/10 aspect-[4/5]">
+              <div
+                className="relative overflow-hidden rounded-[2rem] shadow-2xl"
+                style={{
+                  background:
+                    "linear-gradient(135deg, var(--primary-deep), var(--primary))",
+                }}
+              >
                 <img
-                  src="https://images.unsplash.com/photo-1553877522-43269d4ea984?w=900&q=80"
-                  alt="Operador da central de monitoramento Rota Sul Tech acompanhando câmeras 24 horas"
+                  src={heroTecnico}
+                  alt="Técnico da Rota Sul Tech sorrindo — segurança feita por pessoas"
                   loading="eager"
-                  className="absolute inset-0 h-full w-full object-cover"
+                  width={1024}
+                  height={1024}
+                  className="w-full h-auto object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary-deep via-primary-deep/20 to-transparent" />
+              </div>
 
-                {/* Selo de confiança sobre a foto */}
-                <div className="absolute top-4 left-4 inline-flex items-center gap-2 rounded-full bg-black/50 backdrop-blur px-3 py-1.5 text-[11px] font-medium text-white border border-white/15">
-                  <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse" />
-                  Vigilância humana ativa
+              {/* Selo flutuante */}
+              <div className="absolute -bottom-5 -left-4 md:-left-6 flex items-center gap-3 rounded-xl bg-white shadow-xl border border-border px-4 py-3">
+                <div className="grid place-items-center h-11 w-11 rounded-lg bg-accent text-accent-foreground">
+                  <ShieldCheck className="h-5 w-5" />
                 </div>
-
-                {/* Legenda humanizada */}
-                <div className="absolute inset-x-0 bottom-0 p-5 text-white">
-                  <div className="text-xs uppercase tracking-widest text-accent font-semibold">Do outro lado da câmera</div>
-                  <div className="mt-1 text-lg font-semibold leading-snug" style={{ fontFamily: "var(--font-display)" }}>
-                    Tem uma pessoa treinada olhando por você — agora.
+                <div>
+                  <div className="text-[11px] text-muted-foreground uppercase tracking-wide">Vigilância humana</div>
+                  <div className="text-sm font-bold text-primary leading-tight" style={{ fontFamily: "var(--font-display)" }}>
+                    Ativa agora — 24h
                   </div>
                 </div>
               </div>
 
-              {/* Card flutuante: tempo de resposta */}
-              <div className="absolute -bottom-6 -left-6 hidden sm:flex items-center gap-3 rounded-xl bg-white shadow-xl border border-border px-4 py-3">
-                <div className="grid place-items-center h-11 w-11 rounded-lg bg-accent text-accent-foreground">
+              {/* Card flutuante — resposta */}
+              <div className="absolute -top-4 -right-4 hidden sm:flex items-center gap-3 rounded-xl bg-white shadow-xl border border-border px-4 py-3">
+                <div className="grid place-items-center h-11 w-11 rounded-lg bg-primary text-primary-foreground">
                   <Radio className="h-5 w-5" />
                 </div>
                 <div>
                   <div className="text-[11px] text-muted-foreground uppercase tracking-wide">Resposta média</div>
-                  <div className="text-2xl font-bold text-primary leading-none" style={{ fontFamily: "var(--font-display)" }}>8s</div>
-                </div>
-              </div>
-
-              {/* Card flutuante: câmera ao vivo */}
-              <div className="absolute -top-4 -right-4 hidden sm:block w-40 rounded-xl overflow-hidden border border-white/15 shadow-2xl">
-                <div className="relative aspect-video bg-slate-950">
-                  <img
-                    src="https://images.unsplash.com/photo-1449824913935-59a10b8d2000?w=400&q=70"
-                    alt="Câmera ao vivo — via pública"
-                    loading="lazy"
-                    className="absolute inset-0 h-full w-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-                  <div className="absolute top-1.5 left-1.5 text-[9px] text-white/90 font-mono">CAM 01</div>
-                  <div className="absolute top-1.5 right-1.5 h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
-                  <div className="absolute bottom-1.5 left-1.5 text-[9px] text-emerald-400 font-mono">● LIVE</div>
+                  <div className="text-xl font-bold text-primary leading-none" style={{ fontFamily: "var(--font-display)" }}>8s</div>
                 </div>
               </div>
             </div>
@@ -275,129 +279,154 @@ function Landing() {
         </div>
       </section>
 
-      {/* BAND — Conheça nossas soluções (referência Behance) */}
-      <section aria-label="Conheça nossas soluções" className="relative overflow-hidden">
-        <div
-          className="relative"
+      {/* SERVIÇOS — inspirado na referência: fundo escuro, pill + "Nossos serviços" */}
+      <section id="servicos" className="relative py-20 md:py-28 bg-primary-deep text-white overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.05] pointer-events-none"
           style={{
-            background:
-              "linear-gradient(100deg, var(--primary-deep) 0%, var(--primary) 55%, oklch(0.35 0.14 260) 100%)",
+            backgroundImage:
+              "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
           }}
-        >
-          <div
-            className="absolute inset-0 opacity-[0.07] pointer-events-none"
-            style={{
-              backgroundImage:
-                "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
-              backgroundSize: "56px 56px",
-            }}
-          />
-          <div className="absolute -right-32 top-1/2 -translate-y-1/2 h-[420px] w-[420px] rounded-full bg-accent/25 blur-3xl" />
-          <div className="relative max-w-7xl mx-auto px-5 lg:px-8 py-14 md:py-20 grid md:grid-cols-12 gap-8 items-center">
-            <div className="md:col-span-8 text-white">
-              <span className="text-xs font-semibold tracking-[0.25em] text-accent uppercase">// Rota Sul Tech</span>
-              <h2
-                className="mt-3 text-4xl md:text-6xl font-bold tracking-tight leading-[1.02]"
-                style={{ fontFamily: "var(--font-display)" }}
-              >
-                Conheça nossas <span className="text-accent">soluções</span>.
-              </h2>
-              <p className="mt-4 text-white/75 max-w-xl text-base md:text-lg">
-                Portaria remota, CFTV inteligente e monitoramento 24h — desenhados para condomínios,
-                indústrias e empresas que não podem parar.
-              </p>
-            </div>
-            <div className="md:col-span-4 flex md:justify-end">
-              <a
-                href="#servicos"
-                className="group inline-flex items-center gap-3 rounded-full bg-accent px-7 py-4 text-base font-semibold text-accent-foreground shadow-xl shadow-black/30 hover:brightness-110 hover:-translate-y-0.5 transition"
-              >
-                Explorar soluções
-                <span className="grid place-items-center h-7 w-7 rounded-full bg-accent-foreground/10 group-hover:translate-x-0.5 transition">
-                  <ArrowRight className="h-4 w-4" />
-                </span>
-              </a>
-            </div>
-          </div>
-          {/* faixa inferior com atalhos */}
-          <div className="relative border-t border-white/10 bg-black/20">
-            <div className="max-w-7xl mx-auto px-5 lg:px-8 py-4 grid grid-cols-2 md:grid-cols-4 gap-3 text-white/85 text-sm">
-              {[
-                { icon: Users, label: "Portaria Remota" },
-                { icon: Radio, label: "Alarmes 24h" },
-                { icon: Camera, label: "CFTV & IA" },
-                { icon: ShieldCheck, label: "Controle de Acesso" },
-              ].map(({ icon: Icon, label }) => (
-                <a
-                  key={label}
-                  href="#servicos"
-                  className="flex items-center gap-2 hover:text-accent transition"
-                >
-                  <Icon className="h-4 w-4 text-accent" />
-                  <span className="font-medium">{label}</span>
-                </a>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SERVIÇOS */}
-
-      <section id="servicos" className="py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <div className="max-w-2xl">
-            <span className="text-xs font-semibold tracking-widest text-accent uppercase">O que oferecemos</span>
-            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
-              Três pilares para uma segurança sem falhas
+        />
+        <div className="relative max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="text-center max-w-3xl mx-auto">
+            <span className="inline-flex items-center rounded-full border border-white/25 px-4 py-1.5 text-[11px] font-semibold tracking-[0.25em] text-white/90 uppercase">
+              Conheça as nossas soluções
+            </span>
+            <h2
+              className="mt-5 text-4xl md:text-6xl font-bold tracking-tight leading-[1.02]"
+              style={{ fontFamily: "var(--font-display)" }}
+            >
+              Nossos <span className="text-accent">serviços</span>
             </h2>
-            <p className="mt-4 text-muted-foreground">
-              Integração de pessoas, processos e tecnologia — sob monitoramento humano
-              assistido por inteligência artificial.
+            <p className="mt-5 text-white/70 text-base md:text-lg">
+              Soluções completas em segurança e conservação para garantir proteção, confiança
+              e eficiência em todos os ambientes.
             </p>
           </div>
 
-          <div className="mt-12 grid md:grid-cols-3 gap-6">
+          <div className="mt-14 grid md:grid-cols-3 gap-5">
             {[
               {
                 icon: Users,
                 title: "Portaria Remota & Controle de Acesso",
                 desc:
-                  "Sistemas integrados, biometria sem contato e leitura de placas. Atendimento humano 24h sem porteiro físico.",
+                  "Profissionais altamente treinados para controle de acesso e recepção em empresas, condomínios e instituições. Cordialidade e vigilância no fluxo de pessoas.",
               },
               {
                 icon: Radio,
-                title: "Monitoramento de Alarmes 24h",
+                title: "Monitoramento 24h",
                 desc:
-                  "Resposta imediata com IA para detecção de anomalias, redução de falsos positivos e acionamento tático.",
+                  "Proteção contínua com sistemas avançados de segurança eletrônica: monitoramento em tempo real, alarmes integrados, rondas motorizadas e resposta rápida.",
               },
               {
                 icon: Camera,
-                title: "CFTV e Segurança Híbrida",
+                title: "CFTV & Segurança Híbrida",
                 desc:
-                  "Vigilância eletrônica com análise preditiva via IoT e nuvem, gravação redundante e visão computacional.",
+                  "Vigilância eletrônica com IA, gravação redundante em nuvem e visão computacional para detecção antecipada de anomalias.",
               },
             ].map(({ icon: Icon, title, desc }) => (
               <div
                 key={title}
-                className="group relative rounded-2xl border border-border bg-card p-7 hover:border-primary/40 hover:-translate-y-1 transition-all shadow-sm hover:shadow-xl"
+                className="group relative rounded-2xl bg-white/[0.04] border border-white/10 p-7 hover:bg-white/[0.07] hover:border-accent/40 transition-all"
               >
-                <div className="h-12 w-12 rounded-xl bg-primary text-primary-foreground grid place-items-center group-hover:bg-accent group-hover:text-accent-foreground transition">
+                <div className="h-12 w-12 rounded-xl bg-white/10 text-accent grid place-items-center group-hover:bg-accent group-hover:text-accent-foreground transition">
                   <Icon className="h-6 w-6" strokeWidth={2} />
                 </div>
-                <h3 className="mt-5 text-xl font-semibold text-primary" style={{ fontFamily: "var(--font-display)" }}>
+                <h3 className="mt-5 text-xl font-semibold text-white" style={{ fontFamily: "var(--font-display)" }}>
                   {title}
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{desc}</p>
-                <a
-                  href="#orcamento"
-                  onClick={scrollToForm}
-                  className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-accent transition"
-                >
-                  Solicitar demonstração <ArrowRight className="h-4 w-4" />
-                </a>
+                <p className="mt-3 text-sm leading-relaxed text-white/65">{desc}</p>
               </div>
             ))}
+          </div>
+
+          <div className="mt-6 grid md:grid-cols-2 gap-5">
+            {[
+              {
+                icon: ShieldCheck,
+                title: "Segurança Particular",
+                desc:
+                  "Serviço exclusivo e personalizado para proteção individual e patrimonial — na prevenção e redução de riscos como assaltos, furtos e demais ameaças urbanas.",
+              },
+              {
+                icon: Handshake,
+                title: "Consultoria & Projetos",
+                desc:
+                  "Análise de vulnerabilidade, projeto executivo e implantação de infraestrutura de segurança sob medida para o seu negócio.",
+              },
+            ].map(({ icon: Icon, title, desc }) => (
+              <div
+                key={title}
+                className="group relative rounded-2xl bg-white/[0.04] border border-white/10 p-7 hover:bg-white/[0.07] hover:border-accent/40 transition-all"
+              >
+                <div className="h-12 w-12 rounded-xl bg-white/10 text-accent grid place-items-center group-hover:bg-accent group-hover:text-accent-foreground transition">
+                  <Icon className="h-6 w-6" strokeWidth={2} />
+                </div>
+                <h3 className="mt-5 text-xl font-semibold text-white" style={{ fontFamily: "var(--font-display)" }}>
+                  {title}
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-white/65">{desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* BAND AZUL — Descubra por que somos a solução ideal (inspirado na referência) */}
+      <section className="py-14 md:py-20 bg-primary-deep">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div
+            className="relative overflow-hidden rounded-[2rem] p-8 md:p-14"
+            style={{
+              background:
+                "linear-gradient(135deg, oklch(0.55 0.18 250), oklch(0.42 0.20 258))",
+            }}
+          >
+            <div className="absolute -top-24 -right-16 h-72 w-72 rounded-full bg-white/10 blur-3xl pointer-events-none" />
+            <div className="relative text-center max-w-3xl mx-auto">
+              <span className="inline-flex items-center rounded-full border border-white/40 px-4 py-1.5 text-[11px] font-semibold tracking-[0.25em] text-white uppercase">
+                Conheça as nossas soluções
+              </span>
+              <h2
+                className="mt-5 text-3xl md:text-5xl font-bold text-white leading-tight"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Descubra por que somos a solução ideal<br className="hidden md:block" />
+                {" "}para proteger você e a sua empresa.
+              </h2>
+            </div>
+
+            <ul className="relative mt-10 grid md:grid-cols-2 gap-3">
+              {[
+                "Mais de 10 anos de experiência no setor",
+                "Equipe altamente treinada e qualificada",
+                "Monitoramento 24h com tecnologia avançada",
+                "Atendimento personalizado para cada cliente",
+                "Compromisso com ética e transparência",
+                "Soluções completas em um único parceiro",
+              ].map((item) => (
+                <li
+                  key={item}
+                  className="flex items-center gap-3 rounded-full bg-primary-deep/60 border border-white/10 px-5 py-3 text-white text-sm md:text-base"
+                >
+                  <span className="grid place-items-center h-6 w-6 rounded-full bg-white text-primary-deep shrink-0">
+                    <CheckCircle2 className="h-4 w-4" strokeWidth={2.5} />
+                  </span>
+                  {item}
+                </li>
+              ))}
+            </ul>
+
+            <div className="relative mt-10 flex justify-center">
+              <a
+                href="#orcamento"
+                onClick={scrollToForm}
+                className="inline-flex items-center gap-2 rounded-md bg-white px-8 py-4 text-sm font-bold uppercase tracking-wider text-primary hover:brightness-105 hover:-translate-y-0.5 transition shadow-xl"
+              >
+                Solicite um orçamento <ArrowRight className="h-4 w-4" />
+              </a>
+            </div>
           </div>
         </div>
       </section>
