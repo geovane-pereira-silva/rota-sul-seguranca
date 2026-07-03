@@ -493,41 +493,38 @@ function Landing() {
               </div>
             </article>
 
-            {/* Recursos secundários — só imagem + texto, sem card */}
-            <div className="flex flex-col justify-between gap-8 lg:gap-10">
+            {/* Recursos secundários — apenas ícone + texto, imagens ganharam bloco próprio abaixo */}
+            <div className="flex flex-col justify-between gap-6">
               {[
                 {
-                  img: ligacoesCentral.url,
+                  Icon: PhoneCall,
                   titulo: "Ligações e notificações personalizadas",
                   desc:
                     "WhatsApp e ligações com o número e a marca da sua empresa. Alertas com fotos e status em tempo real.",
                   tag: "WhatsApp & Voz",
                 },
                 {
-                  img: appAgente.url,
+                  Icon: Radio,
                   titulo: "App tático do agente de campo",
                   desc:
                     "Tarefas, SLA cronometrado, deslocamento, checklists e evidências — auditáveis ponta a ponta.",
                   tag: "Ronda & Ocorrências",
                 },
                 {
-                  img: relatoriosImg.url,
+                  Icon: BarChart3,
                   titulo: "Relatórios e e-mails personalizados",
                   desc:
                     "Relatórios gerenciais, gráficos e envios programados com a identidade visual da sua empresa.",
                   tag: "Gestão & BI",
                 },
-              ].map(({ img, titulo, desc, tag }) => (
+              ].map(({ Icon, titulo, desc, tag }) => (
                 <article
                   key={titulo}
-                  className="group grid grid-cols-[9rem_1fr] sm:grid-cols-[11rem_1fr] gap-5 items-center"
+                  className="group flex items-start gap-5 rounded-2xl border border-border bg-card p-5 md:p-6 hover:border-accent/60 hover:shadow-md transition-all"
                 >
-                  <img
-                    src={img}
-                    alt={titulo}
-                    loading="lazy"
-                    className="w-full h-28 sm:h-32 object-contain drop-shadow-md group-hover:scale-[1.04] transition-transform duration-500"
-                  />
+                  <div className="shrink-0 h-12 w-12 rounded-xl bg-accent/10 text-accent inline-flex items-center justify-center">
+                    <Icon className="h-6 w-6" />
+                  </div>
                   <div>
                     <span className="inline-block text-[11px] font-semibold uppercase tracking-widest text-accent">
                       {tag}
@@ -546,6 +543,28 @@ function Landing() {
               ))}
             </div>
           </div>
+
+          {/* Galeria — imagens em bloco próprio, sem texto sobreposto */}
+          <div className="mt-14 grid grid-cols-1 sm:grid-cols-3 gap-5">
+            {[
+              { img: ligacoesCentral.url, alt: "Central de ligações e notificações" },
+              { img: appAgente.url, alt: "App tático do agente em campo" },
+              { img: relatoriosImg.url, alt: "Relatórios gerenciais personalizados" },
+            ].map(({ img, alt }) => (
+              <div
+                key={alt}
+                className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-border bg-muted"
+              >
+                <img
+                  src={img}
+                  alt={alt}
+                  loading="lazy"
+                  className="absolute inset-0 w-full h-full object-cover hover:scale-[1.04] transition-transform duration-500"
+                />
+              </div>
+            ))}
+          </div>
+
 
         </div>
       </section>
