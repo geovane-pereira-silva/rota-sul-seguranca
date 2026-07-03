@@ -41,7 +41,7 @@ import {
   Activity,
   AlertTriangle,
   Home,
-  Clock,
+
   LayoutGrid,
   Settings,
 
