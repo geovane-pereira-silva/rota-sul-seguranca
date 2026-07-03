@@ -387,7 +387,11 @@ function Landing() {
           <form
             onSubmit={(e) => {
               e.preventDefault();
-              setSubmitted(true);
+              setLoading(true);
+              setTimeout(() => {
+                setLoading(false);
+                setSubmitted(true);
+              }, 1200);
             }}
             className="rounded-2xl bg-white p-7 md:p-8 shadow-2xl text-foreground"
           >
@@ -406,14 +410,15 @@ function Landing() {
             ) : (
               <>
                 <h3 className="text-xl font-bold text-primary" style={{ fontFamily: "var(--font-display)" }}>
-                  Solicite seu orçamento
+                  Pronto para otimizar sua segurança?
                 </h3>
                 <p className="mt-1 text-sm text-muted-foreground">Leva menos de 30 segundos.</p>
 
                 <div className="mt-6 space-y-4">
                   <div>
-                    <label className="text-sm font-medium text-foreground">Nome</label>
+                    <label htmlFor="f-nome" className="text-sm font-medium text-foreground">Nome</label>
                     <input
+                      id="f-nome"
                       required
                       type="text"
                       className="mt-1 w-full rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
@@ -421,34 +426,43 @@ function Landing() {
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-foreground">E-mail corporativo</label>
+                    <label htmlFor="f-contato" className="text-sm font-medium text-foreground">E-mail corporativo ou Telefone</label>
                     <input
+                      id="f-contato"
                       required
-                      type="email"
+                      type="text"
                       className="mt-1 w-full rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-                      placeholder="voce@empresa.com.br"
+                      placeholder="voce@empresa.com.br ou (51) 90000-0000"
                     />
                   </div>
                   <div>
-                    <label className="text-sm font-medium text-foreground">Perfil</label>
+                    <label htmlFor="f-perfil" className="text-sm font-medium text-foreground">Perfil</label>
                     <select
+                      id="f-perfil"
                       required
                       className="mt-1 w-full rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
                       defaultValue=""
                     >
                       <option value="" disabled>Selecione uma opção</option>
-                      <option>Condomínio</option>
-                      <option>Empresa</option>
-                      <option>Residência</option>
+                      <option>Sou Síndico / Administradora</option>
+                      <option>Sou Empresário</option>
                     </select>
                   </div>
                 </div>
 
                 <button
                   type="submit"
-                  className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-4 text-sm font-bold text-accent-foreground hover:brightness-110 transition"
+                  disabled={loading}
+                  className="mt-6 w-full inline-flex items-center justify-center gap-2 rounded-full bg-accent px-6 py-4 text-sm font-bold text-accent-foreground hover:brightness-110 transition disabled:opacity-70 disabled:cursor-not-allowed"
                 >
-                  Solicitar Orçamento Gratuito <ArrowRight className="h-4 w-4" />
+                  {loading ? (
+                    <>
+                      <span className="h-4 w-4 rounded-full border-2 border-accent-foreground/40 border-t-accent-foreground animate-spin" />
+                      Enviando...
+                    </>
+                  ) : (
+                    <>Solicitar Orçamento Gratuito <ArrowRight className="h-4 w-4" /></>
+                  )}
                 </button>
                 <p className="mt-3 text-[11px] text-center text-muted-foreground">
                   Seus dados estão protegidos conforme a LGPD.
