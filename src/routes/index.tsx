@@ -7,6 +7,9 @@ import appAgente from "@/assets/app-agente.jpg.asset.json";
 import appPersonalizado from "@/assets/app-cliente-mockup.png";
 import centralOperadores from "@/assets/central-operadores.jpg";
 import servicosBg from "@/assets/servicos-bg.jpg";
+import estruturaCentral from "@/assets/estrutura-central-24h.jpg";
+import estruturaFrota from "@/assets/estrutura-frota-tatica.jpg";
+import estruturaTime from "@/assets/estrutura-time-tecnico.jpg";
 import {
   ShieldCheck,
   Camera,
@@ -912,12 +915,12 @@ function Landing() {
           </div>
           <div className="mt-12 grid md:grid-cols-3 gap-6">
             {[
-              { img: "https://images.unsplash.com/photo-1573164713988-8665fc963095?w=800&q=75", title: "Central 24h", desc: "Operadores presenciais, videowall e protocolo de resposta em segundos." },
-              { img: "https://images.unsplash.com/photo-1580983218765-f663bec07b37?w=800&q=75", title: "Frota Tática", desc: "Viaturas próprias com rastreamento em tempo real para atendimento local." },
-              { img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=800&q=75", title: "Time Técnico", desc: "Engenheiros e técnicos certificados para instalação e manutenção." },
+              { img: estruturaCentral, title: "Central 24h", desc: "Operadores presenciais, videowall e protocolo de resposta em segundos." },
+              { img: estruturaFrota, title: "Frota Tática", desc: "Viaturas próprias com rastreamento em tempo real para atendimento local." },
+              { img: estruturaTime, title: "Time Técnico", desc: "Engenheiros e técnicos certificados para instalação e manutenção." },
             ].map((c) => (
               <div key={c.title} className="rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-lg transition">
-                <img src={c.img} alt={c.title} loading="lazy" className="h-48 w-full object-cover" />
+                <img src={c.img} alt={c.title} loading="lazy" width={1024} height={768} className="h-48 w-full object-cover" />
                 <div className="p-6">
                   <div className="flex items-center gap-2 text-primary">
                     <Building2 className="h-5 w-5" />
