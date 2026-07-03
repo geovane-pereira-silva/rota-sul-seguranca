@@ -1,9 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import heroTecnico from "@/assets/hero-tecnico.jpg";
-import central24h from "@/assets/central-24h.jpg";
-import appMobile from "@/assets/app-mobile.jpg";
-import agenteRonda from "@/assets/agente-ronda.jpg";
+import ligacoesCentral from "@/assets/ligacoes-central.jpg.asset.json";
+import relatoriosImg from "@/assets/relatorios.jpg.asset.json";
+import appAgente from "@/assets/app-agente.jpg.asset.json";
+import appPersonalizado from "@/assets/app-personalizado.png.asset.json";
 import {
   ShieldCheck,
   Camera,
