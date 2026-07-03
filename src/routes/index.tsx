@@ -144,10 +144,31 @@ function Landing() {
                 <span>SP · RS · PR</span>
               </div>
               <div className="mt-4 grid grid-cols-2 gap-3">
-                {["CAM 01 · Portaria", "CAM 02 · Garagem", "CAM 03 · Playground", "CAM 04 · Perímetro"].map((label, i) => (
-                  <div key={i} className="aspect-video rounded-lg bg-gradient-to-br from-slate-800 to-slate-950 border border-white/10 relative overflow-hidden">
-                    <div className="absolute top-2 left-2 text-[10px] font-medium text-white/70">{label}</div>
+                {[
+                  { label: "CAM 01 · Portaria", gif: "https://media.giphy.com/media/SIYtnOkrQxJNFQQ7Op/giphy.gif" },
+                  { label: "CAM 02 · Garagem", gif: "https://media.giphy.com/media/pG9kMKdbJfQttjTkpb/giphy.gif" },
+                  { label: "CAM 03 · Playground", gif: "https://media.giphy.com/media/6AlK10KuTyToP2wmn8/giphy.gif" },
+                  { label: "CAM 04 · Perímetro", gif: "https://media.giphy.com/media/DZbvu0MGf5G5wLsLF4/giphy.gif" },
+                ].map(({ label, gif }, i) => (
+                  <div key={i} className="aspect-video rounded-lg bg-slate-950 border border-white/10 relative overflow-hidden">
+                    <img
+                      src={gif}
+                      alt={label}
+                      loading="lazy"
+                      className="absolute inset-0 h-full w-full object-cover grayscale contrast-110 brightness-90"
+                    />
+                    {/* scanline overlay para reforçar sensação de CFTV */}
+                    <div
+                      className="absolute inset-0 pointer-events-none mix-blend-overlay opacity-40"
+                      style={{
+                        backgroundImage:
+                          "repeating-linear-gradient(0deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 1px, transparent 1px, transparent 3px)",
+                      }}
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/30 pointer-events-none" />
+                    <div className="absolute top-2 left-2 text-[10px] font-medium text-white drop-shadow">{label}</div>
                     <div className="absolute top-2 right-2 h-2 w-2 rounded-full bg-red-500 animate-pulse" />
+                    <div className="absolute bottom-2 left-2 text-[10px] text-white/80 font-mono tracking-wider">● LIVE</div>
                     <div className="absolute bottom-2 right-2 text-[10px] text-emerald-400 font-mono">REC</div>
                   </div>
                 ))}
