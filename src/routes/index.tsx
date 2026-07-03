@@ -601,7 +601,7 @@ function Landing() {
                       <div className="mt-3 px-4 grid grid-cols-4 gap-1.5">
                         <button
                           type="button"
-                          onClick={() => setArmado(true)}
+                          onClick={() => registrarEvento(true)}
                           aria-pressed={armado}
                           className={`flex flex-col items-center gap-1 rounded-xl border py-2 transition-all active:scale-95 ${
                             armado
