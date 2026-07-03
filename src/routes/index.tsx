@@ -31,6 +31,7 @@ function scrollToForm(e: React.MouseEvent) {
 function Landing() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(false);
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground" style={{ fontFamily: "var(--font-sans)" }}>
