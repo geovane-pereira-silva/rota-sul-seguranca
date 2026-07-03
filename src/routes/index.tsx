@@ -170,9 +170,9 @@ function Landing() {
       <section className="border-y border-border bg-secondary">
         <div className="max-w-7xl mx-auto px-5 lg:px-8 py-8 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
           {[
-            { n: "+320", l: "Condomínios atendidos" },
+            { n: "+500", l: "Clientes Protegidos" },
             { n: "8s", l: "Tempo médio de resposta" },
-            { n: "24/7", l: "Monitoramento ininterrupto" },
+            { n: "24/7", l: "Atendimento ininterrupto" },
             { n: "99,98%", l: "Uptime da central" },
           ].map((m) => (
             <div key={m.l}>
