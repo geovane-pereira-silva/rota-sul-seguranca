@@ -4,7 +4,9 @@ import heroFrota from "@/assets/hero-frota.jpg";
 import ligacoesCentral from "@/assets/ligacoes-central.jpg.asset.json";
 import relatoriosImg from "@/assets/relatorios.jpg.asset.json";
 import appAgente from "@/assets/app-agente.jpg.asset.json";
-import appPersonalizado from "@/assets/app-personalizado.png.asset.json";
+import appPersonalizado from "@/assets/app-cliente-mockup.png";
+import centralOperadores from "@/assets/central-operadores.jpg";
+import servicosBg from "@/assets/servicos-bg.jpg";
 import {
   ShieldCheck,
   Camera,
