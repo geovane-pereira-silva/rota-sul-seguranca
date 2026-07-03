@@ -30,6 +30,11 @@ import {
   Headphones,
   PhoneCall,
   BarChart3,
+  Lock,
+  Unlock,
+  Video,
+  Bell,
+  MoveLeft,
 } from "lucide-react";
 
 
@@ -46,6 +51,8 @@ function Landing() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [armado, setArmado] = useState(true);
+
 
   return (
     <div className="min-h-screen bg-background font-sans text-foreground" style={{ fontFamily: "var(--font-sans)" }}>
@@ -451,7 +458,7 @@ function Landing() {
               <div className="absolute top-5 left-5 z-10 inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-3 py-1 text-[11px] font-bold uppercase tracking-widest">
                 <Star className="h-3 w-3" /> Aplicativo do cliente
               </div>
-              <div className="grid md:grid-cols-2 gap-4 p-6 md:p-10 items-center min-h-[520px]">
+              <div className="grid md:grid-cols-[1fr_1.05fr] gap-6 p-6 md:p-10 items-center min-h-[620px]">
                 <div className="order-2 md:order-1">
                   <div className="text-[11px] font-semibold uppercase tracking-widest text-accent">
                     iOS & Android
@@ -481,18 +488,126 @@ function Landing() {
                     ))}
                   </ul>
                 </div>
+
+                {/* Mockup interativo do celular */}
                 <div className="order-1 md:order-2 relative flex items-center justify-center py-4">
                   <div className="absolute inset-0 bg-accent/15 blur-3xl rounded-full" />
-                  <img
-                    src={appPersonalizado}
-                    alt="Aplicativo do cliente Rota Sul Tech — controle o sistema pelo celular"
-                    loading="lazy"
-                    width={1024}
-                    height={1280}
-                    className="relative w-full max-w-[280px] h-auto object-contain drop-shadow-2xl group-hover:scale-[1.03] transition-transform duration-500"
-                  />
+
+                  {/* Dica de interação */}
+                  <div className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 flex items-center gap-2 pointer-events-none">
+                    <div className="hidden sm:flex flex-col items-end text-right">
+                      <span className="text-[11px] font-bold uppercase tracking-widest text-accent">
+                        Experimente
+                      </span>
+                      <span className="text-xs text-white/85">toque no botão</span>
+                    </div>
+                    <MoveLeft className="hidden sm:block h-8 w-8 text-accent animate-pulse" strokeWidth={2.5} />
+                  </div>
+
+                  {/* Frame do celular */}
+                  <div className="relative w-full max-w-[340px] aspect-[9/19] rounded-[2.5rem] bg-neutral-900 p-2.5 shadow-2xl ring-1 ring-white/10">
+                    <div className="relative h-full w-full rounded-[2rem] overflow-hidden bg-gradient-to-b from-slate-900 via-slate-950 to-black">
+                      {/* Notch */}
+                      <div className="absolute top-2 left-1/2 -translate-x-1/2 h-5 w-24 rounded-full bg-black z-10" />
+
+                      {/* Status bar */}
+                      <div className="relative z-0 pt-3 px-5 flex items-center justify-between text-[10px] text-white/70 font-medium">
+                        <span>09:42</span>
+                        <span>•••</span>
+                      </div>
+
+                      {/* Header */}
+                      <div className="px-5 pt-8">
+                        <div className="text-[10px] uppercase tracking-widest text-white/50">
+                          Rota Sul Tech
+                        </div>
+                        <div className="mt-1 text-white text-lg font-bold" style={{ fontFamily: "var(--font-display)" }}>
+                          Residência Central
+                        </div>
+                      </div>
+
+                      {/* Status circle */}
+                      <div className="mt-5 flex flex-col items-center">
+                        <div
+                          className={`relative h-32 w-32 rounded-full flex items-center justify-center transition-colors duration-500 ${
+                            armado
+                              ? "bg-gradient-to-br from-red-500/20 to-red-500/5 ring-4 ring-red-500/40"
+                              : "bg-gradient-to-br from-emerald-400/20 to-emerald-400/5 ring-4 ring-emerald-400/40"
+                          }`}
+                        >
+                          <div
+                            className={`absolute inset-0 rounded-full animate-ping opacity-40 ${
+                              armado ? "bg-red-500/20" : "bg-emerald-400/20"
+                            }`}
+                          />
+                          {armado ? (
+                            <Lock className="h-12 w-12 text-red-400 relative z-10" strokeWidth={2.2} />
+                          ) : (
+                            <Unlock className="h-12 w-12 text-emerald-300 relative z-10" strokeWidth={2.2} />
+                          )}
+                        </div>
+                        <div className="mt-3 text-[10px] uppercase tracking-widest text-white/50">
+                          Sistema
+                        </div>
+                        <div
+                          className={`text-base font-bold tracking-wide transition-colors ${
+                            armado ? "text-red-300" : "text-emerald-300"
+                          }`}
+                        >
+                          {armado ? "ARMADO" : "DESARMADO"}
+                        </div>
+                      </div>
+
+                      {/* Botão interativo */}
+                      <div className="mt-4 px-5">
+                        <button
+                          type="button"
+                          onClick={() => setArmado((v) => !v)}
+                          aria-pressed={armado}
+                          aria-label={armado ? "Desarmar sistema" : "Armar sistema"}
+                          className={`w-full rounded-2xl py-3 text-sm font-bold uppercase tracking-widest transition-all active:scale-95 shadow-lg ${
+                            armado
+                              ? "bg-emerald-400 text-slate-900 hover:bg-emerald-300 shadow-emerald-400/30"
+                              : "bg-red-500 text-white hover:bg-red-400 shadow-red-500/30"
+                          }`}
+                        >
+                          {armado ? "Desarmar" : "Armar"}
+                        </button>
+                      </div>
+
+                      {/* Ações rápidas */}
+                      <div className="mt-4 px-5 grid grid-cols-3 gap-2">
+                        {[
+                          { Icon: Video, label: "Câmeras" },
+                          { Icon: Bell, label: "Eventos" },
+                          { Icon: ShieldCheck, label: "Setores" },
+                        ].map(({ Icon, label }) => (
+                          <div
+                            key={label}
+                            className="flex flex-col items-center gap-1 rounded-xl bg-white/5 border border-white/10 py-2.5"
+                          >
+                            <Icon className="h-4 w-4 text-accent" />
+                            <span className="text-[9px] text-white/70 font-medium">{label}</span>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Última atividade */}
+                      <div className="mt-4 mx-5 rounded-xl bg-white/5 border border-white/10 p-3">
+                        <div className="text-[9px] uppercase tracking-widest text-white/40">
+                          Última atividade
+                        </div>
+                        <div className="mt-1 text-[11px] text-white/85">
+                          {armado
+                            ? "Sistema armado às 09:41"
+                            : "Sistema desarmado agora"}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
+
             </article>
 
             {/* Recursos secundários — apenas ícone + texto, imagens ganharam bloco próprio abaixo */}
@@ -555,16 +670,17 @@ function Landing() {
             ].map(({ img, alt }) => (
               <div
                 key={alt}
-                className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-border bg-muted"
+                className="rounded-2xl overflow-hidden border border-border bg-gradient-to-br from-secondary to-muted p-4 flex items-center justify-center"
               >
                 <img
                   src={img}
                   alt={alt}
                   loading="lazy"
-                  className="absolute inset-0 w-full h-full object-cover hover:scale-[1.04] transition-transform duration-500"
+                  className="w-full h-auto max-h-64 object-contain hover:scale-[1.04] transition-transform duration-500"
                 />
               </div>
             ))}
+
           </div>
 
 
