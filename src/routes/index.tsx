@@ -281,9 +281,81 @@ function Landing() {
         <div className="max-w-7xl mx-auto px-5 lg:px-8">
           <div className="max-w-2xl">
             <span className="text-xs font-semibold tracking-widest text-accent uppercase">O que oferecemos</span>
+      {/* BAND — Conheça nossas soluções (referência Behance) */}
+      <section aria-label="Conheça nossas soluções" className="relative overflow-hidden">
+        <div
+          className="relative"
+          style={{
+            background:
+              "linear-gradient(100deg, var(--primary-deep) 0%, var(--primary) 55%, oklch(0.35 0.14 260) 100%)",
+          }}
+        >
+          <div
+            className="absolute inset-0 opacity-[0.07] pointer-events-none"
+            style={{
+              backgroundImage:
+                "linear-gradient(to right, white 1px, transparent 1px), linear-gradient(to bottom, white 1px, transparent 1px)",
+              backgroundSize: "56px 56px",
+            }}
+          />
+          <div className="absolute -right-32 top-1/2 -translate-y-1/2 h-[420px] w-[420px] rounded-full bg-accent/25 blur-3xl" />
+          <div className="relative max-w-7xl mx-auto px-5 lg:px-8 py-14 md:py-20 grid md:grid-cols-12 gap-8 items-center">
+            <div className="md:col-span-8 text-white">
+              <span className="text-xs font-semibold tracking-[0.25em] text-accent uppercase">// Rota Sul Tech</span>
+              <h2
+                className="mt-3 text-4xl md:text-6xl font-bold tracking-tight leading-[1.02]"
+                style={{ fontFamily: "var(--font-display)" }}
+              >
+                Conheça nossas <span className="text-accent">soluções</span>.
+              </h2>
+              <p className="mt-4 text-white/75 max-w-xl text-base md:text-lg">
+                Portaria remota, CFTV inteligente e monitoramento 24h — desenhados para condomínios,
+                indústrias e empresas que não podem parar.
+              </p>
+            </div>
+            <div className="md:col-span-4 flex md:justify-end">
+              <a
+                href="#servicos"
+                className="group inline-flex items-center gap-3 rounded-full bg-accent px-7 py-4 text-base font-semibold text-accent-foreground shadow-xl shadow-black/30 hover:brightness-110 hover:-translate-y-0.5 transition"
+              >
+                Explorar soluções
+                <span className="grid place-items-center h-7 w-7 rounded-full bg-accent-foreground/10 group-hover:translate-x-0.5 transition">
+                  <ArrowRight className="h-4 w-4" />
+                </span>
+              </a>
+            </div>
+          </div>
+          {/* faixa inferior com atalhos */}
+          <div className="relative border-t border-white/10 bg-black/20">
+            <div className="max-w-7xl mx-auto px-5 lg:px-8 py-4 grid grid-cols-2 md:grid-cols-4 gap-3 text-white/85 text-sm">
+              {[
+                { icon: Users, label: "Portaria Remota" },
+                { icon: Radio, label: "Alarmes 24h" },
+                { icon: Camera, label: "CFTV & IA" },
+                { icon: ShieldCheck, label: "Controle de Acesso" },
+              ].map(({ icon: Icon, label }) => (
+                <a
+                  key={label}
+                  href="#servicos"
+                  className="flex items-center gap-2 hover:text-accent transition"
+                >
+                  <Icon className="h-4 w-4 text-accent" />
+                  <span className="font-medium">{label}</span>
+                </a>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* SERVIÇOS */}
+
+      <section id="servicos" className="py-20 md:py-28">
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="max-w-2xl">
+            <span className="text-xs font-semibold tracking-widest text-accent uppercase">O que oferecemos</span>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
               Três pilares para uma segurança sem falhas
-            </h2>
             <p className="mt-4 text-muted-foreground">
               Integração de pessoas, processos e tecnologia — sob monitoramento humano
               assistido por inteligência artificial.
