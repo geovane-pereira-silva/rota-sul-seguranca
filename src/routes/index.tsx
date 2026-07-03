@@ -275,12 +275,6 @@ function Landing() {
         </div>
       </section>
 
-      {/* SERVIÇOS */}
-
-      <section id="servicos" className="py-20 md:py-28">
-        <div className="max-w-7xl mx-auto px-5 lg:px-8">
-          <div className="max-w-2xl">
-            <span className="text-xs font-semibold tracking-widest text-accent uppercase">O que oferecemos</span>
       {/* BAND — Conheça nossas soluções (referência Behance) */}
       <section aria-label="Conheça nossas soluções" className="relative overflow-hidden">
         <div
