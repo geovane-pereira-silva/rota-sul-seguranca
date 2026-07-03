@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import {
   ShieldCheck,
@@ -17,7 +17,12 @@ import {
   MapPin,
   Menu,
   X,
+  Newspaper,
+  Building2,
+  Handshake,
+  Headphones,
 } from "lucide-react";
+
 
 export const Route = createFileRoute("/")({
   component: Landing,
@@ -46,20 +51,25 @@ function Landing() {
               Rota Sul Tech
             </span>
           </a>
-          <nav className="hidden md:flex items-center gap-8 text-sm text-white/80" aria-label="Navegação principal">
+          <nav className="hidden lg:flex items-center gap-6 text-sm text-white/80" aria-label="Navegação principal">
+            <a href="#top" className="hover:text-white transition">Home</a>
+            <a href="#sobre" className="hover:text-white transition">A Rota Sul Tech</a>
             <a href="#servicos" className="hover:text-white transition">Serviços</a>
-            <a href="#beneficios" className="hover:text-white transition">Benefícios</a>
-            <a href="#clientes" className="hover:text-white transition">Depoimentos</a>
+            <a href="#diferenciais" className="hover:text-white transition">Diferenciais</a>
+            <a href="#estrutura" className="hover:text-white transition">Estrutura</a>
+            <a href="#parceiros" className="hover:text-white transition">Parceiros</a>
+            <a href="#midia" className="hover:text-white transition">Na mídia</a>
+            <a href="#blog" className="hover:text-white transition">Blog</a>
+            <a href="#orcamento" onClick={scrollToForm} className="hover:text-white transition font-semibold">CONTATO</a>
           </nav>
-          <a
-            href="#orcamento"
-            onClick={scrollToForm}
-            className="hidden md:inline-flex items-center gap-2 rounded-full border border-white/30 px-4 py-2 text-sm font-semibold text-white hover:bg-white hover:text-primary transition"
+          <Link
+            to="/area-cliente"
+            className="hidden lg:inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground hover:brightness-110 transition"
           >
-            Solicitar Orçamento <ArrowRight className="h-4 w-4" />
-          </a>
+            Área do Cliente <ArrowRight className="h-4 w-4" />
+          </Link>
           <button
-            className="md:hidden text-white p-2"
+            className="lg:hidden text-white p-2"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label="Menu"
           >
@@ -67,19 +77,30 @@ function Landing() {
           </button>
         </div>
         {menuOpen && (
-          <div className="md:hidden bg-primary border-t border-white/10 px-5 py-4 space-y-3 text-white/90">
-            <a href="#servicos" onClick={() => setMenuOpen(false)} className="block">Serviços</a>
-            <a href="#beneficios" onClick={() => setMenuOpen(false)} className="block">Benefícios</a>
-            <a href="#clientes" onClick={() => setMenuOpen(false)} className="block">Depoimentos</a>
-            <a
-              href="#orcamento"
-              onClick={(e) => { setMenuOpen(false); scrollToForm(e); }}
+          <div className="lg:hidden bg-primary border-t border-white/10 px-5 py-4 space-y-3 text-white/90">
+            {[
+              ["#top", "Home"],
+              ["#sobre", "A Rota Sul Tech"],
+              ["#servicos", "Serviços"],
+              ["#diferenciais", "Diferenciais"],
+              ["#estrutura", "Estrutura"],
+              ["#parceiros", "Parceiros"],
+              ["#midia", "Na mídia"],
+              ["#blog", "Blog"],
+              ["#orcamento", "CONTATO"],
+            ].map(([href, label]) => (
+              <a key={href} href={href} onClick={() => setMenuOpen(false)} className="block">{label}</a>
+            ))}
+            <Link
+              to="/area-cliente"
+              onClick={() => setMenuOpen(false)}
               className="block rounded-lg bg-accent text-accent-foreground text-center py-2 font-semibold"
             >
-              Solicitar Orçamento
-            </a>
+              Área do Cliente
+            </Link>
           </div>
         )}
+
       </header>
 
       {/* HERO */}
