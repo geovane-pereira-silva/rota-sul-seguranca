@@ -442,10 +442,10 @@ function Landing() {
             </p>
           </div>
 
-          {/* Bento: destaque para o App 100% personalizado + 3 cards secundários */}
-          <div className="mt-14 grid lg:grid-cols-5 gap-6">
-            {/* DESTAQUE — App personalizado */}
-            <article className="lg:col-span-3 lg:row-span-2 group relative rounded-3xl overflow-hidden border border-border bg-gradient-to-br from-primary-deep via-primary to-primary-deep text-white shadow-xl">
+          {/* Bento: destaque para o App do cliente + 3 recursos ao lado */}
+          <div className="mt-14 grid lg:grid-cols-2 gap-10 lg:gap-12 items-stretch">
+            {/* DESTAQUE — App do cliente */}
+            <article className="group relative rounded-3xl overflow-hidden border border-border bg-gradient-to-br from-primary-deep via-primary to-primary-deep text-white shadow-xl">
               <div className="absolute top-5 left-5 z-10 inline-flex items-center gap-2 rounded-full bg-accent text-accent-foreground px-3 py-1 text-[11px] font-bold uppercase tracking-widest">
                 <Star className="h-3 w-3" /> Aplicativo do cliente
               </div>
@@ -480,7 +480,6 @@ function Landing() {
                   </ul>
                 </div>
                 <div className="order-1 md:order-2 relative flex items-center justify-center py-4">
-                  {/* Halo */}
                   <div className="absolute inset-0 bg-accent/15 blur-3xl rounded-full" />
                   <img
                     src={appPersonalizado}
@@ -494,60 +493,60 @@ function Landing() {
               </div>
             </article>
 
-
-            {/* Cards secundários — nada é cortado (object-contain) */}
-            {[
-              {
-                img: ligacoesCentral.url,
-                titulo: "Ligações e notificações personalizadas",
-                desc:
-                  "WhatsApp e ligações com o número e a marca da sua empresa. Alertas com fotos e status em tempo real.",
-                tag: "WhatsApp & Voz",
-              },
-              {
-                img: appAgente.url,
-                titulo: "App tático do agente de campo",
-                desc:
-                  "Tarefas, SLA cronometrado, deslocamento, checklists e evidências — auditáveis ponta a ponta.",
-                tag: "Ronda & Ocorrências",
-              },
-              {
-                img: relatoriosImg.url,
-                titulo: "Relatórios e e-mails personalizados",
-                desc:
-                  "Relatórios gerenciais, gráficos e envios programados com a identidade visual da sua empresa.",
-                tag: "Gestão & BI",
-              },
-            ].map(({ img, titulo, desc, tag }, i) => (
-              <article
-                key={titulo}
-                className={`group rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all lg:col-span-2 ${i === 0 ? "lg:col-start-4" : ""}`}
-              >
-                <div className="relative h-48 md:h-52 bg-gradient-to-br from-secondary to-muted flex items-center justify-center overflow-hidden">
+            {/* Recursos secundários — só imagem + texto, sem card */}
+            <div className="flex flex-col justify-between gap-8 lg:gap-10">
+              {[
+                {
+                  img: ligacoesCentral.url,
+                  titulo: "Ligações e notificações personalizadas",
+                  desc:
+                    "WhatsApp e ligações com o número e a marca da sua empresa. Alertas com fotos e status em tempo real.",
+                  tag: "WhatsApp & Voz",
+                },
+                {
+                  img: appAgente.url,
+                  titulo: "App tático do agente de campo",
+                  desc:
+                    "Tarefas, SLA cronometrado, deslocamento, checklists e evidências — auditáveis ponta a ponta.",
+                  tag: "Ronda & Ocorrências",
+                },
+                {
+                  img: relatoriosImg.url,
+                  titulo: "Relatórios e e-mails personalizados",
+                  desc:
+                    "Relatórios gerenciais, gráficos e envios programados com a identidade visual da sua empresa.",
+                  tag: "Gestão & BI",
+                },
+              ].map(({ img, titulo, desc, tag }) => (
+                <article
+                  key={titulo}
+                  className="group grid grid-cols-[9rem_1fr] sm:grid-cols-[11rem_1fr] gap-5 items-center"
+                >
                   <img
                     src={img}
                     alt={titulo}
                     loading="lazy"
-                    className="max-h-full max-w-full object-contain p-4 group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-28 sm:h-32 object-contain drop-shadow-md group-hover:scale-[1.04] transition-transform duration-500"
                   />
-                  <div className="absolute top-3 left-3 rounded-full bg-primary/90 backdrop-blur px-3 py-1 text-[11px] font-medium text-white">
-                    {tag}
+                  <div>
+                    <span className="inline-block text-[11px] font-semibold uppercase tracking-widest text-accent">
+                      {tag}
+                    </span>
+                    <h3
+                      className="mt-1 text-base md:text-lg font-semibold text-primary leading-snug"
+                      style={{ fontFamily: "var(--font-display)" }}
+                    >
+                      {titulo}
+                    </h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
+                      {desc}
+                    </p>
                   </div>
-                </div>
-                <div className="p-5">
-                  <h3
-                    className="text-base font-semibold text-primary leading-snug"
-                    style={{ fontFamily: "var(--font-display)" }}
-                  >
-                    {titulo}
-                  </h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
-                    {desc}
-                  </p>
-                </div>
-              </article>
-            ))}
+                </article>
+              ))}
+            </div>
           </div>
+
         </div>
       </section>
 
