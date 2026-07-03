@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
-import heroTecnico from "@/assets/hero-tecnico.jpg";
+import heroFrota from "@/assets/hero-frota.jpg";
 import ligacoesCentral from "@/assets/ligacoes-central.jpg.asset.json";
 import relatoriosImg from "@/assets/relatorios.jpg.asset.json";
 import appAgente from "@/assets/app-agente.jpg.asset.json";
