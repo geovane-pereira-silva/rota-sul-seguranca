@@ -520,15 +520,13 @@ function Landing() {
                 <div className="order-1 md:order-2 relative flex items-center justify-center py-4">
                   <div className="absolute inset-0 bg-accent/15 blur-3xl rounded-full" />
 
-                  {/* Dica de interação */}
-                  <div className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 z-20 flex items-center gap-2 pointer-events-none">
-                    <div className="hidden sm:flex flex-col items-end text-right">
-                      <span className="text-[11px] font-bold uppercase tracking-widest text-accent">
-                        Experimente
-                      </span>
-                      <span className="text-xs text-white/85">toque em Armar/Desarmar</span>
-                    </div>
-                    <MoveLeft className="hidden sm:block h-8 w-8 text-accent animate-pulse" strokeWidth={2.5} />
+                  {/* Dica de interação — acima do celular para não sobrepor a tela */}
+                  <div className="absolute -top-2 left-1/2 -translate-x-1/2 z-20 flex items-center gap-2 pointer-events-none">
+                    <span className="inline-flex items-center gap-2 rounded-full bg-accent/15 border border-accent/40 px-3 py-1 backdrop-blur-sm">
+                      <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
+                      <span className="text-[11px] font-bold uppercase tracking-widest text-accent">Experimente</span>
+                      <span className="text-[11px] text-white/85">toque em Armar / Desarmar</span>
+                    </span>
                   </div>
 
                   {/* Frame do celular */}
