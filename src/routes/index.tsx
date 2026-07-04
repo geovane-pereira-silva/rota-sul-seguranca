@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import heroFrota from "@/assets/hero-frota.jpg";
 import ligacoesCentral from "@/assets/ligacoes-central.jpg.asset.json";
 import relatoriosImg from "@/assets/relatorios.jpg.asset.json";
@@ -10,6 +11,7 @@ import servicosBg from "@/assets/servicos-bg.jpg";
 import estruturaCentral from "@/assets/estrutura-central-24h.jpg";
 import estruturaFrota from "@/assets/estrutura-frota-tatica.jpg";
 import estruturaTime from "@/assets/estrutura-time-tecnico.jpg";
+import centralAlertaPanico from "@/assets/central-alerta-panico.jpg";
 import {
   ShieldCheck,
   Camera,
@@ -65,6 +67,7 @@ function Landing() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [armado, setArmado] = useState(true);
+  const [panicoAberto, setPanicoAberto] = useState(false);
   const [eventos, setEventos] = useState<{ dot: string; label: string; meta: string; time: string }[]>([
     { dot: "bg-red-500", label: "Alarme intrusão", meta: "Setor externo", time: "22:15" },
     { dot: "bg-emerald-400", label: "Armado", meta: "Por João", time: "20:30" },
@@ -609,11 +612,11 @@ function Landing() {
                           className={`flex flex-col items-center gap-1 rounded-xl border py-2 transition-all active:scale-95 ${
                             armado
                               ? "bg-emerald-500/20 border-emerald-400/50 shadow-lg shadow-emerald-500/20"
-                              : "bg-white/5 border-white/10 hover:bg-white/10"
+                              : "bg-emerald-500/10 border-emerald-400/60 hover:bg-emerald-500/20 animate-pulse ring-2 ring-emerald-400/40"
                           }`}
                         >
-                          <Lock className={`h-3.5 w-3.5 ${armado ? "text-emerald-300" : "text-white/70"}`} />
-                          <span className={`text-[9px] font-semibold ${armado ? "text-emerald-200" : "text-white/70"}`}>Armar</span>
+                          <Lock className={`h-3.5 w-3.5 ${armado ? "text-emerald-300" : "text-emerald-200"}`} />
+                          <span className={`text-[9px] font-semibold ${armado ? "text-emerald-200" : "text-emerald-100"}`}>Armar</span>
                         </button>
                         <button
                           type="button"
@@ -622,20 +625,24 @@ function Landing() {
                           className={`flex flex-col items-center gap-1 rounded-xl border py-2 transition-all active:scale-95 ${
                             !armado
                               ? "bg-amber-500/20 border-amber-400/50 shadow-lg shadow-amber-500/20"
-                              : "bg-white/5 border-white/10 hover:bg-white/10"
+                              : "bg-amber-500/10 border-amber-400/60 hover:bg-amber-500/20 animate-pulse ring-2 ring-amber-400/40"
                           }`}
                         >
-                          <Unlock className={`h-3.5 w-3.5 ${!armado ? "text-amber-300" : "text-white/70"}`} />
-                          <span className={`text-[9px] font-semibold ${!armado ? "text-amber-200" : "text-white/70"}`}>Desarmar</span>
+                          <Unlock className={`h-3.5 w-3.5 ${!armado ? "text-amber-300" : "text-amber-200"}`} />
+                          <span className={`text-[9px] font-semibold ${!armado ? "text-amber-200" : "text-amber-100"}`}>Desarmar</span>
                         </button>
                         <div className="flex flex-col items-center gap-1 rounded-xl border py-2 bg-white/5 border-white/10">
                           <Video className="h-3.5 w-3.5 text-white/70" />
                           <span className="text-[9px] font-semibold text-white/70">Câmeras</span>
                         </div>
-                        <div className="flex flex-col items-center gap-1 rounded-xl border py-2 bg-red-500/20 border-red-400/50 shadow-lg shadow-red-500/20">
+                        <button
+                          type="button"
+                          onClick={() => setPanicoAberto(true)}
+                          className="flex flex-col items-center gap-1 rounded-xl border py-2 bg-red-500/20 border-red-400/50 shadow-lg shadow-red-500/20 transition-all active:scale-95 hover:bg-red-500/30"
+                        >
                           <AlertTriangle className="h-3.5 w-3.5 text-red-300" />
                           <span className="text-[9px] font-semibold text-red-200">Pânico</span>
-                        </div>
+                        </button>
                       </div>
 
                       {/* Live camera */}
@@ -1191,6 +1198,59 @@ function Landing() {
           <path d="M19.11 17.24c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.13-.42-2.15-1.33-.79-.71-1.33-1.58-1.49-1.85-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.02-.22-.53-.45-.46-.61-.47l-.52-.01c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29 0 1.35.98 2.66 1.12 2.84.14.18 1.94 2.96 4.7 4.15.66.28 1.17.45 1.57.58.66.21 1.26.18 1.73.11.53-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32zM16.02 3C9.39 3 4 8.39 4 15.02c0 2.34.68 4.52 1.85 6.36L4 29l7.83-2.05a12 12 0 0 0 4.19.76c6.63 0 12.02-5.39 12.02-12.02S22.65 3 16.02 3zm0 21.86a9.83 9.83 0 0 1-5.02-1.37l-.36-.21-4.65 1.22 1.24-4.53-.23-.37a9.83 9.83 0 0 1-1.5-5.24c0-5.44 4.43-9.86 9.87-9.86 5.44 0 9.86 4.42 9.86 9.86 0 5.44-4.42 9.86-9.86 9.86z" />
         </svg>
       </a>
+
+      {/* Popup Pânico — simulação de acionamento */}
+      <Dialog open={panicoAberto} onOpenChange={setPanicoAberto}>
+        <DialogContent className="max-w-lg p-0 overflow-hidden border-red-500/40 bg-slate-950">
+          <div className="relative">
+            <img
+              src={centralAlertaPanico}
+              alt="Central de monitoramento recebendo alerta de pânico"
+              width={1024}
+              height={1024}
+              loading="lazy"
+              className="w-full h-64 object-cover"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+            <div className="absolute top-3 left-3 inline-flex items-center gap-2 rounded-full bg-red-600/90 px-3 py-1 text-white text-xs font-bold shadow-lg animate-pulse">
+              <AlertTriangle className="h-3.5 w-3.5" />
+              ALERTA DE PÂNICO
+            </div>
+            <div className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-black/70 px-2.5 py-1 text-[10px] font-mono text-red-300">
+              <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
+              AO VIVO
+            </div>
+          </div>
+          <div className="p-5 space-y-3">
+            <DialogHeader>
+              <DialogTitle className="text-white flex items-center gap-2">
+                <PhoneCall className="h-5 w-5 text-red-400 animate-pulse" />
+                Central acionada — Polícia a caminho
+              </DialogTitle>
+              <DialogDescription className="text-white/70">
+                Nossos operadores receberam seu alerta em segundos, validaram as câmeras e já acionaram a viatura mais próxima e a Polícia Militar.
+              </DialogDescription>
+            </DialogHeader>
+            <div className="grid grid-cols-3 gap-2 text-center">
+              <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 py-2">
+                <CheckCircle2 className="h-4 w-4 text-emerald-400 mx-auto" />
+                <div className="text-[10px] text-emerald-200 font-semibold mt-1">Alerta recebido</div>
+              </div>
+              <div className="rounded-lg border border-emerald-500/30 bg-emerald-500/10 py-2">
+                <CheckCircle2 className="h-4 w-4 text-emerald-400 mx-auto" />
+                <div className="text-[10px] text-emerald-200 font-semibold mt-1">Câmeras validadas</div>
+              </div>
+              <div className="rounded-lg border border-red-500/40 bg-red-500/10 py-2">
+                <Radio className="h-4 w-4 text-red-400 mx-auto animate-pulse" />
+                <div className="text-[10px] text-red-200 font-semibold mt-1">Polícia acionada</div>
+              </div>
+            </div>
+            <p className="text-[11px] text-white/50 text-center pt-1">
+              Simulação demonstrativa do aplicativo Rota Sul Tech.
+            </p>
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 }
