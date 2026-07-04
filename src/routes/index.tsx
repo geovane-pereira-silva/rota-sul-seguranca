@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import cameraQuintal from "@/assets/camera-quintal.jpg";
 import heroFrota from "@/assets/hero-frota.jpg";
 import ligacoesCentral from "@/assets/ligacoes-central.jpg.asset.json";
 import relatoriosImg from "@/assets/relatorios.jpg.asset.json";
