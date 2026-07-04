@@ -93,12 +93,29 @@ function Landing() {
     ].slice(0, 4));
   };
 
-  // Popup pânico: abre versão "fica tranquilo" após 2s e fecha o principal após 10s
+  const nowHHMM = () => {
+    const now = new Date();
+    return `${String(now.getHours()).padStart(2, "0")}:${String(now.getMinutes()).padStart(2, "0")}`;
+  };
+  const pushEvento = (ev: { dot: string; label: string; meta: string; time: string }) => {
+    setEventos((prev) => [ev, ...prev].slice(0, 4));
+  };
+
+  const acionarPanico = () => {
+    setPanicoAberto(true);
+    pushEvento({ dot: "bg-red-500", label: "Pânico acionado", meta: "Por você (app)", time: nowHHMM() });
+  };
+
+  // Popup pânico: registra "tático a caminho", abre "fica tranquilo" após 2s e fecha o principal após 10s
   useEffect(() => {
     if (!panicoAberto) return;
+    const t0 = setTimeout(() => {
+      pushEvento({ dot: "bg-amber-400", label: "Tático a caminho", meta: "Central 24h", time: nowHHMM() });
+    }, 1500);
     const t1 = setTimeout(() => setFunnyAberto(true), 2000);
     const t2 = setTimeout(() => setPanicoAberto(false), 10000);
     return () => {
+      clearTimeout(t0);
       clearTimeout(t1);
       clearTimeout(t2);
     };
