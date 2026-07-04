@@ -317,12 +317,12 @@ function Landing() {
               Segurança feita por gente. Escalada por tecnologia.
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Somos uma empresa gaúcha especializada em terceirização de monitoramento eletrônico.
+              Somos uma empresa de Poços de Caldas - MG especializada em terceirização de monitoramento eletrônico.
               Nascemos da união entre operadores de segurança experientes e engenheiros de tecnologia
               — com a missão de proteger pessoas, patrimônios e o sono de quem confia na gente.
             </p>
             <ul className="mt-6 space-y-3 text-sm text-foreground">
-              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> +10 anos protegendo condomínios e empresas do Sul do Brasil</li>
+              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> +10 anos protegendo condomínios e empresas em Poços de Caldas e região</li>
               <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> Central própria com energia e link redundantes</li>
               <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> Equipe humana 24/7 — nunca só uma máquina do outro lado</li>
             </ul>
