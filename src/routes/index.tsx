@@ -676,7 +676,7 @@ function Landing() {
                         </button>
                         <button
                           type="button"
-                          onClick={() => setPanicoAberto(true)}
+                          onClick={acionarPanico}
                           className="flex flex-col items-center gap-1 rounded-xl border py-2 bg-red-500/20 border-red-400/50 shadow-lg shadow-red-500/20 transition-all active:scale-95 hover:bg-red-500/30"
                         >
                           <AlertTriangle className="h-3.5 w-3.5 text-red-300" />
