@@ -1348,21 +1348,54 @@ function Landing() {
           </DialogHeader>
           <div className="grid grid-cols-2 gap-2">
             {[
-              { label: "Quintal", cam: "CAM 01" },
-              { label: "Garagem", cam: "CAM 02" },
-              { label: "Rua", cam: "CAM 03" },
-              { label: "Frente da casa", cam: "CAM 04" },
+              { label: "Quintal", cam: "CAM 01", img: cameraQuintal, motion: "dog" as const },
+              { label: "Frente da casa", cam: "CAM 02", img: cameraFrente, motion: "flicker" as const },
+              { label: "Rua", cam: "CAM 03", img: cameraRua, motion: "car" as const },
+              { label: "Garagem", cam: "CAM 04", img: cameraGaragem, motion: "scan" as const },
             ].map((c) => (
               <div key={c.cam} className="relative aspect-video rounded-lg overflow-hidden border border-white/10 bg-black">
                 <img
-                  src={cameraQuintal}
+                  src={c.img}
                   alt={`Câmera ${c.label}`}
                   loading="lazy"
                   width={1280}
                   height={768}
                   className="absolute inset-0 h-full w-full object-cover"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
+                {/* Motion overlay — simula gif com animação CSS */}
+                {c.motion === "dog" && (
+                  <>
+                    <div className="absolute bottom-[18%] left-0 right-0 h-8 cam-walk pointer-events-none">
+                      <div className="relative h-full">
+                        {/* Sombra pessoa + cachorro */}
+                        <div className="absolute bottom-0 left-0 w-3 h-6 rounded-t-full bg-black/70" />
+                        <div className="absolute bottom-0 left-4 w-4 h-3 rounded-t-md bg-black/70" />
+                        <div className="absolute bottom-0 left-3.5 w-0.5 h-1.5 bg-black/70" />
+                        <div className="absolute bottom-0 left-7 w-0.5 h-1.5 bg-black/70" />
+                      </div>
+                    </div>
+                  </>
+                )}
+                {c.motion === "flicker" && (
+                  <div className="absolute inset-0 pointer-events-none">
+                    <div className="absolute inset-0 bg-yellow-200 mix-blend-overlay cam-flicker" />
+                  </div>
+                )}
+                {c.motion === "car" && (
+                  <div className="absolute top-[38%] left-0 right-0 h-6 cam-headlights pointer-events-none">
+                    <div className="relative h-full w-16">
+                      <div className="absolute inset-y-0 left-0 w-16 rounded-full bg-yellow-200/70 blur-md" />
+                      <div className="absolute inset-y-1 left-1 w-14 rounded-full bg-white/90 blur-sm" />
+                    </div>
+                  </div>
+                )}
+                {c.motion === "scan" && (
+                  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+                    <div className="absolute inset-x-0 h-8 bg-gradient-to-b from-transparent via-emerald-400/25 to-transparent cam-scan" />
+                  </div>
+                )}
+
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20 pointer-events-none" />
                 <div className="absolute top-1.5 left-2 text-[10px] font-mono text-white/90 bg-black/50 px-1.5 py-0.5 rounded">
                   {c.cam} · {c.label.toUpperCase()}
                 </div>
@@ -1375,7 +1408,7 @@ function Landing() {
             ))}
           </div>
           <p className="text-[11px] text-white/50 text-center">
-            Simulação demonstrativa · imagens ilustrativas.
+            Simulação demonstrativa · imagens ilustrativas com movimento.
           </p>
         </DialogContent>
       </Dialog>
