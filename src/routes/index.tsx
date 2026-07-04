@@ -132,12 +132,12 @@ function Landing() {
               <ShieldCheck className="h-5 w-5" strokeWidth={2.5} />
             </span>
             <span className="font-semibold tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
-              Rota Sul Tech
+              Rota Sul Segurança
             </span>
           </a>
           <nav className="hidden lg:flex items-center gap-6 text-sm text-white/80" aria-label="Navegação principal">
             <a href="#top" className="hover:text-white transition">Home</a>
-            <a href="#sobre" className="hover:text-white transition">A Rota Sul Tech</a>
+            <a href="#sobre" className="hover:text-white transition">A Rota Sul Segurança</a>
             <a href="#servicos" className="hover:text-white transition">Serviços</a>
             <a href="#diferenciais" className="hover:text-white transition">Diferenciais</a>
             <a href="#estrutura" className="hover:text-white transition">Estrutura</a>
@@ -164,7 +164,7 @@ function Landing() {
           <div className="lg:hidden bg-primary border-t border-white/10 px-5 py-4 space-y-3 text-white/90">
             {[
               ["#top", "Home"],
-              ["#sobre", "A Rota Sul Tech"],
+              ["#sobre", "A Rota Sul Segurança"],
               ["#servicos", "Serviços"],
               ["#diferenciais", "Diferenciais"],
               ["#estrutura", "Estrutura"],
@@ -195,7 +195,7 @@ function Landing() {
         {/* Imagem de fundo com a frota */}
         <img
           src={heroFrota}
-          alt="Gestor da Rota Sul Tech em base operacional com frota de viaturas de segurança"
+          alt="Gestor da Rota Sul Segurança em base operacional com frota de viaturas de segurança"
           fetchPriority="high"
           width={1920}
           height={1088}
@@ -289,13 +289,13 @@ function Landing() {
         </div>
       </section>
 
-      {/* SOBRE — A Rota Sul Tech */}
+      {/* SOBRE — A Rota Sul Segurança */}
       <section id="sobre" className="py-20 md:py-28">
         <div className="max-w-7xl mx-auto px-5 lg:px-8 grid lg:grid-cols-2 gap-12 items-center">
           <div className="relative">
             <img
               src={centralOperadores}
-              alt="Central de monitoramento 24h da Rota Sul Tech com operadores acompanhando câmeras em tempo real"
+              alt="Central de monitoramento 24h da Rota Sul Segurança com operadores acompanhando câmeras em tempo real"
               loading="lazy"
               width={1600}
               height={1088}
@@ -312,7 +312,7 @@ function Landing() {
             </div>
           </div>
           <div>
-            <span className="text-xs font-semibold tracking-widest text-accent uppercase">A Rota Sul Tech</span>
+            <span className="text-xs font-semibold tracking-widest text-accent uppercase">A Rota Sul Segurança</span>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
               Segurança feita por gente. Escalada por tecnologia.
             </h2>
@@ -595,7 +595,7 @@ function Landing() {
                           <div>
                             <div className="text-[10px] text-white/50 leading-none">Bem-vindo</div>
                             <div className="text-[11px] font-bold text-white leading-tight" style={{ fontFamily: "var(--font-display)" }}>
-                              Rota Sul Tech
+                              Rota Sul Segurança
                             </div>
                           </div>
                         </div>
@@ -896,7 +896,7 @@ function Landing() {
           <div className="text-center max-w-3xl mx-auto">
             <span className="text-xs font-semibold tracking-widest text-accent uppercase">Prova social</span>
             <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
-              Quem confia na Rota Sul Tech dorme tranquilo.
+              Quem confia na Rota Sul Segurança dorme tranquilo.
             </h2>
             <p className="mt-5 text-lg text-muted-foreground">
               Veja como nossos parceiros de diversos setores escalaram seus negócios, eliminaram custos operacionais e garantiram a melhor tecnologia de monitoramento do mercado.
@@ -1028,7 +1028,7 @@ function Landing() {
           </div>
           <div className="mt-12 grid md:grid-cols-3 gap-6">
             {[
-              { veiculo: "Jornal da Cidade", titulo: "Rota Sul Tech reduz em 38% o custo de portaria em condomínios de Poços de Caldas." },
+              { veiculo: "Jornal da Cidade", titulo: "Rota Sul Segurança reduz em 38% o custo de portaria em condomínios de Poços de Caldas." },
               { veiculo: "Correio do Povo", titulo: "IA aplicada à segurança: startup gaúcha entra no radar de administradoras." },
               { veiculo: "Portal Sindiconet", titulo: "Terceirização de monitoramento: por que síndicos estão migrando." },
             ].map((n) => (
@@ -1205,7 +1205,7 @@ function Landing() {
               <span className="grid place-items-center h-9 w-9 rounded-lg bg-accent text-accent-foreground">
                 <ShieldCheck className="h-5 w-5" strokeWidth={2.5} />
               </span>
-              <span className="font-semibold" style={{ fontFamily: "var(--font-display)" }}>Rota Sul Tech</span>
+              <span className="font-semibold" style={{ fontFamily: "var(--font-display)" }}>Rota Sul Segurança</span>
             </div>
             <p className="mt-4 text-sm max-w-md">
               Central de monitoramento 24h com tecnologia proprietária, IA e atendimento
@@ -1231,7 +1231,7 @@ function Landing() {
         </div>
         <div className="border-t border-white/10">
           <div className="max-w-7xl mx-auto px-5 lg:px-8 py-5 text-xs flex flex-col md:flex-row justify-between gap-2">
-            <span>© 2026 Rota Sul Tech. Todos os direitos reservados.</span>
+            <span>© 2026 Rota Sul Segurança. Todos os direitos reservados.</span>
             <span>CNPJ 00.000.000/0001-00</span>
           </div>
         </div>
@@ -1317,7 +1317,7 @@ function Landing() {
             <DialogDescription className="text-slate-700 text-sm leading-relaxed">
               Respira fundo. <strong>Ninguém foi acionado</strong>, a Polícia não está a caminho, e nenhum vizinho vai reclamar. 🚔❌
               <br /><br />
-              Isso foi só uma <strong>simulação</strong> pra você ver como o botão de pânico funciona no app da Rota Sul Tech. Fique tranquilo(a) — é só uma demonstração 💚
+              Isso foi só uma <strong>simulação</strong> pra você ver como o botão de pânico funciona no app da Rota Sul Segurança. Fique tranquilo(a) — é só uma demonstração 💚
             </DialogDescription>
           </DialogHeader>
           <button

@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Rota Sul Tech | Terceirização de Monitoramento 24h" },
+      { title: "Rota Sul Segurança | Terceirização de Monitoramento 24h" },
       {
         name: "description",
         content:
-          "Central de monitoramento 24h com IA, portaria remota e CFTV. Reduza custos e passivos trabalhistas terceirizando sua segurança com a Rota Sul Tech.",
+          "Central de monitoramento 24h com IA, portaria remota e CFTV. Reduza custos e passivos trabalhistas terceirizando sua segurança com a Rota Sul Segurança.",
       },
-      { name: "author", content: "Rota Sul Tech" },
-      { property: "og:title", content: "Rota Sul Tech | Monitoramento 24h com IA" },
+      { name: "author", content: "Rota Sul Segurança" },
+      { property: "og:title", content: "Rota Sul Segurança | Monitoramento 24h com IA" },
       {
         property: "og:description",
         content:
