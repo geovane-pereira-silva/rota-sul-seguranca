@@ -143,15 +143,12 @@ function Landing() {
           </a>
           <nav className="hidden lg:flex items-center gap-6 text-sm text-white/80" aria-label="Navegação principal">
             <a href="#top" className="hover:text-white transition">Home</a>
-            <a href="#sobre" className="hover:text-white transition">A Rota Sul Segurança</a>
+            <a href="#sobre" className="hover:text-white transition">A Empresa</a>
             <a href="#servicos" className="hover:text-white transition">Serviços</a>
             <a href="#diferenciais" className="hover:text-white transition">Diferenciais</a>
-            <a href="#estrutura" className="hover:text-white transition">Estrutura</a>
-            <a href="#parceiros" className="hover:text-white transition">Parceiros</a>
-            <a href="#midia" className="hover:text-white transition">Na mídia</a>
-            <a href="#blog" className="hover:text-white transition">Blog</a>
             <a href="#orcamento" onClick={scrollToForm} className="hover:text-white transition font-semibold">CONTATO</a>
           </nav>
+
           <Link
             to="/area-cliente"
             className="hidden lg:inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground hover:brightness-110 transition"
