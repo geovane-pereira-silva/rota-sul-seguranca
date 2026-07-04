@@ -646,10 +646,14 @@ function Landing() {
                           <Unlock className={`h-3.5 w-3.5 ${!armado ? "text-amber-300" : "text-amber-200"}`} />
                           <span className={`text-[9px] font-semibold ${!armado ? "text-amber-200" : "text-amber-100"}`}>Desarmar</span>
                         </button>
-                        <div className="flex flex-col items-center gap-1 rounded-xl border py-2 bg-white/5 border-white/10">
+                        <button
+                          type="button"
+                          onClick={() => setCamerasAberto(true)}
+                          className="flex flex-col items-center gap-1 rounded-xl border py-2 bg-white/5 border-white/10 hover:bg-white/10 transition-all active:scale-95"
+                        >
                           <Video className="h-3.5 w-3.5 text-white/70" />
                           <span className="text-[9px] font-semibold text-white/70">Câmeras</span>
-                        </div>
+                        </button>
                         <button
                           type="button"
                           onClick={() => setPanicoAberto(true)}
@@ -669,20 +673,32 @@ function Landing() {
                             AO VIVO
                           </span>
                         </div>
-                        <div className="relative h-16 rounded-lg overflow-hidden bg-gradient-to-br from-slate-800 via-slate-900 to-black border border-white/10">
-                          <div className="absolute inset-0 opacity-70 bg-[radial-gradient(ellipse_at_bottom,_rgba(251,191,36,0.35),_transparent_60%)]" />
-                          <div className="absolute inset-0 opacity-40 bg-[linear-gradient(180deg,transparent_60%,rgba(0,0,0,0.6))]" />
-                          <div className="absolute bottom-1 left-1.5 text-[8px] text-white/70 font-mono">CAM 01 · GARAGEM</div>
-                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setCamerasAberto(true)}
+                          className="relative block w-full h-16 rounded-lg overflow-hidden border border-white/10 group"
+                        >
+                          <img
+                            src={cameraQuintal}
+                            alt="Prévia câmera quintal"
+                            loading="lazy"
+                            width={1280}
+                            height={768}
+                            className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+                          <div className="absolute bottom-1 left-1.5 text-[8px] text-white/90 font-mono drop-shadow">CAM 01 · QUINTAL</div>
+                          <div className="absolute top-1 right-1.5 text-[8px] text-white/90 font-mono bg-black/40 px-1 rounded">HD</div>
+                        </button>
                       </div>
 
-                      {/* Eventos recentes */}
+                      {/* Eventos recentes — altura fixa evita mudança de tamanho do mockup */}
                       <div className="mt-3 mx-4 flex-1">
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-[10px] font-semibold text-white/80">Eventos recentes</span>
                           <span className="text-[9px] text-accent">Ver todos</span>
                         </div>
-                        <div className="space-y-1">
+                        <div className="space-y-1 min-h-[128px]">
                           {eventos.map((ev, i) => (
                             <div key={`${ev.label}-${ev.time}-${i}`} className="flex items-center gap-2 rounded-md bg-white/5 border border-white/5 px-2 py-1.5 animate-in fade-in slide-in-from-top-1 duration-300">
                               <span className={`h-1.5 w-1.5 rounded-full ${ev.dot} shrink-0`} />
