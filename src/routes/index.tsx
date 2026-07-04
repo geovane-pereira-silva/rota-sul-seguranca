@@ -55,8 +55,12 @@ import {
 
   LayoutGrid,
   Settings,
+  Download,
+  ShieldAlert,
+  HelpCircle,
 
 } from "lucide-react";
+
 
 
 export const Route = createFileRoute("/")({
