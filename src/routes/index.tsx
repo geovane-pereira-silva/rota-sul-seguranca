@@ -167,13 +167,10 @@ function Landing() {
           <div className="lg:hidden bg-primary border-t border-white/10 px-5 py-4 space-y-3 text-white/90">
             {[
               ["#top", "Home"],
-              ["#sobre", "A Rota Sul Segurança"],
+              ["#sobre", "A Empresa"],
               ["#servicos", "Serviços"],
               ["#diferenciais", "Diferenciais"],
-              ["#estrutura", "Estrutura"],
-              ["#parceiros", "Parceiros"],
-              ["#midia", "Na mídia"],
-              ["#blog", "Blog"],
+
               ["#orcamento", "CONTATO"],
             ].map(([href, label]) => (
               <a key={href} href={href} onClick={() => setMenuOpen(false)} className="block">{label}</a>
