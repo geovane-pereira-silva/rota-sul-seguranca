@@ -1,6 +1,8 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from "@/components/ui/accordion";
+
 import cameraQuintal from "@/assets/camera-quintal.jpg";
 import cameraFrente from "@/assets/camera-frente.jpg";
 import cameraRua from "@/assets/camera-rua.jpg";
@@ -53,8 +55,12 @@ import {
 
   LayoutGrid,
   Settings,
+  Download,
+  ShieldAlert,
+  HelpCircle,
 
 } from "lucide-react";
+
 
 
 export const Route = createFileRoute("/")({
@@ -70,10 +76,16 @@ function Landing() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [formEmail, setFormEmail] = useState("");
+  const [formTelefone, setFormTelefone] = useState("");
+  const [contatoErro, setContatoErro] = useState<string | null>(null);
+  const [checklistEmail, setChecklistEmail] = useState("");
+  const [checklistEnviado, setChecklistEnviado] = useState(false);
   const [armado, setArmado] = useState(true);
   const [panicoAberto, setPanicoAberto] = useState(false);
   const [funnyAberto, setFunnyAberto] = useState(false);
   const [camerasAberto, setCamerasAberto] = useState(false);
+
   const [eventos, setEventos] = useState<{ dot: string; label: string; meta: string; time: string }[]>([
     { dot: "bg-red-500", label: "Alarme intrusão", meta: "Setor externo", time: "22:15" },
     { dot: "bg-emerald-400", label: "Armado", meta: "Por João", time: "20:30" },
@@ -137,15 +149,12 @@ function Landing() {
           </a>
           <nav className="hidden lg:flex items-center gap-6 text-sm text-white/80" aria-label="Navegação principal">
             <a href="#top" className="hover:text-white transition">Home</a>
-            <a href="#sobre" className="hover:text-white transition">A Rota Sul Segurança</a>
+            <a href="#sobre" className="hover:text-white transition">A Empresa</a>
             <a href="#servicos" className="hover:text-white transition">Serviços</a>
             <a href="#diferenciais" className="hover:text-white transition">Diferenciais</a>
-            <a href="#estrutura" className="hover:text-white transition">Estrutura</a>
-            <a href="#parceiros" className="hover:text-white transition">Parceiros</a>
-            <a href="#midia" className="hover:text-white transition">Na mídia</a>
-            <a href="#blog" className="hover:text-white transition">Blog</a>
             <a href="#orcamento" onClick={scrollToForm} className="hover:text-white transition font-semibold">CONTATO</a>
           </nav>
+
           <Link
             to="/area-cliente"
             className="hidden lg:inline-flex items-center gap-2 rounded-full bg-accent px-4 py-2 text-sm font-semibold text-accent-foreground hover:brightness-110 transition"
@@ -164,13 +173,10 @@ function Landing() {
           <div className="lg:hidden bg-primary border-t border-white/10 px-5 py-4 space-y-3 text-white/90">
             {[
               ["#top", "Home"],
-              ["#sobre", "A Rota Sul Segurança"],
+              ["#sobre", "A Empresa"],
               ["#servicos", "Serviços"],
               ["#diferenciais", "Diferenciais"],
-              ["#estrutura", "Estrutura"],
-              ["#parceiros", "Parceiros"],
-              ["#midia", "Na mídia"],
-              ["#blog", "Blog"],
+
               ["#orcamento", "CONTATO"],
             ].map(([href, label]) => (
               <a key={href} href={href} onClick={() => setMenuOpen(false)} className="block">{label}</a>
@@ -228,20 +234,19 @@ function Landing() {
           <div className="max-w-2xl text-white">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 backdrop-blur px-3 py-1 text-[11px] font-semibold tracking-widest uppercase text-white/90">
               <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
-              Central ativa agora — 24/7
+              A cada 11 segundos, um alarme dispara no Brasil
             </div>
             <h1
               className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-[4.2rem] font-bold leading-[1.02] tracking-tight"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Nós cuidamos da{" "}
-              <span className="text-accent">segurança do seu patrimônio</span>,
-              e você cuida do que realmente importa.
+              Elimine o custo e o risco da{" "}
+              <span className="text-accent">portaria própria</span> — sem abrir mão da segurança.
             </h1>
             <p className="mt-6 text-base md:text-lg text-white/80 max-w-xl">
-              Há mais de 10 anos em Poços de Caldas, unindo tecnologia,
-              monitoramento eletrônico e uma equipe humana 24h para proteger
-              famílias, empresas e obras com resposta em segundos.
+              Há mais de 10 anos em Poços de Caldas, oferecendo portaria remota,
+              monitoramento eletrônico terceirizado e uma equipe humana 24h para
+              proteger condomínios, empresas e obras com resposta em segundos.
             </p>
 
             <div className="mt-9 flex flex-col sm:flex-row gap-3">
@@ -250,8 +255,9 @@ function Landing() {
                 onClick={scrollToForm}
                 className="inline-flex items-center justify-center gap-2 rounded-md bg-accent px-9 py-4 text-sm md:text-base font-bold uppercase tracking-wider text-accent-foreground shadow-lg shadow-accent/30 hover:brightness-110 hover:-translate-y-0.5 transition"
               >
-                Quero saber mais
+                Quero minha proposta em 24h <ArrowRight className="h-4 w-4" />
               </a>
+
               <a
                 href="#servicos"
                 className="inline-flex items-center justify-center gap-2 rounded-md border border-white/30 bg-white/5 backdrop-blur px-8 py-4 text-sm md:text-base font-semibold text-white hover:bg-white/15 transition"
@@ -317,15 +323,17 @@ function Landing() {
               Segurança feita por gente. Escalada por tecnologia.
             </h2>
             <p className="mt-4 text-muted-foreground">
-              Somos uma empresa de Poços de Caldas - MG especializada em terceirização de monitoramento eletrônico.
-              Nascemos da união entre operadores de segurança experientes e engenheiros de tecnologia
-              — com a missão de proteger pessoas, patrimônios e o sono de quem confia na gente.
+              Somos uma empresa de Poços de Caldas - MG especializada em <strong>monitoramento eletrônico terceirizado</strong>,
+              <strong> portaria remota</strong> e <strong>segurança patrimonial para empresas</strong> e condomínios.
+              Nascemos da união entre operadores experientes e engenheiros de tecnologia — com a missão de
+              proteger pessoas, patrimônios e o sono de quem confia na gente.
             </p>
             <ul className="mt-6 space-y-3 text-sm text-foreground">
-              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> +10 anos protegendo condomínios e empresas em Poços de Caldas e região</li>
+              <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> +10 anos em <strong>segurança para condomínio</strong> e empresas em Poços de Caldas e região</li>
               <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> Central própria com energia e link redundantes</li>
               <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> Equipe humana 24/7 — nunca só uma máquina do outro lado</li>
             </ul>
+
           </div>
         </div>
       </section>
@@ -467,13 +475,14 @@ function Landing() {
 
             <ul className="relative mt-10 grid md:grid-cols-2 gap-3">
               {[
-                "Mais de 10 anos de experiência no setor",
-                "Equipe altamente treinada e qualificada",
-                "Monitoramento 24h com tecnologia avançada",
-                "Atendimento personalizado para cada cliente",
-                "Compromisso com ética e transparência",
+                "Mais de 10 anos em segurança patrimonial para empresas",
+                "Especialistas em substituir porteiro por monitoramento",
+                "Monitoramento eletrônico terceirizado com tecnologia avançada",
+                "Portaria remota com atendimento personalizado 24h",
+                "Compromisso com ética, LGPD e transparência",
                 "Soluções completas em um único parceiro",
               ].map((item) => (
+
                 <li
                   key={item}
                   className="flex items-center gap-3 rounded-full bg-primary-deep/60 border border-white/10 px-5 py-3 text-white text-sm md:text-base"
@@ -973,12 +982,13 @@ function Landing() {
           </div>
           <div className="mt-12 grid md:grid-cols-3 gap-6">
             {[
-              { img: estruturaCentral, title: "Central 24h", desc: "Operadores presenciais, videowall e protocolo de resposta em segundos." },
-              { img: estruturaFrota, title: "Frota Tática", desc: "Viaturas próprias com rastreamento em tempo real para atendimento local." },
-              { img: estruturaTime, title: "Time Técnico", desc: "Engenheiros e técnicos certificados para instalação e manutenção." },
+              { img: estruturaCentral, title: "Central 24h", alt: "Central de monitoramento 24 horas da Rota Sul Segurança em Poços de Caldas, MG", desc: "Operadores presenciais, videowall e protocolo de resposta em segundos." },
+              { img: estruturaFrota, title: "Frota Tática", alt: "Frota tática de resposta rápida a alarmes em Poços de Caldas, MG", desc: "Viaturas próprias com rastreamento em tempo real para atendimento local." },
+              { img: estruturaTime, title: "Time Técnico", alt: "Equipe técnica certificada para instalação de CFTV e alarmes em Poços de Caldas, MG", desc: "Engenheiros e técnicos certificados para instalação e manutenção." },
             ].map((c) => (
               <div key={c.title} className="rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-lg transition">
-                <img src={c.img} alt={c.title} loading="lazy" width={1024} height={768} className="h-48 w-full object-cover" />
+                <img src={c.img} alt={c.alt} loading="lazy" width={1024} height={768} className="h-48 w-full object-cover" />
+
                 <div className="p-6">
                   <div className="flex items-center gap-2 text-primary">
                     <Building2 className="h-5 w-5" />
@@ -1028,8 +1038,8 @@ function Landing() {
           </div>
           <div className="mt-12 grid md:grid-cols-3 gap-6">
             {[
-              { veiculo: "Jornal Regional Hoje", titulo: "Rota Sul Segurança reduz em 38% o custo de portaria em condomínios de Poços de Caldas." },
-              { veiculo: "Portal Notícias MG", titulo: "IA aplicada à segurança: empresa de Poços de Caldas entra no radar de administradoras." },
+              { veiculo: "Jornal Regional de Poços", titulo: "Rota Sul Segurança reduz em 38% o custo de portaria em condomínios de Poços de Caldas." },
+              { veiculo: "Portal Sul de Minas Notícias", titulo: "IA aplicada à segurança: empresa de Poços de Caldas entra no radar de administradoras." },
               { veiculo: "Revista Síndico Mineiro", titulo: "Terceirização de monitoramento: por que síndicos estão migrando." },
             ].map((n) => (
               <article key={n.veiculo} className="rounded-2xl border border-border bg-card p-6 hover:shadow-lg transition">
@@ -1081,6 +1091,109 @@ function Landing() {
         </div>
       </section>
 
+      {/* FAQ — perguntas frequentes (SEO / GEO) */}
+      <section id="faq" className="py-20 md:py-28 bg-background">
+        <div className="max-w-4xl mx-auto px-5 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-accent uppercase">
+              <HelpCircle className="h-4 w-4" /> Perguntas frequentes
+            </span>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
+              Tira-dúvidas sobre monitoramento terceirizado.
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              As perguntas que mais recebemos de síndicos, empresários e gestores em Poços de Caldas e região.
+            </p>
+          </div>
+
+          <Accordion type="single" collapsible className="mt-10 rounded-2xl border border-border bg-card px-6">
+            {[
+              {
+                q: "Como reduzir o passivo trabalhista em condomínios com portaria remota?",
+                a: "A portaria remota substitui o porteiro presencial por uma central de monitoramento 24h. Você elimina folha de pagamento, encargos, férias, 13º e afastamentos — pagando apenas uma mensalidade fixa pelo serviço terceirizado. O contrato é entre pessoas jurídicas, então não há vínculo trabalhista com quem opera o acesso.",
+              },
+              {
+                q: "Quanto custa terceirizar o monitoramento de um condomínio ou empresa?",
+                a: "O investimento varia conforme o tamanho do imóvel, número de câmeras, quantidade de acessos e nível de resposta contratado. Em média, condomínios em Poços de Caldas economizam entre 30% e 60% em relação a uma portaria própria. Enviamos um orçamento comparativo em até 24 horas, sem compromisso.",
+              },
+              {
+                q: "Portaria remota é mais segura que porteiro presencial?",
+                a: "Sim, em quase todos os cenários. Na portaria remota, quem opera o acesso está protegido em uma central blindada, com múltiplas câmeras, IA de detecção e protocolo de resposta imediata. Isso elimina o risco de coação ao porteiro — e ainda acionamos uma frota tática que se desloca ao local em minutos.",
+              },
+              {
+                q: "Vocês atendem empresas, obras e comércios, ou só condomínios residenciais?",
+                a: "Atendemos condomínios residenciais e comerciais, empresas, indústrias, obras, gastronomia e propriedades rurais em Poços de Caldas - MG e região. Cada operação é dimensionada sob medida — do CFTV com IA à portaria remota com controle biométrico.",
+              },
+              {
+                q: "Em quanto tempo a central responde a um alarme disparado?",
+                a: "Nosso tempo médio de recepção e validação do alerta é de 8 segundos. Após a confirmação pelas câmeras, a viatura tática mais próxima é acionada e, quando o caso exige, a Polícia Militar é comunicada em paralelo. Você recebe todo o histórico no app do cliente em tempo real.",
+              },
+            ].map((item, i) => (
+              <AccordionItem key={i} value={`item-${i}`} className="border-border last:border-0">
+                <AccordionTrigger className="text-left text-base font-semibold text-primary hover:no-underline py-5">
+                  {item.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed pb-5">
+                  {item.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+      {/* LEAD MAGNET — Checklist gratuito (reciprocidade) */}
+      <section id="checklist" className="py-16 bg-secondary/40">
+        <div className="max-w-4xl mx-auto px-5 lg:px-8">
+          <div className="rounded-3xl border border-accent/30 bg-gradient-to-br from-white to-accent/5 p-8 md:p-10 shadow-lg grid md:grid-cols-[auto_1fr] gap-6 items-center">
+            <div className="grid place-items-center h-16 w-16 rounded-2xl bg-accent text-accent-foreground shadow-md shrink-0 mx-auto md:mx-0">
+              <Download className="h-8 w-8" />
+            </div>
+            <div>
+              <div className="text-xs font-semibold tracking-widest text-accent uppercase">Material gratuito</div>
+              <h3 className="mt-1 text-2xl md:text-3xl font-bold text-primary" style={{ fontFamily: "var(--font-display)" }}>
+                Checklist: 7 sinais de que seu condomínio está vulnerável
+              </h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Um diagnóstico rápido para síndicos e administradoras identificarem brechas antes que virem prejuízo. Enviamos direto no seu e-mail.
+              </p>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (!checklistEmail) return;
+                  setChecklistEnviado(true);
+                }}
+                className="mt-4 flex flex-col sm:flex-row gap-2"
+              >
+                {checklistEnviado ? (
+                  <div className="w-full flex items-center gap-2 text-sm font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-4 py-3">
+                    <CheckCircle2 className="h-5 w-5" />
+                    Enviado! Confira sua caixa de entrada em instantes.
+                  </div>
+                ) : (
+                  <>
+                    <input
+                      type="email"
+                      required
+                      value={checklistEmail}
+                      onChange={(e) => setChecklistEmail(e.target.value)}
+                      placeholder="Seu melhor e-mail"
+                      className="flex-1 rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    />
+                    <button
+                      type="submit"
+                      className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:brightness-110 transition"
+                    >
+                      Quero o checklist gratuito <ArrowRight className="h-4 w-4" />
+                    </button>
+                  </>
+                )}
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FORMULÁRIO */}
 
       <section
@@ -1106,11 +1219,20 @@ function Landing() {
               <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> Resposta em até 24 horas úteis</li>
               <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> Estudo comparativo de economia</li>
             </ul>
+            <div className="mt-6 inline-flex items-center gap-2 rounded-lg border border-amber-300/40 bg-amber-400/10 px-4 py-3 text-sm text-amber-100">
+              <AlertTriangle className="h-4 w-4 shrink-0" />
+              Vagas limitadas de atendimento prioritário este mês para novos condomínios na região.
+            </div>
           </div>
 
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              if (!formEmail && !formTelefone) {
+                setContatoErro("Informe ao menos um e-mail ou telefone para contato.");
+                return;
+              }
+              setContatoErro(null);
               setLoading(true);
               setTimeout(() => {
                 setLoading(false);
@@ -1149,16 +1271,40 @@ function Landing() {
                       placeholder="Seu nome completo"
                     />
                   </div>
-                  <div>
-                    <label htmlFor="f-contato" className="text-sm font-medium text-foreground">E-mail corporativo ou Telefone</label>
-                    <input
-                      id="f-contato"
-                      required
-                      type="text"
-                      className="mt-1 w-full rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-                      placeholder="voce@empresa.com.br ou (51) 90000-0000"
-                    />
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <div>
+                      <label htmlFor="f-email" className="text-sm font-medium text-foreground">
+                        E-mail <span className="text-muted-foreground text-xs">(opcional)</span>
+                      </label>
+                      <input
+                        id="f-email"
+                        type="email"
+                        value={formEmail}
+                        onChange={(e) => setFormEmail(e.target.value)}
+                        className="mt-1 w-full rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        placeholder="voce@empresa.com.br"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="f-tel" className="text-sm font-medium text-foreground">
+                        Telefone / WhatsApp <span className="text-muted-foreground text-xs">(opcional)</span>
+                      </label>
+                      <input
+                        id="f-tel"
+                        type="tel"
+                        value={formTelefone}
+                        onChange={(e) => setFormTelefone(e.target.value)}
+                        className="mt-1 w-full rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        placeholder="(35) 90000-0000"
+                      />
+                    </div>
                   </div>
+                  {contatoErro && (
+                    <p className="text-xs text-destructive font-medium">{contatoErro}</p>
+                  )}
+                  <p className="text-[11px] text-muted-foreground">
+                    Preencha ao menos um dos campos acima — escolha o canal que preferir.
+                  </p>
                   <div>
                     <label htmlFor="f-perfil" className="text-sm font-medium text-foreground">Perfil</label>
                     <select
@@ -1185,10 +1331,11 @@ function Landing() {
                       Enviando...
                     </>
                   ) : (
-                    <>Solicitar Orçamento Gratuito <ArrowRight className="h-4 w-4" /></>
+                    <>Quero saber quanto vou economizar <ArrowRight className="h-4 w-4" /></>
                   )}
                 </button>
-                <p className="mt-3 text-[11px] text-center text-muted-foreground">
+                <p className="mt-3 text-[11px] text-center text-muted-foreground inline-flex items-center justify-center gap-1.5 w-full">
+                  <Lock className="h-3 w-3" />
                   Seus dados estão protegidos conforme a LGPD.
                 </p>
               </>
@@ -1196,6 +1343,8 @@ function Landing() {
           </form>
         </div>
       </section>
+
+
 
       {/* FOOTER */}
       <footer className="bg-primary-deep text-white/70 border-t border-white/10">
