@@ -1028,9 +1028,9 @@ function Landing() {
           </div>
           <div className="mt-12 grid md:grid-cols-3 gap-6">
             {[
-              { veiculo: "Jornal da Cidade", titulo: "Rota Sul Segurança reduz em 38% o custo de portaria em condomínios de Poços de Caldas." },
-              { veiculo: "Correio do Povo", titulo: "IA aplicada à segurança: startup gaúcha entra no radar de administradoras." },
-              { veiculo: "Portal Sindiconet", titulo: "Terceirização de monitoramento: por que síndicos estão migrando." },
+              { veiculo: "Jornal Regional Hoje", titulo: "Rota Sul Segurança reduz em 38% o custo de portaria em condomínios de Poços de Caldas." },
+              { veiculo: "Portal Notícias MG", titulo: "IA aplicada à segurança: empresa de Poços de Caldas entra no radar de administradoras." },
+              { veiculo: "Revista Síndico Mineiro", titulo: "Terceirização de monitoramento: por que síndicos estão migrando." },
             ].map((n) => (
               <article key={n.veiculo} className="rounded-2xl border border-border bg-card p-6 hover:shadow-lg transition">
                 <div className="flex items-center gap-2 text-xs font-semibold text-accent uppercase tracking-widest">
