@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import heroFrota from "@/assets/hero-frota.jpg";
 import ligacoesCentral from "@/assets/ligacoes-central.jpg.asset.json";
 import relatoriosImg from "@/assets/relatorios.jpg.asset.json";
@@ -10,6 +11,7 @@ import servicosBg from "@/assets/servicos-bg.jpg";
 import estruturaCentral from "@/assets/estrutura-central-24h.jpg";
 import estruturaFrota from "@/assets/estrutura-frota-tatica.jpg";
 import estruturaTime from "@/assets/estrutura-time-tecnico.jpg";
+import centralAlertaPanico from "@/assets/central-alerta-panico.jpg";
 import {
   ShieldCheck,
   Camera,
@@ -65,6 +67,7 @@ function Landing() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [armado, setArmado] = useState(true);
+  const [panicoAberto, setPanicoAberto] = useState(false);
   const [eventos, setEventos] = useState<{ dot: string; label: string; meta: string; time: string }[]>([
     { dot: "bg-red-500", label: "Alarme intrusão", meta: "Setor externo", time: "22:15" },
     { dot: "bg-emerald-400", label: "Armado", meta: "Por João", time: "20:30" },
@@ -609,11 +612,11 @@ function Landing() {
                           className={`flex flex-col items-center gap-1 rounded-xl border py-2 transition-all active:scale-95 ${
                             armado
                               ? "bg-emerald-500/20 border-emerald-400/50 shadow-lg shadow-emerald-500/20"
-                              : "bg-white/5 border-white/10 hover:bg-white/10"
+                              : "bg-emerald-500/10 border-emerald-400/60 hover:bg-emerald-500/20 animate-pulse ring-2 ring-emerald-400/40"
                           }`}
                         >
-                          <Lock className={`h-3.5 w-3.5 ${armado ? "text-emerald-300" : "text-white/70"}`} />
-                          <span className={`text-[9px] font-semibold ${armado ? "text-emerald-200" : "text-white/70"}`}>Armar</span>
+                          <Lock className={`h-3.5 w-3.5 ${armado ? "text-emerald-300" : "text-emerald-200"}`} />
+                          <span className={`text-[9px] font-semibold ${armado ? "text-emerald-200" : "text-emerald-100"}`}>Armar</span>
                         </button>
                         <button
                           type="button"
@@ -622,20 +625,24 @@ function Landing() {
                           className={`flex flex-col items-center gap-1 rounded-xl border py-2 transition-all active:scale-95 ${
                             !armado
                               ? "bg-amber-500/20 border-amber-400/50 shadow-lg shadow-amber-500/20"
-                              : "bg-white/5 border-white/10 hover:bg-white/10"
+                              : "bg-amber-500/10 border-amber-400/60 hover:bg-amber-500/20 animate-pulse ring-2 ring-amber-400/40"
                           }`}
                         >
-                          <Unlock className={`h-3.5 w-3.5 ${!armado ? "text-amber-300" : "text-white/70"}`} />
-                          <span className={`text-[9px] font-semibold ${!armado ? "text-amber-200" : "text-white/70"}`}>Desarmar</span>
+                          <Unlock className={`h-3.5 w-3.5 ${!armado ? "text-amber-300" : "text-amber-200"}`} />
+                          <span className={`text-[9px] font-semibold ${!armado ? "text-amber-200" : "text-amber-100"}`}>Desarmar</span>
                         </button>
                         <div className="flex flex-col items-center gap-1 rounded-xl border py-2 bg-white/5 border-white/10">
                           <Video className="h-3.5 w-3.5 text-white/70" />
                           <span className="text-[9px] font-semibold text-white/70">Câmeras</span>
                         </div>
-                        <div className="flex flex-col items-center gap-1 rounded-xl border py-2 bg-red-500/20 border-red-400/50 shadow-lg shadow-red-500/20">
+                        <button
+                          type="button"
+                          onClick={() => setPanicoAberto(true)}
+                          className="flex flex-col items-center gap-1 rounded-xl border py-2 bg-red-500/20 border-red-400/50 shadow-lg shadow-red-500/20 transition-all active:scale-95 hover:bg-red-500/30"
+                        >
                           <AlertTriangle className="h-3.5 w-3.5 text-red-300" />
                           <span className="text-[9px] font-semibold text-red-200">Pânico</span>
-                        </div>
+                        </button>
                       </div>
 
                       {/* Live camera */}
