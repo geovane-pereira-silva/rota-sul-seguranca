@@ -76,10 +76,16 @@ function Landing() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [formEmail, setFormEmail] = useState("");
+  const [formTelefone, setFormTelefone] = useState("");
+  const [contatoErro, setContatoErro] = useState<string | null>(null);
+  const [checklistEmail, setChecklistEmail] = useState("");
+  const [checklistEnviado, setChecklistEnviado] = useState(false);
   const [armado, setArmado] = useState(true);
   const [panicoAberto, setPanicoAberto] = useState(false);
   const [funnyAberto, setFunnyAberto] = useState(false);
   const [camerasAberto, setCamerasAberto] = useState(false);
+
   const [eventos, setEventos] = useState<{ dot: string; label: string; meta: string; time: string }[]>([
     { dot: "bg-red-500", label: "Alarme intrusão", meta: "Setor externo", time: "22:15" },
     { dot: "bg-emerald-400", label: "Armado", meta: "Por João", time: "20:30" },
