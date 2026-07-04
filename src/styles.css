@@ -146,3 +146,42 @@
     color: var(--color-foreground);
   }
 }
+
+/* Camera "gif-like" motion overlays */
+@keyframes cam-walk {
+  0% { transform: translateX(-30%); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: translateX(130%); opacity: 0; }
+}
+@keyframes cam-walk-slow {
+  0% { transform: translateX(120%); opacity: 0; }
+  15% { opacity: 1; }
+  85% { opacity: 1; }
+  100% { transform: translateX(-30%); opacity: 0; }
+}
+@keyframes cam-flicker {
+  0%, 100% { opacity: 0.05; }
+  45% { opacity: 0.05; }
+  47% { opacity: 0.55; }
+  49% { opacity: 0.1; }
+  51% { opacity: 0.6; }
+  55% { opacity: 0.08; }
+  80% { opacity: 0.05; }
+}
+@keyframes cam-scan {
+  0% { transform: translateY(-10%); }
+  100% { transform: translateY(110%); }
+}
+@keyframes cam-headlights {
+  0% { transform: translateX(-40%) scaleX(0.6); opacity: 0; }
+  20% { opacity: 0.9; }
+  60% { opacity: 0.9; }
+  100% { transform: translateX(140%) scaleX(1.4); opacity: 0; }
+}
+.cam-walk { animation: cam-walk 6s linear infinite; }
+.cam-walk-slow { animation: cam-walk-slow 9s linear infinite; }
+.cam-flicker { animation: cam-flicker 4s ease-in-out infinite; }
+.cam-scan { animation: cam-scan 3s linear infinite; }
+.cam-headlights { animation: cam-headlights 7s ease-in-out infinite; }
+
