@@ -228,20 +228,19 @@ function Landing() {
           <div className="max-w-2xl text-white">
             <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 backdrop-blur px-3 py-1 text-[11px] font-semibold tracking-widest uppercase text-white/90">
               <span className="h-1.5 w-1.5 rounded-full bg-accent animate-pulse" />
-              Central ativa agora — 24/7
+              A cada 11 segundos, um alarme dispara no Brasil
             </div>
             <h1
               className="mt-6 text-4xl sm:text-5xl md:text-6xl lg:text-[4.2rem] font-bold leading-[1.02] tracking-tight"
               style={{ fontFamily: "var(--font-display)" }}
             >
-              Nós cuidamos da{" "}
-              <span className="text-accent">segurança do seu patrimônio</span>,
-              e você cuida do que realmente importa.
+              Elimine o custo e o risco da{" "}
+              <span className="text-accent">portaria própria</span> — sem abrir mão da segurança.
             </h1>
             <p className="mt-6 text-base md:text-lg text-white/80 max-w-xl">
-              Há mais de 10 anos em Poços de Caldas, unindo tecnologia,
-              monitoramento eletrônico e uma equipe humana 24h para proteger
-              famílias, empresas e obras com resposta em segundos.
+              Há mais de 10 anos em Poços de Caldas, oferecendo portaria remota,
+              monitoramento eletrônico terceirizado e uma equipe humana 24h para
+              proteger condomínios, empresas e obras com resposta em segundos.
             </p>
 
             <div className="mt-9 flex flex-col sm:flex-row gap-3">
@@ -250,8 +249,9 @@ function Landing() {
                 onClick={scrollToForm}
                 className="inline-flex items-center justify-center gap-2 rounded-md bg-accent px-9 py-4 text-sm md:text-base font-bold uppercase tracking-wider text-accent-foreground shadow-lg shadow-accent/30 hover:brightness-110 hover:-translate-y-0.5 transition"
               >
-                Quero saber mais
+                Quero minha proposta em 24h <ArrowRight className="h-4 w-4" />
               </a>
+
               <a
                 href="#servicos"
                 className="inline-flex items-center justify-center gap-2 rounded-md border border-white/30 bg-white/5 backdrop-blur px-8 py-4 text-sm md:text-base font-semibold text-white hover:bg-white/15 transition"
