@@ -469,13 +469,14 @@ function Landing() {
 
             <ul className="relative mt-10 grid md:grid-cols-2 gap-3">
               {[
-                "Mais de 10 anos de experiência no setor",
-                "Equipe altamente treinada e qualificada",
-                "Monitoramento 24h com tecnologia avançada",
-                "Atendimento personalizado para cada cliente",
-                "Compromisso com ética e transparência",
+                "Mais de 10 anos em segurança patrimonial para empresas",
+                "Especialistas em substituir porteiro por monitoramento",
+                "Monitoramento eletrônico terceirizado com tecnologia avançada",
+                "Portaria remota com atendimento personalizado 24h",
+                "Compromisso com ética, LGPD e transparência",
                 "Soluções completas em um único parceiro",
               ].map((item) => (
+
                 <li
                   key={item}
                   className="flex items-center gap-3 rounded-full bg-primary-deep/60 border border-white/10 px-5 py-3 text-white text-sm md:text-base"
