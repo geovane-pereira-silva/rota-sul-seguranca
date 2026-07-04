@@ -1091,6 +1091,109 @@ function Landing() {
         </div>
       </section>
 
+      {/* FAQ — perguntas frequentes (SEO / GEO) */}
+      <section id="faq" className="py-20 md:py-28 bg-background">
+        <div className="max-w-4xl mx-auto px-5 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto">
+            <span className="inline-flex items-center gap-2 text-xs font-semibold tracking-widest text-accent uppercase">
+              <HelpCircle className="h-4 w-4" /> Perguntas frequentes
+            </span>
+            <h2 className="mt-3 text-3xl md:text-5xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
+              Tira-dúvidas sobre monitoramento terceirizado.
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              As perguntas que mais recebemos de síndicos, empresários e gestores em Poços de Caldas e região.
+            </p>
+          </div>
+
+          <Accordion type="single" collapsible className="mt-10 rounded-2xl border border-border bg-card px-6">
+            {[
+              {
+                q: "Como reduzir o passivo trabalhista em condomínios com portaria remota?",
+                a: "A portaria remota substitui o porteiro presencial por uma central de monitoramento 24h. Você elimina folha de pagamento, encargos, férias, 13º e afastamentos — pagando apenas uma mensalidade fixa pelo serviço terceirizado. O contrato é entre pessoas jurídicas, então não há vínculo trabalhista com quem opera o acesso.",
+              },
+              {
+                q: "Quanto custa terceirizar o monitoramento de um condomínio ou empresa?",
+                a: "O investimento varia conforme o tamanho do imóvel, número de câmeras, quantidade de acessos e nível de resposta contratado. Em média, condomínios em Poços de Caldas economizam entre 30% e 60% em relação a uma portaria própria. Enviamos um orçamento comparativo em até 24 horas, sem compromisso.",
+              },
+              {
+                q: "Portaria remota é mais segura que porteiro presencial?",
+                a: "Sim, em quase todos os cenários. Na portaria remota, quem opera o acesso está protegido em uma central blindada, com múltiplas câmeras, IA de detecção e protocolo de resposta imediata. Isso elimina o risco de coação ao porteiro — e ainda acionamos uma frota tática que se desloca ao local em minutos.",
+              },
+              {
+                q: "Vocês atendem empresas, obras e comércios, ou só condomínios residenciais?",
+                a: "Atendemos condomínios residenciais e comerciais, empresas, indústrias, obras, gastronomia e propriedades rurais em Poços de Caldas - MG e região. Cada operação é dimensionada sob medida — do CFTV com IA à portaria remota com controle biométrico.",
+              },
+              {
+                q: "Em quanto tempo a central responde a um alarme disparado?",
+                a: "Nosso tempo médio de recepção e validação do alerta é de 8 segundos. Após a confirmação pelas câmeras, a viatura tática mais próxima é acionada e, quando o caso exige, a Polícia Militar é comunicada em paralelo. Você recebe todo o histórico no app do cliente em tempo real.",
+              },
+            ].map((item, i) => (
+              <AccordionItem key={i} value={`item-${i}`} className="border-border last:border-0">
+                <AccordionTrigger className="text-left text-base font-semibold text-primary hover:no-underline py-5">
+                  {item.q}
+                </AccordionTrigger>
+                <AccordionContent className="text-muted-foreground leading-relaxed pb-5">
+                  {item.a}
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+      {/* LEAD MAGNET — Checklist gratuito (reciprocidade) */}
+      <section id="checklist" className="py-16 bg-secondary/40">
+        <div className="max-w-4xl mx-auto px-5 lg:px-8">
+          <div className="rounded-3xl border border-accent/30 bg-gradient-to-br from-white to-accent/5 p-8 md:p-10 shadow-lg grid md:grid-cols-[auto_1fr] gap-6 items-center">
+            <div className="grid place-items-center h-16 w-16 rounded-2xl bg-accent text-accent-foreground shadow-md shrink-0 mx-auto md:mx-0">
+              <Download className="h-8 w-8" />
+            </div>
+            <div>
+              <div className="text-xs font-semibold tracking-widest text-accent uppercase">Material gratuito</div>
+              <h3 className="mt-1 text-2xl md:text-3xl font-bold text-primary" style={{ fontFamily: "var(--font-display)" }}>
+                Checklist: 7 sinais de que seu condomínio está vulnerável
+              </h3>
+              <p className="mt-2 text-sm text-muted-foreground">
+                Um diagnóstico rápido para síndicos e administradoras identificarem brechas antes que virem prejuízo. Enviamos direto no seu e-mail.
+              </p>
+              <form
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  if (!checklistEmail) return;
+                  setChecklistEnviado(true);
+                }}
+                className="mt-4 flex flex-col sm:flex-row gap-2"
+              >
+                {checklistEnviado ? (
+                  <div className="w-full flex items-center gap-2 text-sm font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-4 py-3">
+                    <CheckCircle2 className="h-5 w-5" />
+                    Enviado! Confira sua caixa de entrada em instantes.
+                  </div>
+                ) : (
+                  <>
+                    <input
+                      type="email"
+                      required
+                      value={checklistEmail}
+                      onChange={(e) => setChecklistEmail(e.target.value)}
+                      placeholder="Seu melhor e-mail"
+                      className="flex-1 rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+                    />
+                    <button
+                      type="submit"
+                      className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:brightness-110 transition"
+                    >
+                      Quero o checklist gratuito <ArrowRight className="h-4 w-4" />
+                    </button>
+                  </>
+                )}
+              </form>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* FORMULÁRIO */}
 
       <section
@@ -1116,11 +1219,20 @@ function Landing() {
               <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> Resposta em até 24 horas úteis</li>
               <li className="flex gap-2"><CheckCircle2 className="h-5 w-5 text-accent shrink-0" /> Estudo comparativo de economia</li>
             </ul>
+            <div className="mt-6 inline-flex items-center gap-2 rounded-lg border border-amber-300/40 bg-amber-400/10 px-4 py-3 text-sm text-amber-100">
+              <AlertTriangle className="h-4 w-4 shrink-0" />
+              Vagas limitadas de atendimento prioritário este mês para novos condomínios na região.
+            </div>
           </div>
 
           <form
             onSubmit={(e) => {
               e.preventDefault();
+              if (!formEmail && !formTelefone) {
+                setContatoErro("Informe ao menos um e-mail ou telefone para contato.");
+                return;
+              }
+              setContatoErro(null);
               setLoading(true);
               setTimeout(() => {
                 setLoading(false);
@@ -1159,16 +1271,40 @@ function Landing() {
                       placeholder="Seu nome completo"
                     />
                   </div>
-                  <div>
-                    <label htmlFor="f-contato" className="text-sm font-medium text-foreground">E-mail corporativo ou Telefone</label>
-                    <input
-                      id="f-contato"
-                      required
-                      type="text"
-                      className="mt-1 w-full rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-                      placeholder="voce@empresa.com.br ou (51) 90000-0000"
-                    />
+                  <div className="grid sm:grid-cols-2 gap-3">
+                    <div>
+                      <label htmlFor="f-email" className="text-sm font-medium text-foreground">
+                        E-mail <span className="text-muted-foreground text-xs">(opcional)</span>
+                      </label>
+                      <input
+                        id="f-email"
+                        type="email"
+                        value={formEmail}
+                        onChange={(e) => setFormEmail(e.target.value)}
+                        className="mt-1 w-full rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        placeholder="voce@empresa.com.br"
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="f-tel" className="text-sm font-medium text-foreground">
+                        Telefone / WhatsApp <span className="text-muted-foreground text-xs">(opcional)</span>
+                      </label>
+                      <input
+                        id="f-tel"
+                        type="tel"
+                        value={formTelefone}
+                        onChange={(e) => setFormTelefone(e.target.value)}
+                        className="mt-1 w-full rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        placeholder="(35) 90000-0000"
+                      />
+                    </div>
                   </div>
+                  {contatoErro && (
+                    <p className="text-xs text-destructive font-medium">{contatoErro}</p>
+                  )}
+                  <p className="text-[11px] text-muted-foreground">
+                    Preencha ao menos um dos campos acima — escolha o canal que preferir.
+                  </p>
                   <div>
                     <label htmlFor="f-perfil" className="text-sm font-medium text-foreground">Perfil</label>
                     <select
@@ -1195,10 +1331,11 @@ function Landing() {
                       Enviando...
                     </>
                   ) : (
-                    <>Solicitar Orçamento Gratuito <ArrowRight className="h-4 w-4" /></>
+                    <>Quero saber quanto vou economizar <ArrowRight className="h-4 w-4" /></>
                   )}
                 </button>
-                <p className="mt-3 text-[11px] text-center text-muted-foreground">
+                <p className="mt-3 text-[11px] text-center text-muted-foreground inline-flex items-center justify-center gap-1.5 w-full">
+                  <Lock className="h-3 w-3" />
                   Seus dados estão protegidos conforme a LGPD.
                 </p>
               </>
@@ -1206,6 +1343,8 @@ function Landing() {
           </form>
         </div>
       </section>
+
+
 
       {/* FOOTER */}
       <footer className="bg-primary-deep text-white/70 border-t border-white/10">
