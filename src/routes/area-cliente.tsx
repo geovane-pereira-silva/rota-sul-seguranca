@@ -15,7 +15,7 @@ import {
 export const Route = createFileRoute("/area-cliente")({
   head: () => ({
     meta: [
-      { title: "Área do Cliente | Rota Sul Tech" },
+      { title: "Área do Cliente | Rota Sul Segurança" },
       {
         name: "description",
         content:
@@ -149,7 +149,7 @@ function ClientArea() {
               <ShieldCheck className="h-5 w-5" strokeWidth={2.5} />
             </span>
             <span className="font-semibold tracking-tight" style={{ fontFamily: "var(--font-display)" }}>
-              Rota Sul Tech
+              Rota Sul Segurança
             </span>
           </Link>
           <Link
