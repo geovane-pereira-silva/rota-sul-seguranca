@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import cameraQuintal from "@/assets/camera-quintal.jpg";
 import heroFrota from "@/assets/hero-frota.jpg";
 import ligacoesCentral from "@/assets/ligacoes-central.jpg.asset.json";
 import relatoriosImg from "@/assets/relatorios.jpg.asset.json";
@@ -68,10 +69,13 @@ function Landing() {
   const [loading, setLoading] = useState(false);
   const [armado, setArmado] = useState(true);
   const [panicoAberto, setPanicoAberto] = useState(false);
+  const [funnyAberto, setFunnyAberto] = useState(false);
+  const [camerasAberto, setCamerasAberto] = useState(false);
   const [eventos, setEventos] = useState<{ dot: string; label: string; meta: string; time: string }[]>([
     { dot: "bg-red-500", label: "Alarme intrusão", meta: "Setor externo", time: "22:15" },
     { dot: "bg-emerald-400", label: "Armado", meta: "Por João", time: "20:30" },
     { dot: "bg-white/40", label: "Desarmado", meta: "Por Maria", time: "07:45" },
+    { dot: "bg-white/40", label: "Sistema iniciado", meta: "Auto-check", time: "07:30" },
   ]);
   const registrarEvento = (novoArmado: boolean) => {
     if (novoArmado === armado) return;
@@ -85,6 +89,17 @@ function Landing() {
       ...prev,
     ].slice(0, 4));
   };
+
+  // Popup pânico: abre versão "fica tranquilo" após 2s e fecha o principal após 10s
+  useEffect(() => {
+    if (!panicoAberto) return;
+    const t1 = setTimeout(() => setFunnyAberto(true), 2000);
+    const t2 = setTimeout(() => setPanicoAberto(false), 10000);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [panicoAberto]);
 
 
   return (
@@ -631,10 +646,14 @@ function Landing() {
                           <Unlock className={`h-3.5 w-3.5 ${!armado ? "text-amber-300" : "text-amber-200"}`} />
                           <span className={`text-[9px] font-semibold ${!armado ? "text-amber-200" : "text-amber-100"}`}>Desarmar</span>
                         </button>
-                        <div className="flex flex-col items-center gap-1 rounded-xl border py-2 bg-white/5 border-white/10">
+                        <button
+                          type="button"
+                          onClick={() => setCamerasAberto(true)}
+                          className="flex flex-col items-center gap-1 rounded-xl border py-2 bg-white/5 border-white/10 hover:bg-white/10 transition-all active:scale-95"
+                        >
                           <Video className="h-3.5 w-3.5 text-white/70" />
                           <span className="text-[9px] font-semibold text-white/70">Câmeras</span>
-                        </div>
+                        </button>
                         <button
                           type="button"
                           onClick={() => setPanicoAberto(true)}
@@ -654,20 +673,32 @@ function Landing() {
                             AO VIVO
                           </span>
                         </div>
-                        <div className="relative h-16 rounded-lg overflow-hidden bg-gradient-to-br from-slate-800 via-slate-900 to-black border border-white/10">
-                          <div className="absolute inset-0 opacity-70 bg-[radial-gradient(ellipse_at_bottom,_rgba(251,191,36,0.35),_transparent_60%)]" />
-                          <div className="absolute inset-0 opacity-40 bg-[linear-gradient(180deg,transparent_60%,rgba(0,0,0,0.6))]" />
-                          <div className="absolute bottom-1 left-1.5 text-[8px] text-white/70 font-mono">CAM 01 · GARAGEM</div>
-                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setCamerasAberto(true)}
+                          className="relative block w-full h-16 rounded-lg overflow-hidden border border-white/10 group"
+                        >
+                          <img
+                            src={cameraQuintal}
+                            alt="Prévia câmera quintal"
+                            loading="lazy"
+                            width={1280}
+                            height={768}
+                            className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/30" />
+                          <div className="absolute bottom-1 left-1.5 text-[8px] text-white/90 font-mono drop-shadow">CAM 01 · QUINTAL</div>
+                          <div className="absolute top-1 right-1.5 text-[8px] text-white/90 font-mono bg-black/40 px-1 rounded">HD</div>
+                        </button>
                       </div>
 
-                      {/* Eventos recentes */}
+                      {/* Eventos recentes — altura fixa evita mudança de tamanho do mockup */}
                       <div className="mt-3 mx-4 flex-1">
                         <div className="flex items-center justify-between mb-1">
                           <span className="text-[10px] font-semibold text-white/80">Eventos recentes</span>
                           <span className="text-[9px] text-accent">Ver todos</span>
                         </div>
-                        <div className="space-y-1">
+                        <div className="space-y-1 min-h-[128px]">
                           {eventos.map((ev, i) => (
                             <div key={`${ev.label}-${ev.time}-${i}`} className="flex items-center gap-2 rounded-md bg-white/5 border border-white/5 px-2 py-1.5 animate-in fade-in slide-in-from-top-1 duration-300">
                               <span className={`h-1.5 w-1.5 rounded-full ${ev.dot} shrink-0`} />
@@ -1216,6 +1247,9 @@ function Landing() {
               <AlertTriangle className="h-3.5 w-3.5" />
               ALERTA DE PÂNICO
             </div>
+            <div className="absolute top-3 right-10 inline-flex items-center gap-1.5 rounded-full bg-yellow-400/95 text-black px-2.5 py-1 text-[10px] font-black uppercase tracking-widest shadow-lg">
+              Simulação
+            </div>
             <div className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-black/70 px-2.5 py-1 text-[10px] font-mono text-red-300">
               <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
               AO VIVO
@@ -1228,7 +1262,7 @@ function Landing() {
                 Central acionada — Polícia a caminho
               </DialogTitle>
               <DialogDescription className="text-white/70">
-                Nossos operadores receberam seu alerta em segundos, validaram as câmeras e já acionaram a viatura mais próxima e a Polícia Militar.
+                <strong className="text-yellow-300">Isto é apenas uma simulação — ninguém foi acionado de verdade.</strong> Em um caso real, nossos operadores recebem seu alerta em segundos, validam as câmeras e acionam a viatura mais próxima e a Polícia Militar.
               </DialogDescription>
             </DialogHeader>
             <div className="grid grid-cols-3 gap-2 text-center">
@@ -1246,9 +1280,83 @@ function Landing() {
               </div>
             </div>
             <p className="text-[11px] text-white/50 text-center pt-1">
-              Simulação demonstrativa do aplicativo Rota Sul Tech.
+              Fecha sozinho em 10s · ou clique no X no canto superior.
             </p>
           </div>
+        </DialogContent>
+      </Dialog>
+
+      {/* Popup Funny — pra ficar tranquilo */}
+      <Dialog open={funnyAberto} onOpenChange={setFunnyAberto}>
+        <DialogContent className="max-w-sm border-yellow-400/40 bg-gradient-to-br from-yellow-50 to-white text-slate-900">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2 text-2xl">
+              <span className="text-3xl">😅</span>
+              Calma, calma!
+            </DialogTitle>
+            <DialogDescription className="text-slate-700 text-sm leading-relaxed">
+              Respira fundo. <strong>Ninguém foi acionado</strong>, a Polícia não está a caminho, e nenhum vizinho vai reclamar. 🚔❌
+              <br /><br />
+              Isso foi só uma <strong>simulação</strong> pra você ver como o botão de pânico funciona no app da Rota Sul Tech. Fique tranquilo(a) — é só uma demonstração 💚
+            </DialogDescription>
+          </DialogHeader>
+          <button
+            type="button"
+            onClick={() => { setFunnyAberto(false); setPanicoAberto(false); }}
+            className="mt-2 w-full rounded-md bg-primary text-white py-2 font-semibold hover:brightness-110 transition"
+          >
+            Ufa, entendi! 😌
+          </button>
+        </DialogContent>
+      </Dialog>
+
+      {/* Popup Câmeras — grid com 4 câmeras */}
+      <Dialog open={camerasAberto} onOpenChange={setCamerasAberto}>
+        <DialogContent className="max-w-2xl border-white/10 bg-slate-950 text-white">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Video className="h-5 w-5 text-accent" />
+              Câmeras ao vivo
+              <span className="ml-2 inline-flex items-center gap-1 text-[10px] font-bold text-red-300">
+                <span className="h-1.5 w-1.5 rounded-full bg-red-500 animate-pulse" />
+                AO VIVO
+              </span>
+            </DialogTitle>
+            <DialogDescription className="text-white/60">
+              Acesse todas as câmeras da sua propriedade em tempo real.
+            </DialogDescription>
+          </DialogHeader>
+          <div className="grid grid-cols-2 gap-2">
+            {[
+              { label: "Quintal", cam: "CAM 01" },
+              { label: "Garagem", cam: "CAM 02" },
+              { label: "Rua", cam: "CAM 03" },
+              { label: "Frente da casa", cam: "CAM 04" },
+            ].map((c) => (
+              <div key={c.cam} className="relative aspect-video rounded-lg overflow-hidden border border-white/10 bg-black">
+                <img
+                  src={cameraQuintal}
+                  alt={`Câmera ${c.label}`}
+                  loading="lazy"
+                  width={1280}
+                  height={768}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-black/20" />
+                <div className="absolute top-1.5 left-2 text-[10px] font-mono text-white/90 bg-black/50 px-1.5 py-0.5 rounded">
+                  {c.cam} · {c.label.toUpperCase()}
+                </div>
+                <div className="absolute top-1.5 right-2 inline-flex items-center gap-1 text-[9px] font-bold text-red-300 bg-black/50 px-1.5 py-0.5 rounded">
+                  <span className="h-1 w-1 rounded-full bg-red-500 animate-pulse" />
+                  REC
+                </div>
+                <div className="absolute bottom-1.5 right-2 text-[9px] font-mono text-white/80">HD · 1080p</div>
+              </div>
+            ))}
+          </div>
+          <p className="text-[11px] text-white/50 text-center">
+            Simulação demonstrativa · imagens ilustrativas.
+          </p>
         </DialogContent>
       </Dialog>
     </div>
