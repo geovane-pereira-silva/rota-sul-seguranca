@@ -69,10 +69,13 @@ function Landing() {
   const [loading, setLoading] = useState(false);
   const [armado, setArmado] = useState(true);
   const [panicoAberto, setPanicoAberto] = useState(false);
+  const [funnyAberto, setFunnyAberto] = useState(false);
+  const [camerasAberto, setCamerasAberto] = useState(false);
   const [eventos, setEventos] = useState<{ dot: string; label: string; meta: string; time: string }[]>([
     { dot: "bg-red-500", label: "Alarme intrusão", meta: "Setor externo", time: "22:15" },
     { dot: "bg-emerald-400", label: "Armado", meta: "Por João", time: "20:30" },
     { dot: "bg-white/40", label: "Desarmado", meta: "Por Maria", time: "07:45" },
+    { dot: "bg-white/40", label: "Sistema iniciado", meta: "Auto-check", time: "07:30" },
   ]);
   const registrarEvento = (novoArmado: boolean) => {
     if (novoArmado === armado) return;
@@ -86,6 +89,17 @@ function Landing() {
       ...prev,
     ].slice(0, 4));
   };
+
+  // Popup pânico: abre versão "fica tranquilo" após 2s e fecha o principal após 10s
+  useEffect(() => {
+    if (!panicoAberto) return;
+    const t1 = setTimeout(() => setFunnyAberto(true), 2000);
+    const t2 = setTimeout(() => setPanicoAberto(false), 10000);
+    return () => {
+      clearTimeout(t1);
+      clearTimeout(t2);
+    };
+  }, [panicoAberto]);
 
 
   return (
