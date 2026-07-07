@@ -17,7 +17,7 @@ import centralOperadores from "@/assets/central-operadores.jpg";
 import servicosBg from "@/assets/servicos-bg.jpg";
 import estruturaCentral from "@/assets/estrutura-central-24h.jpg";
 import estruturaFrota from "@/assets/estrutura-frota-tatica.jpg";
-import estruturaTime from "@/assets/estrutura-time-tecnico.jpg";
+import estruturaTime from "@/assets/camera-intelbras-tecnico.jpg";
 import centralAlertaPanico from "@/assets/central-alerta-panico.jpg";
 import {
   ShieldCheck,
@@ -81,8 +81,8 @@ function Landing() {
   const [formEmail, setFormEmail] = useState("");
   const [formTelefone, setFormTelefone] = useState("");
   const [contatoErro, setContatoErro] = useState<string | null>(null);
-  const [checklistEmail, setChecklistEmail] = useState("");
-  const [checklistEnviado, setChecklistEnviado] = useState(false);
+  const [materialEnviado, setMaterialEnviado] = useState<Record<string, boolean>>({});
+  const [materialEmail, setMaterialEmail] = useState<Record<string, string>>({});
   const [armado, setArmado] = useState(true);
   const [panicoAberto, setPanicoAberto] = useState(false);
   const [funnyAberto, setFunnyAberto] = useState(false);
@@ -1018,11 +1018,32 @@ function Landing() {
             </p>
           </div>
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {["Intelbras", "Hikvision", "Motorola", "Bosch", "Positivo", "Axis", "Dahua", "Unifi"].map((p) => (
-              <div key={p} className="flex items-center justify-center rounded-xl border border-border bg-card py-8 hover:border-accent/50 hover:shadow-md transition">
-                <div className="flex items-center gap-2 text-primary">
+            {[
+              { nome: "Intelbras", domain: "intelbras.com" },
+              { nome: "Hikvision", domain: "hikvision.com" },
+              { nome: "Motorola", domain: "motorola.com" },
+              { nome: "Bosch", domain: "bosch.com" },
+              { nome: "Positivo", domain: "positivo.com.br" },
+              { nome: "Axis", domain: "axis.com" },
+              { nome: "Dahua", domain: "dahuasecurity.com" },
+              { nome: "Ubiquiti", domain: "ui.com" },
+            ].map((p) => (
+              <div key={p.nome} className="flex items-center justify-center rounded-xl border border-border bg-card py-8 px-4 hover:border-accent/50 hover:shadow-md transition h-28">
+                <img
+                  src={`https://logo.clearbit.com/${p.domain}`}
+                  alt={`Logotipo ${p.nome}`}
+                  loading="lazy"
+                  className="max-h-10 max-w-[140px] object-contain grayscale hover:grayscale-0 transition"
+                  onError={(e) => {
+                    const img = e.currentTarget;
+                    img.style.display = "none";
+                    const fallback = img.nextElementSibling as HTMLElement | null;
+                    if (fallback) fallback.style.display = "flex";
+                  }}
+                />
+                <div className="hidden items-center gap-2 text-primary">
                   <Handshake className="h-5 w-5 text-accent" />
-                  <span className="font-semibold" style={{ fontFamily: "var(--font-display)" }}>{p}</span>
+                  <span className="font-semibold" style={{ fontFamily: "var(--font-display)" }}>{p.nome}</span>
                 </div>
               </div>
             ))}
@@ -1073,11 +1094,12 @@ function Landing() {
               Ver todos os artigos <ArrowRight className="h-4 w-4" />
             </a>
           </div>
-          <div className="mt-10 grid md:grid-cols-3 gap-6">
+          <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
               { img: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=75", cat: "Condomínios", titulo: "5 sinais de que seu condomínio precisa terceirizar a portaria" },
               { img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=75", cat: "Tecnologia", titulo: "Como a IA reduz falsos positivos em alarmes residenciais" },
               { img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=75", cat: "Gestão", titulo: "Terceirização x segurança própria: comparativo completo de custos" },
+              { img: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=75", cat: "Seguros", titulo: "Contrato de monitoramento: o detalhe que a seguradora exige (e ninguém te contou)" },
             ].map((p) => (
               <article key={p.titulo} className="rounded-2xl overflow-hidden border border-border bg-card hover:shadow-lg transition">
                 <img src={p.img} alt={p.titulo} loading="lazy" className="h-44 w-full object-cover" />
@@ -1145,54 +1167,95 @@ function Landing() {
         </div>
       </section>
 
-      {/* LEAD MAGNET — Checklist gratuito (reciprocidade) */}
+      {/* LEAD MAGNETS — 3 materiais gratuitos (reciprocidade) */}
       <section id="checklist" className="py-16 bg-secondary/40">
-        <div className="max-w-4xl mx-auto px-5 lg:px-8">
-          <div className="rounded-3xl border border-accent/30 bg-gradient-to-br from-white to-accent/5 p-8 md:p-10 shadow-lg grid md:grid-cols-[auto_1fr] gap-6 items-center">
-            <div className="grid place-items-center h-16 w-16 rounded-2xl bg-accent text-accent-foreground shadow-md shrink-0 mx-auto md:mx-0">
-              <Download className="h-8 w-8" />
-            </div>
-            <div>
-              <div className="text-xs font-semibold tracking-widest text-accent uppercase">Material gratuito</div>
-              <h3 className="mt-1 text-2xl md:text-3xl font-bold text-primary" style={{ fontFamily: "var(--font-display)" }}>
-                Checklist: 7 sinais de que seu condomínio está vulnerável
-              </h3>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Um diagnóstico rápido para síndicos e administradoras identificarem brechas antes que virem prejuízo. Enviamos direto no seu e-mail.
-              </p>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (!checklistEmail) return;
-                  setChecklistEnviado(true);
-                }}
-                className="mt-4 flex flex-col sm:flex-row gap-2"
-              >
-                {checklistEnviado ? (
-                  <div className="w-full flex items-center gap-2 text-sm font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-4 py-3">
-                    <CheckCircle2 className="h-5 w-5" />
-                    Enviado! Confira sua caixa de entrada em instantes.
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="text-xs font-semibold tracking-widest text-accent uppercase">Materiais gratuitos</span>
+            <h2 className="mt-3 text-3xl md:text-4xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
+              Baixe agora. Proteja depois.
+            </h2>
+            <p className="mt-3 text-muted-foreground text-sm">
+              Guias práticos escritos pela nossa equipe operacional. Sem enrolação, sem venda disfarçada.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                id: "checklist",
+                icone: ShieldCheck,
+                selo: "Checklist · Condomínios",
+                titulo: "7 sinais de que seu condomínio está vulnerável",
+                sub: "Diagnóstico rápido para síndicos identificarem brechas antes que virem prejuízo.",
+                cta: "Quero o checklist",
+              },
+              {
+                id: "casa",
+                icone: Home,
+                selo: "Guia · Residencial",
+                titulo: "75 dicas para blindar sua casa sem gastar uma fortuna",
+                sub: "Do posicionamento da câmera aos hábitos que denunciam quando você viaja. Pequenas mudanças, grande efeito.",
+                cta: "Baixar o guia",
+              },
+              {
+                id: "portaria",
+                icone: Unlock,
+                selo: "E-book · Portaria virtual",
+                titulo: "O que não te contaram sobre portaria virtual",
+                sub: "Mitos, letras miúdas em contratos e as 5 perguntas que você precisa fazer antes de assinar.",
+                cta: "Ler o e-book",
+              },
+            ].map((m) => {
+              const enviado = materialEnviado[m.id];
+              return (
+                <div
+                  key={m.id}
+                  className="rounded-3xl border border-accent/30 bg-gradient-to-br from-white to-accent/5 p-7 shadow-sm hover:shadow-lg transition flex flex-col"
+                >
+                  <div className="grid place-items-center h-14 w-14 rounded-2xl bg-accent text-accent-foreground shadow-md shrink-0">
+                    <m.icone className="h-7 w-7" />
                   </div>
-                ) : (
-                  <>
-                    <input
-                      type="email"
-                      required
-                      value={checklistEmail}
-                      onChange={(e) => setChecklistEmail(e.target.value)}
-                      placeholder="Seu melhor e-mail"
-                      className="flex-1 rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    />
-                    <button
-                      type="submit"
-                      className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:brightness-110 transition"
-                    >
-                      Quero o checklist gratuito <ArrowRight className="h-4 w-4" />
-                    </button>
-                  </>
-                )}
-              </form>
-            </div>
+                  <div className="mt-5 text-[11px] font-semibold tracking-widest text-accent uppercase">{m.selo}</div>
+                  <h3 className="mt-2 text-lg md:text-xl font-bold text-primary leading-snug" style={{ fontFamily: "var(--font-display)" }}>
+                    {m.titulo}
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground flex-1">{m.sub}</p>
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      if (!materialEmail[m.id]) return;
+                      setMaterialEnviado((prev) => ({ ...prev, [m.id]: true }));
+                    }}
+                    className="mt-5 flex flex-col gap-2"
+                  >
+                    {enviado ? (
+                      <div className="w-full flex items-center gap-2 text-sm font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-4 py-3">
+                        <CheckCircle2 className="h-5 w-5" />
+                        Enviado! Confira sua caixa de entrada.
+                      </div>
+                    ) : (
+                      <>
+                        <input
+                          type="email"
+                          required
+                          value={materialEmail[m.id] ?? ""}
+                          onChange={(e) => setMaterialEmail((prev) => ({ ...prev, [m.id]: e.target.value }))}
+                          placeholder="Seu melhor e-mail"
+                          className="w-full rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        />
+                        <button
+                          type="submit"
+                          className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:brightness-110 transition"
+                        >
+                          {m.cta} <Download className="h-4 w-4" />
+                        </button>
+                      </>
+                    )}
+                  </form>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
