@@ -22,8 +22,7 @@ type Dados = {
   urgencia?: string;
 };
 
-const WHATS_BASE =
-  "https://web.whatsapp.com/send?phone=5535988749336&text=";
+const WHATS_BASE = "https://wa.me/5535988749336?text=";
 
 function buildWhatsUrl(d: Dados) {
   const linhas = [
@@ -62,8 +61,8 @@ export function SdrChat({
       setStep("nome");
       setInput("");
       pushBot([
-        "Oi! Sou a Bia, assistente virtual da Rota Sul Segurança 👋",
-        "Vou te fazer 5 perguntas rápidas pra te encaminhar ao especialista certo. Combinado?",
+        "Olá! Aqui é a Sentinela, da Central de Atendimento da Rota Sul Segurança 🛡️",
+        "Vou fazer algumas perguntas rápidas pra te encaminhar ao especialista certo. Tudo bem?",
         "Pra começar, qual é o seu nome?",
       ]);
     }
