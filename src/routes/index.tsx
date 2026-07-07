@@ -1018,11 +1018,32 @@ function Landing() {
             </p>
           </div>
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
-            {["Intelbras", "Hikvision", "Motorola", "Bosch", "Positivo", "Axis", "Dahua", "Unifi"].map((p) => (
-              <div key={p} className="flex items-center justify-center rounded-xl border border-border bg-card py-8 hover:border-accent/50 hover:shadow-md transition">
-                <div className="flex items-center gap-2 text-primary">
+            {[
+              { nome: "Intelbras", domain: "intelbras.com" },
+              { nome: "Hikvision", domain: "hikvision.com" },
+              { nome: "Motorola", domain: "motorola.com" },
+              { nome: "Bosch", domain: "bosch.com" },
+              { nome: "Positivo", domain: "positivo.com.br" },
+              { nome: "Axis", domain: "axis.com" },
+              { nome: "Dahua", domain: "dahuasecurity.com" },
+              { nome: "Ubiquiti", domain: "ui.com" },
+            ].map((p) => (
+              <div key={p.nome} className="flex items-center justify-center rounded-xl border border-border bg-card py-8 px-4 hover:border-accent/50 hover:shadow-md transition h-28">
+                <img
+                  src={`https://logo.clearbit.com/${p.domain}`}
+                  alt={`Logotipo ${p.nome}`}
+                  loading="lazy"
+                  className="max-h-10 max-w-[140px] object-contain grayscale hover:grayscale-0 transition"
+                  onError={(e) => {
+                    const img = e.currentTarget;
+                    img.style.display = "none";
+                    const fallback = img.nextElementSibling as HTMLElement | null;
+                    if (fallback) fallback.style.display = "flex";
+                  }}
+                />
+                <div className="hidden items-center gap-2 text-primary">
                   <Handshake className="h-5 w-5 text-accent" />
-                  <span className="font-semibold" style={{ fontFamily: "var(--font-display)" }}>{p}</span>
+                  <span className="font-semibold" style={{ fontFamily: "var(--font-display)" }}>{p.nome}</span>
                 </div>
               </div>
             ))}
