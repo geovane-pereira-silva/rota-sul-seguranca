@@ -17,7 +17,7 @@ import centralOperadores from "@/assets/central-operadores.jpg";
 import servicosBg from "@/assets/servicos-bg.jpg";
 import estruturaCentral from "@/assets/estrutura-central-24h.jpg";
 import estruturaFrota from "@/assets/estrutura-frota-tatica.jpg";
-import estruturaTime from "@/assets/estrutura-time-tecnico.jpg";
+import estruturaTime from "@/assets/camera-intelbras-tecnico.jpg";
 import centralAlertaPanico from "@/assets/central-alerta-panico.jpg";
 import {
   ShieldCheck,
