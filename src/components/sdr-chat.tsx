@@ -6,6 +6,7 @@ type Msg = { from: "bot" | "user"; text: string };
 
 type Step =
   | "nome"
+  | "servico"
   | "tipo"
   | "cidade"
   | "interesse"
@@ -15,6 +16,7 @@ type Step =
 
 type Dados = {
   nome?: string;
+  servico?: string;
   tipo?: string;
   cidade?: string;
   interesse?: string;
@@ -28,6 +30,7 @@ function buildWhatsUrl(d: Dados) {
   const linhas = [
     "Olá! Vim pelo site da Rota Sul Segurança.",
     d.nome ? `Nome: ${d.nome}` : "",
+    d.servico ? `Serviço de interesse: ${d.servico}` : "",
     d.tipo ? `Tipo de imóvel: ${d.tipo}` : "",
     d.cidade ? `Cidade: ${d.cidade}` : "",
     d.interesse ? `Interesse: ${d.interesse}` : "",
