@@ -1388,7 +1388,7 @@ function Landing() {
 
       {/* WHATSAPP FLOAT */}
       <a
-        href="https://wa.me/5500000000000?text=Ol%C3%A1%2C%20quero%20um%20or%C3%A7amento%20de%20monitoramento."
+        href="https://web.whatsapp.com/send?phone=5535988749336&text=Ol%C3%A1,%20estou%20no%20site:%20Monitore%20Next.%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es:"
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Fale conosco no WhatsApp"
