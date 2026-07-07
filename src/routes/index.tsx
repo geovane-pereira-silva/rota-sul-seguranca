@@ -81,8 +81,8 @@ function Landing() {
   const [formEmail, setFormEmail] = useState("");
   const [formTelefone, setFormTelefone] = useState("");
   const [contatoErro, setContatoErro] = useState<string | null>(null);
-  const [checklistEmail, setChecklistEmail] = useState("");
-  const [checklistEnviado, setChecklistEnviado] = useState(false);
+  const [materialEnviado, setMaterialEnviado] = useState<Record<string, boolean>>({});
+  const [materialEmail, setMaterialEmail] = useState<Record<string, string>>({});
   const [armado, setArmado] = useState(true);
   const [panicoAberto, setPanicoAberto] = useState(false);
   const [funnyAberto, setFunnyAberto] = useState(false);
