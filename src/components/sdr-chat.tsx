@@ -100,11 +100,16 @@ export function SdrChat({
     if (step === "nome") {
       next.nome = value;
       setDados(next);
-      setStep("tipo");
+      setStep("servico");
       pushBot([
         `Prazer, ${value.split(" ")[0]}!`,
-        "O atendimento é pra qual tipo de imóvel?",
+        "Posso te ajudar com câmeras, alarmes, monitoramento 24h ou portaria virtual. Qual desses serviços você procura?",
       ]);
+    } else if (step === "servico") {
+      next.servico = value;
+      setDados(next);
+      setStep("tipo");
+      pushBot(["Ótimo. Esse atendimento é pra uma residência ou empresa/comércio?"]);
     } else if (step === "tipo") {
       next.tipo = value;
       setDados(next);
@@ -114,7 +119,7 @@ export function SdrChat({
       next.cidade = value;
       setDados(next);
       setStep("interesse");
-      pushBot(["Ótimo. O que você está buscando agora?"]);
+      pushBot(["Entendi. Me conta um pouco mais: o que você quer resolver agora?"]);
     } else if (step === "interesse") {
       next.interesse = value;
       setDados(next);
