@@ -86,6 +86,7 @@ function Landing() {
   const [panicoAberto, setPanicoAberto] = useState(false);
   const [funnyAberto, setFunnyAberto] = useState(false);
   const [camerasAberto, setCamerasAberto] = useState(false);
+  const [chatAberto, setChatAberto] = useState(false);
 
   const [eventos, setEventos] = useState<{ dot: string; label: string; meta: string; time: string }[]>([
     { dot: "bg-red-500", label: "Alarme intrusão", meta: "Setor externo", time: "22:15" },
