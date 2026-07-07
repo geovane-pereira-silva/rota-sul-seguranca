@@ -159,7 +159,7 @@ export function SdrChat({
           </div>
           <div className="flex-1">
             <DialogTitle className="text-white text-base leading-tight">
-              Bia · Rota Sul Segurança
+              Sentinela · Rota Sul Segurança
             </DialogTitle>
             <p className="text-xs text-white/80 flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-green-400 inline-block" />
@@ -208,21 +208,6 @@ export function SdrChat({
             </div>
           )}
         </div>
-
-        {step !== "fim" && opcoes[step].length > 0 && !typing && (
-          <div className="flex flex-wrap gap-2 px-3 pt-2 bg-white border-t">
-            {opcoes[step].map((o) => (
-              <button
-                key={o}
-                type="button"
-                onClick={() => handleQuick(o)}
-                className="text-xs border border-[#128C7E]/30 text-[#128C7E] rounded-full px-3 py-1.5 hover:bg-[#128C7E]/10 transition"
-              >
-                {o}
-              </button>
-            ))}
-          </div>
-        )}
 
         {step !== "fim" ? (
           <form
