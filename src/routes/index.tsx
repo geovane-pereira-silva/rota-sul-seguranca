@@ -58,7 +58,8 @@ import {
   Download,
   ShieldAlert,
   HelpCircle,
-
+  MessageCircle,
+  Send,
 } from "lucide-react";
 
 
