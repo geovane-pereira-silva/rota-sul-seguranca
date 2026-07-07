@@ -1388,18 +1388,19 @@ function Landing() {
         </div>
       </footer>
 
-      {/* WHATSAPP FLOAT */}
-      <a
-        href="https://web.whatsapp.com/send?phone=5535988749336&text=Ol%C3%A1,%20estou%20no%20site:%20Monitore%20Next.%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es:"
-        target="_blank"
-        rel="noopener noreferrer"
-        aria-label="Fale conosco no WhatsApp"
+      {/* CHAT SDR FLOAT */}
+      <button
+        type="button"
+        onClick={() => setChatAberto(true)}
+        aria-label="Falar com atendente"
         className="fixed bottom-5 right-5 z-50 h-14 w-14 rounded-full bg-[#25D366] text-white grid place-items-center shadow-2xl hover:scale-110 transition"
       >
-        <svg viewBox="0 0 32 32" className="h-7 w-7 fill-current" aria-hidden="true">
-          <path d="M19.11 17.24c-.27-.14-1.6-.79-1.85-.88-.25-.09-.43-.14-.61.14-.18.27-.7.88-.86 1.06-.16.18-.32.2-.59.07-.27-.14-1.13-.42-2.15-1.33-.79-.71-1.33-1.58-1.49-1.85-.16-.27-.02-.42.12-.55.12-.12.27-.32.41-.48.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.48-.07-.14-.61-1.47-.84-2.02-.22-.53-.45-.46-.61-.47l-.52-.01c-.18 0-.48.07-.73.34-.25.27-.96.94-.96 2.29 0 1.35.98 2.66 1.12 2.84.14.18 1.94 2.96 4.7 4.15.66.28 1.17.45 1.57.58.66.21 1.26.18 1.73.11.53-.08 1.6-.65 1.83-1.28.23-.63.23-1.17.16-1.28-.07-.11-.25-.18-.52-.32zM16.02 3C9.39 3 4 8.39 4 15.02c0 2.34.68 4.52 1.85 6.36L4 29l7.83-2.05a12 12 0 0 0 4.19.76c6.63 0 12.02-5.39 12.02-12.02S22.65 3 16.02 3zm0 21.86a9.83 9.83 0 0 1-5.02-1.37l-.36-.21-4.65 1.22 1.24-4.53-.23-.37a9.83 9.83 0 0 1-1.5-5.24c0-5.44 4.43-9.86 9.87-9.86 5.44 0 9.86 4.42 9.86 9.86 0 5.44-4.42 9.86-9.86 9.86z" />
-        </svg>
-      </a>
+        <MessageCircle className="h-7 w-7" />
+        <span className="absolute -top-1 -right-1 h-3 w-3 rounded-full bg-red-500 ring-2 ring-white animate-pulse" />
+      </button>
+
+      <SdrChat open={chatAberto} onOpenChange={setChatAberto} />
+
 
       {/* Popup Pânico — simulação de acionamento */}
       <Dialog open={panicoAberto} onOpenChange={setPanicoAberto}>
