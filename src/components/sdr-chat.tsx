@@ -6,6 +6,7 @@ type Msg = { from: "bot" | "user"; text: string };
 
 type Step =
   | "nome"
+  | "servico"
   | "tipo"
   | "cidade"
   | "interesse"
@@ -15,6 +16,7 @@ type Step =
 
 type Dados = {
   nome?: string;
+  servico?: string;
   tipo?: string;
   cidade?: string;
   interesse?: string;
@@ -28,6 +30,7 @@ function buildWhatsUrl(d: Dados) {
   const linhas = [
     "Olá! Vim pelo site da Rota Sul Segurança.",
     d.nome ? `Nome: ${d.nome}` : "",
+    d.servico ? `Serviço de interesse: ${d.servico}` : "",
     d.tipo ? `Tipo de imóvel: ${d.tipo}` : "",
     d.cidade ? `Cidade: ${d.cidade}` : "",
     d.interesse ? `Interesse: ${d.interesse}` : "",
@@ -97,11 +100,16 @@ export function SdrChat({
     if (step === "nome") {
       next.nome = value;
       setDados(next);
-      setStep("tipo");
+      setStep("servico");
       pushBot([
         `Prazer, ${value.split(" ")[0]}!`,
-        "O atendimento é pra qual tipo de imóvel?",
+        "Posso te ajudar com câmeras, alarmes, monitoramento 24h ou portaria virtual. Qual desses serviços você procura?",
       ]);
+    } else if (step === "servico") {
+      next.servico = value;
+      setDados(next);
+      setStep("tipo");
+      pushBot(["Ótimo. Esse atendimento é pra uma residência ou empresa/comércio?"]);
     } else if (step === "tipo") {
       next.tipo = value;
       setDados(next);
@@ -111,7 +119,7 @@ export function SdrChat({
       next.cidade = value;
       setDados(next);
       setStep("interesse");
-      pushBot(["Ótimo. O que você está buscando agora?"]);
+      pushBot(["Entendi. Me conta um pouco mais: o que você quer resolver agora?"]);
     } else if (step === "interesse") {
       next.interesse = value;
       setDados(next);
