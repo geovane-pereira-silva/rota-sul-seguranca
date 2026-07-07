@@ -85,9 +85,6 @@ export function SdrChat({
     });
   }
 
-  function handleQuick(value: string) {
-    submit(value);
-  }
 
   function submit(raw: string) {
     const value = raw.trim();
@@ -138,15 +135,6 @@ export function SdrChat({
     }
   }
 
-  const opcoes: Record<Step, string[]> = {
-    nome: [],
-    tipo: ["Residência", "Comércio", "Condomínio", "Indústria"],
-    cidade: [],
-    interesse: ["Câmeras", "Alarme monitorado", "Monitoramento 24h", "Portaria remota"],
-    jaTem: ["Sim, quero trocar", "Sim, quero ampliar", "Não tenho nada ainda"],
-    urgencia: ["Imediata", "Nos próximos 15 dias", "Só pesquisando"],
-    fim: [],
-  };
 
   const finalUrl = buildWhatsUrl({ ...dados });
 
