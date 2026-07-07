@@ -22,8 +22,7 @@ type Dados = {
   urgencia?: string;
 };
 
-const WHATS_BASE =
-  "https://web.whatsapp.com/send?phone=5535988749336&text=";
+const WHATS_BASE = "https://wa.me/5535988749336?text=";
 
 function buildWhatsUrl(d: Dados) {
   const linhas = [
@@ -62,8 +61,8 @@ export function SdrChat({
       setStep("nome");
       setInput("");
       pushBot([
-        "Oi! Sou a Bia, assistente virtual da Rota Sul Segurança 👋",
-        "Vou te fazer 5 perguntas rápidas pra te encaminhar ao especialista certo. Combinado?",
+        "Olá! Aqui é a Sentinela, da Central de Atendimento da Rota Sul Segurança 🛡️",
+        "Vou fazer algumas perguntas rápidas pra te encaminhar ao especialista certo. Tudo bem?",
         "Pra começar, qual é o seu nome?",
       ]);
     }
@@ -86,9 +85,6 @@ export function SdrChat({
     });
   }
 
-  function handleQuick(value: string) {
-    submit(value);
-  }
 
   function submit(raw: string) {
     const value = raw.trim();
@@ -139,15 +135,6 @@ export function SdrChat({
     }
   }
 
-  const opcoes: Record<Step, string[]> = {
-    nome: [],
-    tipo: ["Residência", "Comércio", "Condomínio", "Indústria"],
-    cidade: [],
-    interesse: ["Câmeras", "Alarme monitorado", "Monitoramento 24h", "Portaria remota"],
-    jaTem: ["Sim, quero trocar", "Sim, quero ampliar", "Não tenho nada ainda"],
-    urgencia: ["Imediata", "Nos próximos 15 dias", "Só pesquisando"],
-    fim: [],
-  };
 
   const finalUrl = buildWhatsUrl({ ...dados });
 
@@ -160,7 +147,7 @@ export function SdrChat({
           </div>
           <div className="flex-1">
             <DialogTitle className="text-white text-base leading-tight">
-              Bia · Rota Sul Segurança
+              Sentinela · Rota Sul Segurança
             </DialogTitle>
             <p className="text-xs text-white/80 flex items-center gap-1.5">
               <span className="h-2 w-2 rounded-full bg-green-400 inline-block" />
@@ -209,21 +196,6 @@ export function SdrChat({
             </div>
           )}
         </div>
-
-        {step !== "fim" && opcoes[step].length > 0 && !typing && (
-          <div className="flex flex-wrap gap-2 px-3 pt-2 bg-white border-t">
-            {opcoes[step].map((o) => (
-              <button
-                key={o}
-                type="button"
-                onClick={() => handleQuick(o)}
-                className="text-xs border border-[#128C7E]/30 text-[#128C7E] rounded-full px-3 py-1.5 hover:bg-[#128C7E]/10 transition"
-              >
-                {o}
-              </button>
-            ))}
-          </div>
-        )}
 
         {step !== "fim" ? (
           <form
