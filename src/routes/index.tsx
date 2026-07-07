@@ -1167,54 +1167,95 @@ function Landing() {
         </div>
       </section>
 
-      {/* LEAD MAGNET — Checklist gratuito (reciprocidade) */}
+      {/* LEAD MAGNETS — 3 materiais gratuitos (reciprocidade) */}
       <section id="checklist" className="py-16 bg-secondary/40">
-        <div className="max-w-4xl mx-auto px-5 lg:px-8">
-          <div className="rounded-3xl border border-accent/30 bg-gradient-to-br from-white to-accent/5 p-8 md:p-10 shadow-lg grid md:grid-cols-[auto_1fr] gap-6 items-center">
-            <div className="grid place-items-center h-16 w-16 rounded-2xl bg-accent text-accent-foreground shadow-md shrink-0 mx-auto md:mx-0">
-              <Download className="h-8 w-8" />
-            </div>
-            <div>
-              <div className="text-xs font-semibold tracking-widest text-accent uppercase">Material gratuito</div>
-              <h3 className="mt-1 text-2xl md:text-3xl font-bold text-primary" style={{ fontFamily: "var(--font-display)" }}>
-                Checklist: 7 sinais de que seu condomínio está vulnerável
-              </h3>
-              <p className="mt-2 text-sm text-muted-foreground">
-                Um diagnóstico rápido para síndicos e administradoras identificarem brechas antes que virem prejuízo. Enviamos direto no seu e-mail.
-              </p>
-              <form
-                onSubmit={(e) => {
-                  e.preventDefault();
-                  if (!checklistEmail) return;
-                  setChecklistEnviado(true);
-                }}
-                className="mt-4 flex flex-col sm:flex-row gap-2"
-              >
-                {checklistEnviado ? (
-                  <div className="w-full flex items-center gap-2 text-sm font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-4 py-3">
-                    <CheckCircle2 className="h-5 w-5" />
-                    Enviado! Confira sua caixa de entrada em instantes.
+        <div className="max-w-7xl mx-auto px-5 lg:px-8">
+          <div className="text-center max-w-2xl mx-auto mb-10">
+            <span className="text-xs font-semibold tracking-widest text-accent uppercase">Materiais gratuitos</span>
+            <h2 className="mt-3 text-3xl md:text-4xl font-bold tracking-tight text-primary" style={{ fontFamily: "var(--font-display)" }}>
+              Baixe agora. Proteja depois.
+            </h2>
+            <p className="mt-3 text-muted-foreground text-sm">
+              Guias práticos escritos pela nossa equipe operacional. Sem enrolação, sem venda disfarçada.
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-6">
+            {[
+              {
+                id: "checklist",
+                icone: ShieldCheck,
+                selo: "Checklist · Condomínios",
+                titulo: "7 sinais de que seu condomínio está vulnerável",
+                sub: "Diagnóstico rápido para síndicos identificarem brechas antes que virem prejuízo.",
+                cta: "Quero o checklist",
+              },
+              {
+                id: "casa",
+                icone: Home,
+                selo: "Guia · Residencial",
+                titulo: "75 dicas para blindar sua casa sem gastar uma fortuna",
+                sub: "Do posicionamento da câmera aos hábitos que denunciam quando você viaja. Pequenas mudanças, grande efeito.",
+                cta: "Baixar o guia",
+              },
+              {
+                id: "portaria",
+                icone: Unlock,
+                selo: "E-book · Portaria virtual",
+                titulo: "O que não te contaram sobre portaria virtual",
+                sub: "Mitos, letras miúdas em contratos e as 5 perguntas que você precisa fazer antes de assinar.",
+                cta: "Ler o e-book",
+              },
+            ].map((m) => {
+              const enviado = materialEnviado[m.id];
+              return (
+                <div
+                  key={m.id}
+                  className="rounded-3xl border border-accent/30 bg-gradient-to-br from-white to-accent/5 p-7 shadow-sm hover:shadow-lg transition flex flex-col"
+                >
+                  <div className="grid place-items-center h-14 w-14 rounded-2xl bg-accent text-accent-foreground shadow-md shrink-0">
+                    <m.icone className="h-7 w-7" />
                   </div>
-                ) : (
-                  <>
-                    <input
-                      type="email"
-                      required
-                      value={checklistEmail}
-                      onChange={(e) => setChecklistEmail(e.target.value)}
-                      placeholder="Seu melhor e-mail"
-                      className="flex-1 rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
-                    />
-                    <button
-                      type="submit"
-                      className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:brightness-110 transition"
-                    >
-                      Quero o checklist gratuito <ArrowRight className="h-4 w-4" />
-                    </button>
-                  </>
-                )}
-              </form>
-            </div>
+                  <div className="mt-5 text-[11px] font-semibold tracking-widest text-accent uppercase">{m.selo}</div>
+                  <h3 className="mt-2 text-lg md:text-xl font-bold text-primary leading-snug" style={{ fontFamily: "var(--font-display)" }}>
+                    {m.titulo}
+                  </h3>
+                  <p className="mt-2 text-sm text-muted-foreground flex-1">{m.sub}</p>
+                  <form
+                    onSubmit={(e) => {
+                      e.preventDefault();
+                      if (!materialEmail[m.id]) return;
+                      setMaterialEnviado((prev) => ({ ...prev, [m.id]: true }));
+                    }}
+                    className="mt-5 flex flex-col gap-2"
+                  >
+                    {enviado ? (
+                      <div className="w-full flex items-center gap-2 text-sm font-semibold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-lg px-4 py-3">
+                        <CheckCircle2 className="h-5 w-5" />
+                        Enviado! Confira sua caixa de entrada.
+                      </div>
+                    ) : (
+                      <>
+                        <input
+                          type="email"
+                          required
+                          value={materialEmail[m.id] ?? ""}
+                          onChange={(e) => setMaterialEmail((prev) => ({ ...prev, [m.id]: e.target.value }))}
+                          placeholder="Seu melhor e-mail"
+                          className="w-full rounded-lg border border-border bg-white px-4 py-3 text-sm outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+                        />
+                        <button
+                          type="submit"
+                          className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-5 py-3 text-sm font-bold text-primary-foreground hover:brightness-110 transition"
+                        >
+                          {m.cta} <Download className="h-4 w-4" />
+                        </button>
+                      </>
+                    )}
+                  </form>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
