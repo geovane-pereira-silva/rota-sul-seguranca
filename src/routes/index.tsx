@@ -1020,35 +1020,34 @@ function Landing() {
           </div>
           <div className="mt-12 grid grid-cols-2 md:grid-cols-4 gap-4">
             {[
-              { nome: "Intelbras", domain: "intelbras.com" },
-              { nome: "Hikvision", domain: "hikvision.com" },
-              { nome: "Motorola", domain: "motorola.com" },
-              { nome: "Bosch", domain: "bosch.com" },
-              { nome: "Positivo", domain: "positivo.com.br" },
-              { nome: "Axis", domain: "axis.com" },
-              { nome: "Dahua", domain: "dahuasecurity.com" },
-              { nome: "Ubiquiti", domain: "ui.com" },
+              { nome: "intelbras", tag: "Câmeras & CFTV", cor: "text-[#00A859]" },
+              { nome: "HIKVISION", tag: "Vídeo IP", cor: "text-[#CE0E2D]" },
+              { nome: "MOTOROLA", tag: "Rádios & Alarmes", cor: "text-[#0071CE]" },
+              { nome: "BOSCH", tag: "Sensores", cor: "text-[#EA0016]" },
+              { nome: "Positivo", tag: "Automação", cor: "text-[#00A0DF]" },
+              { nome: "AXIS", tag: "Câmeras IP", cor: "text-[#CC092F]" },
+              { nome: "Dahua", tag: "Monitoramento", cor: "text-[#E60012]" },
+              { nome: "Ubiquiti", tag: "Redes & Wi-Fi", cor: "text-[#0559C9]" },
             ].map((p) => (
-              <div key={p.nome} className="flex items-center justify-center rounded-xl border border-border bg-card py-8 px-4 hover:border-accent/50 hover:shadow-md transition h-28">
-                <img
-                  src={`https://logo.clearbit.com/${p.domain}`}
-                  alt={`Logotipo ${p.nome}`}
-                  loading="lazy"
-                  className="max-h-10 max-w-[140px] object-contain grayscale hover:grayscale-0 transition"
-                  onError={(e) => {
-                    const img = e.currentTarget;
-                    img.style.display = "none";
-                    const fallback = img.nextElementSibling as HTMLElement | null;
-                    if (fallback) fallback.style.display = "flex";
-                  }}
-                />
-                <div className="hidden items-center gap-2 text-primary">
-                  <Handshake className="h-5 w-5 text-accent" />
-                  <span className="font-semibold" style={{ fontFamily: "var(--font-display)" }}>{p.nome}</span>
-                </div>
+              <div
+                key={p.nome}
+                className="group flex flex-col items-center justify-center rounded-xl border border-border bg-card py-8 px-4 hover:border-accent/60 hover:shadow-md transition h-28"
+              >
+                <span
+                  className={`text-xl md:text-2xl font-extrabold tracking-tight ${p.cor} group-hover:scale-105 transition`}
+                  style={{ fontFamily: "var(--font-display)", letterSpacing: "-0.02em" }}
+                >
+                  {p.nome}
+                </span>
+                <span className="mt-1 text-[10px] font-semibold text-muted-foreground uppercase tracking-widest">
+                  {p.tag}
+                </span>
               </div>
             ))}
           </div>
+          <p className="mt-6 text-center text-xs text-muted-foreground">
+            Marcas registradas de seus respectivos proprietários. Somos integradores homologados.
+          </p>
         </div>
       </section>
 
