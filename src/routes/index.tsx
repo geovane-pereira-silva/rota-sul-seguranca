@@ -18,7 +18,7 @@ import centralOperadores from "@/assets/central-operadores.jpg";
 import servicosBg from "@/assets/servicos-bg.jpg";
 import estruturaCentral from "@/assets/estrutura-central-24h.jpg";
 import estruturaFrota from "@/assets/estrutura-frota-tatica.jpg";
-import estruturaTime from "@/assets/camera-intelbras-tecnico.jpg";
+import estruturaTime from "@/assets/camera-intelbras-tecnico.jpg.asset.json";
 import centralAlertaPanico from "@/assets/central-alerta-panico.jpg";
 import {
   ShieldCheck,
@@ -988,7 +988,7 @@ function Landing() {
             {[
               { img: estruturaCentral, title: "Central 24h", alt: "Central de monitoramento 24 horas da Rota Sul Segurança em Poços de Caldas, MG", desc: "Operadores presenciais, videowall e protocolo de resposta em segundos." },
               { img: estruturaFrota, title: "Frota Tática", alt: "Frota tática de resposta rápida a alarmes em Poços de Caldas, MG", desc: "Viaturas próprias com rastreamento em tempo real para atendimento local." },
-              { img: estruturaTime, title: "Time Técnico", alt: "Equipe técnica certificada para instalação de CFTV e alarmes em Poços de Caldas, MG", desc: "Engenheiros e técnicos certificados para instalação e manutenção." },
+              { img: estruturaTime.url, title: "Time Técnico", alt: "Equipe técnica certificada para instalação de CFTV e alarmes em Poços de Caldas, MG", desc: "Engenheiros e técnicos certificados para instalação e manutenção." },
             ].map((c) => (
               <div key={c.title} className="rounded-2xl overflow-hidden border border-border bg-card shadow-sm hover:shadow-lg transition">
                 <img src={c.img} alt={c.alt} loading="lazy" width={1024} height={768} className="h-48 w-full object-cover" />
