@@ -1220,7 +1220,7 @@ function Landing() {
                     <m.icone className="h-7 w-7" />
                   </div>
                   <div className="mt-5 text-[11px] font-semibold tracking-widest text-accent uppercase">{m.selo}</div>
-                  <h3 className="mt-2 text-lg md:text-xl font-bold text-primary leading-snug" style={{ fontFamily: "var(--font-display)" }}>
+                  <h3 className="mt-2 text-base sm:text-lg md:text-xl font-bold text-primary leading-snug break-words" style={{ fontFamily: "var(--font-display)" }}>
                     {m.titulo}
                   </h3>
                   <p className="mt-2 text-sm text-muted-foreground flex-1">{m.sub}</p>
