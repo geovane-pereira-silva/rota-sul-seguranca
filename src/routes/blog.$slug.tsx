@@ -50,7 +50,7 @@ export const Route = createFileRoute("/blog/$slug")({
 });
 
 function BlogPostPage() {
-  const { post } = Route.useLoaderData();
+  const { post } = Route.useLoaderData() as { post: BlogPost };
   const { prev, next } = getAdjacentPosts(post.slug);
 
   return (
