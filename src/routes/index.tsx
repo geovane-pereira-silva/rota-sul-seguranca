@@ -1094,23 +1094,25 @@ function Landing() {
               Ver todos os artigos <ArrowRight className="h-4 w-4" />
             </a>
           </div>
-          <div className="mt-10 grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              { img: "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=800&q=75", cat: "Condomínios", titulo: "5 sinais de que seu condomínio precisa terceirizar a portaria" },
-              { img: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&q=75", cat: "Tecnologia", titulo: "Como a IA reduz falsos positivos em alarmes residenciais" },
-              { img: "https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=800&q=75", cat: "Gestão", titulo: "Terceirização x segurança própria: comparativo completo de custos" },
-              { img: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=75", cat: "Seguros", titulo: "Contrato de monitoramento: o detalhe que a seguradora exige (e ninguém te contou)" },
-            ].map((p) => (
-              <article key={p.titulo} className="rounded-2xl overflow-hidden border border-border bg-card hover:shadow-lg transition">
+          <div className="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {blogPosts.map((p) => (
+              <Link
+                key={p.slug}
+                to="/blog/$slug"
+                params={{ slug: p.slug }}
+                className="group rounded-2xl overflow-hidden border border-border bg-card hover:shadow-lg transition flex flex-col"
+              >
                 <img src={p.img} alt={p.titulo} loading="lazy" className="h-44 w-full object-cover" />
-                <div className="p-6">
+                <div className="p-5 flex-1 flex flex-col">
                   <div className="text-xs font-semibold text-accent uppercase tracking-widest">{p.cat}</div>
-                  <h3 className="mt-2 font-semibold text-primary" style={{ fontFamily: "var(--font-display)" }}>{p.titulo}</h3>
-                  <a href="#" className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary hover:text-accent transition">
+                  <h3 className="mt-2 font-semibold text-primary leading-snug break-words" style={{ fontFamily: "var(--font-display)" }}>
+                    {p.titulo}
+                  </h3>
+                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary group-hover:text-accent transition">
                     Ler artigo <ArrowRight className="h-4 w-4" />
-                  </a>
+                  </span>
                 </div>
-              </article>
+              </Link>
             ))}
           </div>
         </div>
