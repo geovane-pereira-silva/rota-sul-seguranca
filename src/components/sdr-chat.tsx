@@ -25,7 +25,7 @@ type Dados = {
 };
 
 const WHATS_BASE =
-  "https://web.whatsapp.com/send?phone=5535988749336&text=";
+  "https://wa.me/5535988749336?text=";
 
 function buildWhatsUrl(d: Dados) {
   const linhas = [
