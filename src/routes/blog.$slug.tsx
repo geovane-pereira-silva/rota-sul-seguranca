@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { ArrowRight, ArrowLeft, MessageCircle, ShieldCheck } from "lucide-react";
-import { blogPosts, getAdjacentPosts, getPostBySlug, WHATSAPP_URL } from "@/lib/blog-posts";
+import { blogPosts, getAdjacentPosts, getPostBySlug, WHATSAPP_URL, type BlogPost } from "@/lib/blog-posts";
 
 export const Route = createFileRoute("/blog/$slug")({
   loader: ({ params }) => {
